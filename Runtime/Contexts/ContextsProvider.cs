@@ -5,14 +5,9 @@ using Juce.Utils.Singletons;
 
 namespace Juce.Core.Contexts
 {
-    public class ContextsProvider : MonoSingleton<ContextsProvider>
+    public class ContextsProvider : AutoStartMonoSingleton<ContextsProvider>
     {
         private readonly List<Context> allContexts = new List<Context>();
-
-        ContextsProvider()
-        {
-            InitInstance(this);
-        }
 
         public static void Register<T>(T service) where T : Context
         {

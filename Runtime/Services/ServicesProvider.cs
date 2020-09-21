@@ -5,15 +5,10 @@ using Juce.Utils.Singletons;
 
 namespace Juce.Core.Services
 {
-    public class ServicesProvider : MonoSingleton<ServicesProvider>
+    public class ServicesProvider : AutoStartMonoSingleton<ServicesProvider>
     {
         private readonly List<IService> allServices = new List<IService>();
         private readonly List<IUpdatableService> updatableServices = new List<IUpdatableService>();
-
-        private ServicesProvider()
-        {
-            InitInstance(this);
-        }
 
         private void Update()
         {
