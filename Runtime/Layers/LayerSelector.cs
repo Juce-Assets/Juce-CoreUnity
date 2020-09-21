@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using Juce.Core.Contracts;
 
 namespace Juce.Core.Layers
 { 

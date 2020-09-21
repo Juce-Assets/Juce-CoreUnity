@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Juce.Core.Contexts;
-using Juce.Core.Contracts;
-using Juce.Core.Singletons;
+using Juce.Utils.Contracts;
+using Juce.Utils.Singletons;
 
 namespace Juce.Core.Contexts
 {

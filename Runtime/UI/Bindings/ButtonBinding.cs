@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine.UI;
-using Juce.Core.Contracts;
+using Juce.Utils.Contracts;
 
 namespace Juce.Core.UI
 {

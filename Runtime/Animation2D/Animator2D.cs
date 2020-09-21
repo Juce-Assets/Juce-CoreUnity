@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
-using Juce.Core.Contracts;
 using Juce.Core.Time;
+using Juce.Utils.Contracts;
 
 namespace Juce.Core.Animation2D
 {

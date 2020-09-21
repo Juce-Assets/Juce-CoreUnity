@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
-using Juce.Core.Contracts;
+using Juce.Utils.Contracts;
 
 namespace Juce.Core.Particles
 {

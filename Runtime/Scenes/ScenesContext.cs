@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Juce.Core.Contracts;
+using Juce.Utils.Contracts;
 
 namespace Juce.Core.Scenes
 {
