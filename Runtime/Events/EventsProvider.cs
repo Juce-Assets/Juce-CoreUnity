@@ -5,14 +5,11 @@ using Juce.Utils.Singletons;
 
 namespace Juce.Core.Events
 {
-    public class EventsProvider : MonoSingleton<EventsProvider>
+    public class EventsProvider : AutoStartMonoSingleton<EventsProvider>
     {
         private readonly Dictionary<Type, List<EventReference>> eventHandlers = new Dictionary<Type, List<EventReference>>();
 
-        EventsProvider()
-        {
-            InitInstance(this);
-        }
+
 
         public EventReference Subscribe<T>(Action<T> onInvoked) 
         {

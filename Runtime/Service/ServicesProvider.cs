@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Juce.Utils.Contracts;
 using Juce.Utils.Singletons;
 
-namespace Juce.Core.Services
+namespace Juce.Core.Service
 {
     public class ServicesProvider : AutoStartMonoSingleton<ServicesProvider>
     {
