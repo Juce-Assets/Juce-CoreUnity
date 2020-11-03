@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Juce.Core.UI
+﻿namespace Juce.Core.UI
 {
     public class Binding
     {
@@ -8,7 +6,7 @@ namespace Juce.Core.UI
 
         public void Bind()
         {
-            if(!binded)
+            if (!binded)
             {
                 binded = true;
 
@@ -18,7 +16,7 @@ namespace Juce.Core.UI
 
         public void Unbind()
         {
-            if(binded)
+            if (binded)
             {
                 binded = false;
 
@@ -28,12 +26,10 @@ namespace Juce.Core.UI
 
         protected virtual void OnBind()
         {
-
         }
 
         protected virtual void OnUnbind()
         {
-
         }
     }
 }

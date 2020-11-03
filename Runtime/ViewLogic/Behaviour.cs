@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Juce.Core.ViewLogic
+﻿namespace Juce.Core.ViewLogic
 {
     public abstract class Behaviour
     {
@@ -8,7 +6,7 @@ namespace Juce.Core.ViewLogic
 
         public void Enable()
         {
-            if(enabled)
+            if (enabled)
             {
                 return;
             }
@@ -19,8 +17,8 @@ namespace Juce.Core.ViewLogic
         }
 
         public void Disable()
-        { 
-            if(!enabled)
+        {
+            if (!enabled)
             {
                 return;
             }
@@ -32,12 +30,10 @@ namespace Juce.Core.ViewLogic
 
         protected virtual void OnEnable()
         {
-
         }
 
         protected virtual void OnDisable()
         {
-
         }
     }
 }

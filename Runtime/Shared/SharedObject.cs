@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Juce.Core.Shared
+﻿namespace Juce.Core.Shared
 {
     public class SharedObject
     {

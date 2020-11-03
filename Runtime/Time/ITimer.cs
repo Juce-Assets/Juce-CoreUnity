@@ -8,7 +8,9 @@ namespace Juce.Core.Time
         TimeSpan Time { get; }
 
         void Start();
+
         void Reset();
+
         void Restart();
 
         bool HasReached(TimeSpan time);

@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Juce.Core.Service;
+using Juce.Core.UI;
+using Juce.Utils.Contracts;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Juce.Utils.Contracts;
-using Juce.Core.Service;
-using Juce.Core.UI;
 
 namespace Juce.Core.Services
 {
@@ -17,12 +16,10 @@ namespace Juce.Core.Services
 
         public void Init()
         {
-
         }
 
         public void CleanUp()
         {
-
         }
 
         public async Task PushViewModel(ViewModel viewModel)
@@ -56,7 +53,7 @@ namespace Juce.Core.Services
 
             viewModel = null;
 
-            if(clearAllSubViewModels)
+            if (clearAllSubViewModels)
             {
                 ClearAllSubViewModels();
             }
@@ -99,7 +96,7 @@ namespace Juce.Core.Services
         {
             List<Task> toWait = new List<Task>();
 
-            List<ViewModel> subViewModelsCopy = new List<ViewModel>(subViewModels); 
+            List<ViewModel> subViewModelsCopy = new List<ViewModel>(subViewModels);
 
             for (int i = 0; i < subViewModelsCopy.Count; ++i)
             {

@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Juce.Utils.Contracts;
 using System.Collections.Generic;
-using Juce.Utils.Contracts;
 
 namespace Juce.Core.Sequencing
 {

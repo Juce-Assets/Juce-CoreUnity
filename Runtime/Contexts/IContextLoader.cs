@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Juce.Core.Contexts
 {
-    public interface IContextLoader 
+    public interface IContextLoader
     {
         Task Load();
+
         Task Unload();
     }
 }

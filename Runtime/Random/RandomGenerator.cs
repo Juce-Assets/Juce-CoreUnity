@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Juce.Core.Random
+﻿namespace Juce.Core.Random
 {
     public class RandomGenerator
     {

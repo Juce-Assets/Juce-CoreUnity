@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Juce.Core.ViewLogic
+﻿namespace Juce.Core.ViewLogic
 {
     public interface ILinker
     {

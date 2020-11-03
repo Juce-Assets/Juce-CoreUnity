@@ -1,5 +1,5 @@
-﻿using System;
-using Juce.Utils.Contracts;
+﻿using Juce.Utils.Contracts;
+using System;
 
 namespace Juce.Core.Time
 {
@@ -10,11 +10,11 @@ namespace Juce.Core.Time
 
         public ITimeContext TimeContext { get; private set; }
 
-        public TimeSpan Time 
+        public TimeSpan Time
         {
             get
             {
-                if(!started)
+                if (!started)
                 {
                     return TimeSpan.Zero;
                 }
@@ -32,7 +32,7 @@ namespace Juce.Core.Time
 
         public void Start()
         {
-            if(started)
+            if (started)
             {
                 return;
             }

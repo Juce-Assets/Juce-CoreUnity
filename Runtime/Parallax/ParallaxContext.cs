@@ -16,13 +16,10 @@
 //            Contract.IsNotNull(layer);
 //            Contract.IsNotNull(TargetCamera);
 
-
 //        }
 
 //        private void RecalculateLayerInstancesOnRow(ParallaxLayer layer, Vector2 position)
 //        {
-          
-            
 //        }
 //    }
 //}

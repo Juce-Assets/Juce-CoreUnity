@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Juce.Utils.Contracts;
 using System.Collections.Generic;
-using Juce.Utils.Contracts;
 
 namespace Juce.Core.Sequencing
 {
@@ -12,7 +11,7 @@ namespace Juce.Core.Sequencing
         {
             InstructionsHelper.AdvanceInstructionsSimultaneously(ref instructionQueue);
 
-            if(instructionQueue.Count == 0)
+            if (instructionQueue.Count == 0)
             {
                 MarkAsCompleted();
             }
@@ -20,7 +19,7 @@ namespace Juce.Core.Sequencing
 
         public void Add(Instruction instruction)
         {
-            if(Started || Finished)
+            if (Started || Finished)
             {
                 return;
             }

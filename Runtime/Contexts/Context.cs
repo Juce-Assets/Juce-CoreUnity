@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Juce.Core.Contexts
 {
@@ -26,12 +25,10 @@ namespace Juce.Core.Contexts
 
         protected virtual void InitContext()
         {
-        
         }
 
         protected virtual void CleanUpContext()
         {
-          
         }
     }
 }

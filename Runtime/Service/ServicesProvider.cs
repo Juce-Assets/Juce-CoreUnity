@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Juce.Utils.Contracts;
+﻿using Juce.Utils.Contracts;
 using Juce.Utils.Singletons;
+using System.Collections.Generic;
 
 namespace Juce.Core.Service
 {

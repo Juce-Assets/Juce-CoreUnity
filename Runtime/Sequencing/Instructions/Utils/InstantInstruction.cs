@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Juce.Core.Sequencing
+﻿namespace Juce.Core.Sequencing
 {
     public abstract class InstantInstruction : Instruction
     {

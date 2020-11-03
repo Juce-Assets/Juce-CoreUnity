@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Juce.Utils.Contracts;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
-using Juce.Utils.Contracts;
 
 namespace Juce.Core.Particles
 {
@@ -31,7 +31,7 @@ namespace Juce.Core.Particles
 
         private void OnParticleSystemStopped()
         {
-            if(!playing)
+            if (!playing)
             {
                 return;
             }
@@ -65,7 +65,7 @@ namespace Juce.Core.Particles
 
         public bool IsPlaying()
         {
-            if(particle == null)
+            if (particle == null)
             {
                 return false;
             }
@@ -75,7 +75,7 @@ namespace Juce.Core.Particles
 
         public async Task AwaitForFinish(CancellationToken cancellationToken)
         {
-            while(IsPlaying() && !cancellationToken.IsCancellationRequested)
+            while (IsPlaying() && !cancellationToken.IsCancellationRequested)
             {
                 await Task.Yield();
             }

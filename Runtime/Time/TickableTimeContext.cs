@@ -10,13 +10,13 @@ namespace Juce.Core.Time
 
         public float DeltaTime { get; private set; }
 
-        public float TimeScale 
+        public float TimeScale
         {
             get { return timeScale; }
 
             set
             {
-                if(value != timeScale)
+                if (value != timeScale)
                 {
                     timeScale = value;
 
@@ -24,6 +24,7 @@ namespace Juce.Core.Time
                 }
             }
         }
+
         public TimeSpan Time { get; private set; }
 
         public TickableTimeContext()

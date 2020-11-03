@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Juce.Utils.Contracts;
-using Juce.Core.Service;
+﻿using Juce.Core.Service;
 using Juce.Core.Tickable;
+using Juce.Utils.Contracts;
+using System.Collections.Generic;
 
 namespace Juce.Core.Services
 {
@@ -13,7 +12,6 @@ namespace Juce.Core.Services
 
         public void Init()
         {
-
         }
 
         public void Update()
@@ -54,7 +52,7 @@ namespace Juce.Core.Services
 
         private void ActuallyRemoveTickables()
         {
-            for(int i = 0; i < tickablesToRemove.Count; ++i)
+            for (int i = 0; i < tickablesToRemove.Count; ++i)
             {
                 tickables.Remove(tickablesToRemove[i]);
             }
@@ -71,7 +69,7 @@ namespace Juce.Core.Services
 
         private void TickTickables()
         {
-            for(int i = 0; i < tickables.Count; ++i)
+            for (int i = 0; i < tickables.Count; ++i)
             {
                 tickables[i].Tick();
             }

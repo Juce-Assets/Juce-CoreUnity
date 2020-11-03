@@ -5,6 +5,7 @@ namespace Juce.Core.Logic
     public class LogicBridge<T> : ILogicBridge<T>
     {
         public event Action<T> OnReceived;
+
         public event Action<T> OnSent;
 
         public void Receive(T message)

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Juce.Utils.Contracts;
+using System;
 using System.Collections.Generic;
-using Juce.Utils.Contracts;
 
 namespace Juce.Core.EntryPoint
 {
@@ -14,7 +14,7 @@ namespace Juce.Core.EntryPoint
 
         public void Execute()
         {
-            if(executed)
+            if (executed)
             {
                 return;
             }
@@ -28,7 +28,7 @@ namespace Juce.Core.EntryPoint
 
         public void CleanUp()
         {
-            for(int i = 0; i < cleanUpActions.Count; ++i)
+            for (int i = 0; i < cleanUpActions.Count; ++i)
             {
                 cleanUpActions[i].Invoke();
             }
@@ -43,7 +43,7 @@ namespace Juce.Core.EntryPoint
 
         public void Finish()
         {
-            if(!executed)
+            if (!executed)
             {
                 return;
             }
@@ -53,7 +53,6 @@ namespace Juce.Core.EntryPoint
 
         protected virtual void OnExecute()
         {
-
         }
     }
 }

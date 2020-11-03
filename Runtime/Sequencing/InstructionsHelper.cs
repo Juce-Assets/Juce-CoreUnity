@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Juce.Core.Sequencing
 {
@@ -36,7 +35,7 @@ namespace Juce.Core.Sequencing
         {
             int finishedCount = 0;
 
-            for(int i = 0; i < instructionQueue.Count; ++i)
+            for (int i = 0; i < instructionQueue.Count; ++i)
             {
                 Instruction currInstruction = instructionQueue[i];
 
@@ -55,13 +54,13 @@ namespace Juce.Core.Sequencing
                     currInstruction.Finish();
                 }
 
-                if(currInstruction.Finished)
+                if (currInstruction.Finished)
                 {
                     ++finishedCount;
                 }
             }
 
-            if(finishedCount == instructionQueue.Count)
+            if (finishedCount == instructionQueue.Count)
             {
                 instructionQueue.Clear();
             }

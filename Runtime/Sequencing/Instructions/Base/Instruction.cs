@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Juce.Core.Sequencing
+﻿namespace Juce.Core.Sequencing
 {
     public abstract class Instruction
     {
@@ -20,7 +18,7 @@ namespace Juce.Core.Sequencing
 
         public void Start()
         {
-            if(started)
+            if (started)
             {
                 return;
             }
@@ -42,7 +40,7 @@ namespace Juce.Core.Sequencing
 
         public void Finish()
         {
-            if(!started || finished)
+            if (!started || finished)
             {
                 return;
             }
@@ -55,17 +53,14 @@ namespace Juce.Core.Sequencing
 
         protected virtual void OnStart()
         {
-
         }
 
         protected virtual void OnUpdate()
         {
-
         }
 
         protected virtual void OnFinish()
         {
-
         }
     }
 }

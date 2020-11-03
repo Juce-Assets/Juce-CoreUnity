@@ -6,19 +6,27 @@ namespace Juce.Core.Physics
     public class PhysicsCallbacks : MonoBehaviour
     {
         public event Action<CollisionData> OnPhysicsCollisionEnter;
+
         public event Action<CollisionData> OnPhysicsCollisionStay;
+
         public event Action<CollisionData> OnPhysicsCollisionExit;
 
         public event Action<Collision2DData> OnPhysicsCollisionEnter2D;
+
         public event Action<Collision2DData> OnPhysicsCollisionStay2D;
+
         public event Action<Collision2DData> OnPhysicsCollisionExit2D;
 
         public event Action<ColliderData> OnPhysicsTriggerEnter;
+
         public event Action<ColliderData> OnPhysicsTriggerStay;
+
         public event Action<ColliderData> OnPhysicsTriggerExit;
 
         public event Action<Collider2DData> OnPhysicsTriggerEnter2D;
+
         public event Action<Collider2DData> OnPhysicsTriggerStay2D;
+
         public event Action<Collider2DData> OnPhysicsTriggerExit2D;
 
         private void OnCollisionEnter(Collision collision)

@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Juce.Utils.Contracts;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Juce.Utils.Contracts;
 
 namespace Juce.Core.Scenes
 {
@@ -24,7 +23,7 @@ namespace Juce.Core.Scenes
 
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, mode);
 
-            if(asyncLoad == null)
+            if (asyncLoad == null)
             {
                 return false;
             }
@@ -68,7 +67,7 @@ namespace Juce.Core.Scenes
 
         public async Task Load()
         {
-            for(int i = 0; i < scenes.Count; ++i)
+            for (int i = 0; i < scenes.Count; ++i)
             {
                 string currScene = scenes[i];
 

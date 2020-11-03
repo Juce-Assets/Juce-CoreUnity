@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Juce.Core.Bootstrap
 {
@@ -12,7 +11,6 @@ namespace Juce.Core.Bootstrap
 
         protected virtual void Execute()
         {
-
         }
     }
 }

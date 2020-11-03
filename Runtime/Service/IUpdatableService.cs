@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Juce.Core.Service
+﻿namespace Juce.Core.Service
 {
     public interface IUpdatableService : IService
     {
