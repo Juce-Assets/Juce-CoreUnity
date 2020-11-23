@@ -1,8 +1,8 @@
-﻿using Juce.Core.Time;
-using Juce.Utils.Contracts;
+﻿using Juce.CoreUnity.Time;
+using System;
 using UnityEngine;
 
-namespace Juce.Core.Animation2D
+namespace Juce.CoreUnity.Animation2D
 {
     [RequireComponent(typeof(SpriteRenderer))]
     [ExecuteAlways]
@@ -13,7 +13,7 @@ namespace Juce.Core.Animation2D
 
         private Animation2D playingAnimation;
         private bool playinganimationNeedsToStart;
-        private int playingAnimationSpriteIndex = 0;
+        private int playingAnimationSpriteIndex;
 
         public ITimer Timer { get; set; }
 
@@ -35,10 +35,17 @@ namespace Juce.Core.Animation2D
             UpdatePlayingAnimation();
         }
 
-        private void Construct(Animation2DPack animationPack, ITimer timer)
+        private void Init(Animation2DPack animationPack, ITimer timer)
         {
-            Contract.IsNotNull(animationPack, $"{nameof(Animation2DPack)} cannot be null on {nameof(Animator2D)}");
-            Contract.IsNotNull(timer, $"{nameof(ITimer)} cannot be null on {nameof(Animator2D)}");
+            if (animationPack == null)
+            {
+                throw new ArgumentNullException($"{nameof(Animation2DPack)} cannot be null on {nameof(Animator2D)}");
+            }
+
+            if (timer == null)
+            {
+                throw new ArgumentNullException($"{nameof(ITimer)} cannot be null on {nameof(Animator2D)}");
+            }
 
             this.animationPack = animationPack;
             Timer = timer;
@@ -56,7 +63,10 @@ namespace Juce.Core.Animation2D
 
         private Animation2D GetAnimation(string name)
         {
-            Contract.IsNotNull(animationPack, $"{nameof(Animation2DPack)} cannot be null on {nameof(Animator2D)}");
+            if (animationPack == null)
+            {
+                throw new Exception($"{nameof(Animation2DPack)} cannot be null on {nameof(Animator2D)}");
+            }
 
             for (int i = 0; i < animationPack.Animations.Count; ++i)
             {
@@ -104,7 +114,10 @@ namespace Juce.Core.Animation2D
                 return;
             }
 
-            Contract.IsNotNull(Timer, $"{nameof(ITimer)} cannot be null on {nameof(Animator2D)}");
+            if (Timer == null)
+            {
+                throw new Exception($"{nameof(ITimer)} cannot be null on {nameof(Animator2D)}");
+            }
 
             if (playinganimationNeedsToStart)
             {

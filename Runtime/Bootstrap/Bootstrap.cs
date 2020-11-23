@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Juce.Core.Bootstrap
+namespace Juce.CoreUnity.Bootstrap
 {
     public abstract class Bootstrap : MonoBehaviour
     {
@@ -9,8 +9,6 @@ namespace Juce.Core.Bootstrap
             Execute();
         }
 
-        protected virtual void Execute()
-        {
-        }
+        protected abstract void Execute();
     }
 }

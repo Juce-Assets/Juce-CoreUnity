@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Juce.Core.Logic
+namespace Juce.CoreUnity.Logic
 {
     public interface ILogicBridge<T>
     {

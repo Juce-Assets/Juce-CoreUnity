@@ -1,8 +1,7 @@
-﻿using Juce.Utils.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace Juce.Core.Sequencing
+namespace Juce.CoreUnity.Sequencing
 {
     public class InstructionsSequence : Instruction
     {
@@ -27,7 +26,10 @@ namespace Juce.Core.Sequencing
                 return;
             }
 
-            Contract.IsNotNull(instruction);
+            if (instruction == null)
+            {
+                throw new ArgumentNullException($"Tried to append {nameof(Instruction)} but it was null at {nameof(InstructionsSequence)}");
+            }
 
             currSimultaneousGroupInstruction = new SimultaneousSequenceInstruction();
 
@@ -43,7 +45,10 @@ namespace Juce.Core.Sequencing
                 return;
             }
 
-            Contract.IsNotNull(instruction);
+            if (instruction == null)
+            {
+                throw new ArgumentNullException($"Tried to join {nameof(Instruction)} but it was null at {nameof(InstructionsSequence)}");
+            }
 
             if (currSimultaneousGroupInstruction == null)
             {

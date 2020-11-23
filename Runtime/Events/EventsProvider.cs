@@ -1,9 +1,8 @@
-﻿using Juce.Utils.Contracts;
-using Juce.Utils.Singletons;
+﻿using Juce.Utils.Singletons;
 using System;
 using System.Collections.Generic;
 
-namespace Juce.Core.Events
+namespace Juce.CoreUnity.Events
 {
     public class EventsProvider : AutoStartMonoSingleton<EventsProvider>
     {
@@ -22,8 +21,7 @@ namespace Juce.Core.Events
 
             EventReference newHandler = new EventReference(type, action);
 
-            List<EventReference> eventDataList;
-            eventHandlers.TryGetValue(type, out eventDataList);
+            eventHandlers.TryGetValue(type, out List<EventReference> eventDataList);
 
             if (eventDataList == null)
             {
@@ -36,27 +34,29 @@ namespace Juce.Core.Events
             return newHandler;
         }
 
-        public void Unsubscribe(EventReference evHandler)
+        public void Unsubscribe(EventReference eventReference)
         {
-            Contract.IsNotNull(evHandler);
+            if (eventReference == null)
+            {
+                throw new ArgumentNullException($"Tried to unsubscribe {nameof(EventReference)} but it was null at {nameof(EventsProvider)}");
+            }
 
             List<EventReference> eventDataList;
-            eventHandlers.TryGetValue(evHandler.Type, out eventDataList);
+            eventHandlers.TryGetValue(eventReference.Type, out eventDataList);
 
             if (eventDataList == null)
             {
                 return;
             }
 
-            eventDataList.Remove(evHandler);
+            eventDataList.Remove(eventReference);
         }
 
         public void Invoke<T>(T obj)
         {
             Type type = typeof(T);
 
-            List<EventReference> eventDataList;
-            eventHandlers.TryGetValue(type, out eventDataList);
+            eventHandlers.TryGetValue(type, out List<EventReference> eventDataList);
 
             if (eventDataList == null)
             {

@@ -1,4 +1,4 @@
-﻿namespace Juce.Core.Random
+﻿namespace Juce.CoreUnity.Random
 {
     public class RandomGenerator
     {

@@ -1,33 +1,24 @@
 ﻿using UnityEngine;
 
-namespace Juce.Core.Contexts
+namespace Juce.CoreUnity.Contexts
 {
     public abstract class Context : MonoBehaviour
     {
-        public bool IsReady { get; protected set; }
-
         private void Awake()
         {
-            IsReady = false;
-
-            InitContext();
+            Init();
         }
 
         private void OnDestroy()
         {
-            CleanUpContext();
+            CleanUp();
         }
 
-        public void MarkAsReady()
-        {
-            IsReady = true;
-        }
-
-        protected virtual void InitContext()
+        protected virtual void Init()
         {
         }
 
-        protected virtual void CleanUpContext()
+        protected virtual void CleanUp()
         {
         }
     }

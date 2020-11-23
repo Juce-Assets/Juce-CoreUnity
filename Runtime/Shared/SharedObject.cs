@@ -1,4 +1,4 @@
-﻿namespace Juce.Core.Shared
+﻿namespace Juce.CoreUnity.Shared
 {
     public class SharedObject
     {

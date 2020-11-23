@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Juce.Core.Layers
+namespace Juce.CoreUnity.Layers
 {
     public class LayerSelector : MonoBehaviour
     {

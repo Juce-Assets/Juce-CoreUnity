@@ -1,7 +1,6 @@
-﻿using Juce.Utils.Contracts;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Juce.Core.Sequencing
+namespace Juce.CoreUnity.Sequencing
 {
     public class SimultaneousSequenceInstruction : Instruction
     {
@@ -24,7 +23,10 @@ namespace Juce.Core.Sequencing
                 return;
             }
 
-            Contract.IsNotNull(instruction);
+            if (instruction == null)
+            {
+                throw new System.ArgumentNullException($"Tried to add null {nameof(Instruction)} at {nameof(SimultaneousSequenceInstruction)}");
+            }
 
             instructionQueue.Add(instruction);
         }

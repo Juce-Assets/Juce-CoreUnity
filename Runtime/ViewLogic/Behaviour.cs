@@ -1,4 +1,4 @@
-﻿namespace Juce.Core.ViewLogic
+﻿namespace Juce.CoreUnity.ViewLogic
 {
     public abstract class Behaviour
     {

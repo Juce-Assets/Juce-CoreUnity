@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Juce.Core.Sequencing
+namespace Juce.CoreUnity.Sequencing
 {
     public static class InstructionsHelper
     {

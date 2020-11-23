@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Juce.Core.Physics
+namespace Juce.CoreUnity.Physics
 {
     public class PhysicsCallbacks : MonoBehaviour
     {

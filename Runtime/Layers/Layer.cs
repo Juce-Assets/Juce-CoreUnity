@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Juce.Core.Layers
+namespace Juce.CoreUnity.Layers
 {
     [CreateAssetMenu(fileName = "Layer", menuName = "Juce/Layers/Layer", order = 1)]
     public class Layer : ScriptableObject

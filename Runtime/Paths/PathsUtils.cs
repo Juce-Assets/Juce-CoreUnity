@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 
-namespace Juce.Core.Files
+namespace Juce.CoreUnity.Files
 {
     public static class PathsUtils
     {

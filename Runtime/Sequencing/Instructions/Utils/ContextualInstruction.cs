@@ -1,7 +1,6 @@
-﻿using Juce.Utils.Contracts;
-using System;
+﻿using System;
 
-namespace Juce.Core.Sequencing
+namespace Juce.CoreUnity.Sequencing
 {
     public class ContextualInstruction : Instruction
     {
@@ -11,7 +10,10 @@ namespace Juce.Core.Sequencing
 
         public ContextualInstruction(Func<Instruction> context)
         {
-            Contract.IsNotNull(context);
+            if (context == null)
+            {
+                throw new ArgumentNullException($"{nameof(Func<Instruction>)} is null at {nameof(ContextualInstruction)}");
+            }
 
             this.context = context;
         }

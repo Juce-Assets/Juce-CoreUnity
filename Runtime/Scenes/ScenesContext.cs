@@ -1,54 +1,70 @@
-﻿using Juce.Utils.Contracts;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Juce.Core.Scenes
+namespace Juce.CoreUnity.Scenes
 {
     public class ScenesContext
     {
-        private readonly List<string> scenes;
+        private readonly IReadOnlyList<string> scenes;
 
-        public ScenesContext(List<string> scenes)
+        public ScenesContext(IReadOnlyList<string> scenes)
         {
-            Contract.IsNotNull(scenes);
-
             this.scenes = scenes;
         }
 
         private async Task<bool> LoadSceneAsync(string scene, LoadSceneMode mode)
         {
-            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
-
-            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, mode);
-
-            if (asyncLoad == null)
+            if (scenes == null)
             {
                 return false;
             }
 
-            asyncLoad.completed += ((UnityEngine.AsyncOperation operation) =>
+            TaskCompletionSource<bool> taskCompletionSource = new TaskCompletionSource<bool>();
+
+            AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(scene, mode);
+
+            if (asyncOperation == null)
+            {
+                return false;
+            }
+
+            asyncOperation.completed += ((UnityEngine.AsyncOperation operation) =>
             {
                 Scene loadedScene = SceneManager.GetSceneByName(scene);
 
-                Contract.IsNotNull(loadedScene, $"There was an error loading scene: {scene}. Loaded scene is null");
+                if (loadedScene == null)
+                {
+                    throw new System.Exception($"There was an error loading scene: {scene}. Loaded scene is null at {nameof(ScenesContext)}");
+                }
 
-                Contract.IsTrue(loadedScene.IsValid(), $"There was an error loading scene: {scene}. Loaded scene is invalid");
+                if (!loadedScene.IsValid())
+                {
+                    throw new System.Exception($"There was an error loading scene: {scene}. Loaded scene is invalid at {nameof(ScenesContext)}");
+                }
 
-                tcs.SetResult(true);
+                taskCompletionSource.SetResult(true);
             });
 
-            return await tcs.Task;
+            return await taskCompletionSource.Task;
         }
 
         private async Task<bool> UnloadSceneAsync(string scene)
         {
-            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+            if (scenes == null)
+            {
+                return false;
+            }
+
+            TaskCompletionSource<bool> taskCompletionSource = new TaskCompletionSource<bool>();
 
             Scene loadedScene = SceneManager.GetSceneByName(scene);
 
-            Contract.IsNotNull(loadedScene, $"There was an error unloading scene: {scene}. Scene to unload is null");
+            if (loadedScene == null)
+            {
+                throw new System.Exception($"There was an error unloading scene: {scene}. Scene to unload is null at {nameof(ScenesContext)}");
+            }
 
             AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(scene);
 
@@ -59,10 +75,10 @@ namespace Juce.Core.Scenes
 
             asyncUnload.completed += ((UnityEngine.AsyncOperation operation) =>
             {
-                tcs.SetResult(true);
+                taskCompletionSource.SetResult(true);
             });
 
-            return await tcs.Task;
+            return await taskCompletionSource.Task;
         }
 
         public async Task Load()

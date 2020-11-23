@@ -1,9 +1,8 @@
-﻿using Juce.Core.Service;
-using Juce.Core.Tickable;
-using Juce.Utils.Contracts;
+﻿using Juce.CoreUnity.Service;
+using Juce.CoreUnity.Tickable;
 using System.Collections.Generic;
 
-namespace Juce.Core.Services
+namespace Juce.CoreUnity.Services
 {
     public class TickablesService : IUpdatableService
     {
@@ -28,24 +27,43 @@ namespace Juce.Core.Services
 
         public void AddTickable(ITickable tickable)
         {
+            if (tickable == null)
+            {
+                throw new System.ArgumentNullException($"Tried to add {nameof(ITickable)} but it was null at {nameof(TickablesService)}");
+            }
+
             bool contains = tickables.Contains(tickable);
 
-            Contract.IsFalse(contains, $"Trying to add {nameof(ITickable)} but it was already on {nameof(TickablesService)}");
+            if (contains)
+            {
+                throw new System.Exception($"Tried to add {nameof(ITickable)} but it was already at {nameof(TickablesService)}");
+            }
 
             tickables.Add(tickable);
         }
 
         public void RemoveTickable(ITickable tickable)
         {
+            if (tickable == null)
+            {
+                throw new System.ArgumentNullException($"Tried to remove {nameof(ITickable)} but it was null at {nameof(TickablesService)}");
+            }
+
             bool contained = tickables.Contains(tickable);
 
-            Contract.IsTrue(contained, $"Tried to remove {nameof(ITickable)}, but it was not added " +
+            if (contained)
+            {
+                throw new System.Exception($"Tried to remove {nameof(ITickable)}, but it was not added " +
                 $"on the first place on {nameof(TickablesService)}");
+            }
 
             bool alreadyToRemove = tickablesToRemove.Contains(tickable);
 
-            Contract.IsFalse(alreadyToRemove, $"Tried to remove {nameof(ITickable)}, but it was not added " +
+            if (alreadyToRemove)
+            {
+                throw new System.Exception($"Tried to remove {nameof(ITickable)}, but it was not added " +
                 $"on the first place on {nameof(TickablesService)}");
+            }
 
             tickablesToRemove.Add(tickable);
         }

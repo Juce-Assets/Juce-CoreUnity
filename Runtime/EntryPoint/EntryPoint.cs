@@ -1,8 +1,7 @@
-﻿using Juce.Utils.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace Juce.Core.EntryPoint
+namespace Juce.CoreUnity.EntryPoint
 {
     public abstract class EntryPoint
     {
@@ -26,21 +25,6 @@ namespace Juce.Core.EntryPoint
             OnExecute();
         }
 
-        public void CleanUp()
-        {
-            for (int i = 0; i < cleanUpActions.Count; ++i)
-            {
-                cleanUpActions[i].Invoke();
-            }
-        }
-
-        public void AddCleanUpAction(Action action)
-        {
-            Contract.IsNotNull(action);
-
-            cleanUpActions.Add(action);
-        }
-
         public void Finish()
         {
             if (!executed)
@@ -51,8 +35,24 @@ namespace Juce.Core.EntryPoint
             OnFinish?.Invoke();
         }
 
-        protected virtual void OnExecute()
+        public void CleanUp()
         {
+            for (int i = 0; i < cleanUpActions.Count; ++i)
+            {
+                cleanUpActions[i].Invoke();
+            }
         }
+
+        public void AddCleanUpAction(Action action)
+        {
+            if (action == null)
+            {
+                throw new ArgumentNullException($"Null CleanUp action at {nameof(EntryPoint)}");
+            }
+
+            cleanUpActions.Add(action);
+        }
+
+        protected abstract void OnExecute();
     }
 }

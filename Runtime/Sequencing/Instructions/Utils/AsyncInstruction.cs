@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
 
-namespace Juce.Core.Sequencing
+namespace Juce.CoreUnity.Sequencing
 {
     public abstract class AsyncInstruction : Instruction
     {
         protected override void OnStart()
         {
-            OnAsyncStart().ExecuteAsync(() =>
+            OnAsyncStart().RunAsync(() =>
             {
                 MarkAsCompleted();
             });

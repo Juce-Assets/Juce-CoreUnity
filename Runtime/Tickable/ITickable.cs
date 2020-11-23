@@ -1,4 +1,4 @@
-﻿namespace Juce.Core.Tickable
+﻿namespace Juce.CoreUnity.Tickable
 {
     public interface ITickable
     {
