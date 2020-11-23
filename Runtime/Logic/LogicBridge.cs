@@ -1,10 +1,11 @@
 ﻿using System;
 
-namespace Juce.Core.Logic
+namespace Juce.CoreUnity.Logic
 {
     public class LogicBridge<T> : ILogicBridge<T>
     {
         public event Action<T> OnReceived;
+
         public event Action<T> OnSent;
 
         public void Receive(T message)

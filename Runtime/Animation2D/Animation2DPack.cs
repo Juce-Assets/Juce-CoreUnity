@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Juce.Core.Animation2D
+namespace Juce.CoreUnity.Animation2D
 {
     [CreateAssetMenu(fileName = "Animation2DPack", menuName = "Juce/Animation2D/Animation2DPack", order = 1)]
     public class Animation2DPack : ScriptableObject

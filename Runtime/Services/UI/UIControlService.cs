@@ -1,46 +1,46 @@
-﻿using System;
+﻿using Juce.CoreUnity.Service;
+using Juce.CoreUnity.UI;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Juce.Utils.Contracts;
-using Juce.Core.Service;
-using Juce.Core.UI;
 
-namespace Juce.Core.Services
+namespace Juce.CoreUnity.Services
 {
     public class UIControlService : IService
     {
-        private ViewModel viewModel;
         private readonly List<ViewModel> subViewModels = new List<ViewModel>();
 
-        public ViewModel ViewModel => viewModel;
+        public ViewModel MainViewModel { get; private set; }
         public IReadOnlyList<ViewModel> SubViewModels => subViewModels;
 
         public void Init()
         {
-
         }
 
         public void CleanUp()
         {
-
         }
 
-        public async Task PushViewModel(ViewModel viewModel)
+        public Task PushViewModel(ViewModel viewModel)
         {
-            Contract.IsNull(this.viewModel);
-            Contract.IsNotNull(viewModel);
+            if (viewModel == null)
+            {
+                throw new System.ArgumentNullException($"Tried to push {nameof(ViewModel)} but it was null at {nameof(UIControlService)}");
+            }
 
-            this.viewModel = viewModel;
+            MainViewModel = viewModel;
 
-            await viewModel.Show();
+            return viewModel.Show();
         }
 
         public async Task PopViewModel(bool popAllSubViewModels = true)
         {
-            Contract.IsNotNull(viewModel);
+            if (MainViewModel == null)
+            {
+                throw new System.Exception($"Tried to pop current{nameof(ViewModel)} but it was null at {nameof(UIControlService)}");
+            }
 
-            ViewModel toHide = viewModel;
-            viewModel = null;
+            ViewModel toHide = MainViewModel;
+            MainViewModel = null;
 
             if (popAllSubViewModels)
             {
@@ -52,11 +52,14 @@ namespace Juce.Core.Services
 
         public void ClearViewModel(bool clearAllSubViewModels = true)
         {
-            Contract.IsNotNull(viewModel);
+            if (MainViewModel == null)
+            {
+                throw new System.Exception($"Tried to clear {nameof(ViewModel)} but it was null at {nameof(UIControlService)}");
+            }
 
-            viewModel = null;
+            MainViewModel = null;
 
-            if(clearAllSubViewModels)
+            if (clearAllSubViewModels)
             {
                 ClearAllSubViewModels();
             }
@@ -64,11 +67,17 @@ namespace Juce.Core.Services
 
         public async Task PushSubViewModel(ViewModel viewModel)
         {
-            Contract.IsNotNull(viewModel);
+            if (viewModel == null)
+            {
+                throw new System.ArgumentNullException($"Tried to push sub {nameof(ViewModel)} but it was null at {nameof(UIControlService)}");
+            }
 
             bool alreadyContains = subViewModels.Contains(viewModel);
 
-            Contract.IsFalse(alreadyContains, "SubViewModel was already added");
+            if (alreadyContains)
+            {
+                throw new System.Exception($"Tried to push sub {nameof(ViewModel)} but it was already pushed {nameof(UIControlService)}");
+            }
 
             subViewModels.Add(viewModel);
 
@@ -77,29 +86,41 @@ namespace Juce.Core.Services
 
         public async Task PopSubViewModel(ViewModel viewModel)
         {
-            Contract.IsNotNull(viewModel);
+            if (viewModel == null)
+            {
+                throw new System.ArgumentNullException($"Tried to pop sub {nameof(ViewModel)} but it was null at {nameof(UIControlService)}");
+            }
 
             bool removed = subViewModels.Remove(viewModel);
 
-            Contract.IsTrue(removed, "Tried to remove a SubViewModel but it was not added");
+            if (!removed)
+            {
+                throw new System.Exception($"Tried to pop sub {nameof(ViewModel)} but it was not contained at {nameof(UIControlService)}");
+            }
 
             await viewModel.Hide();
         }
 
         public void ClearSubViewModel(ViewModel viewModel)
         {
-            Contract.IsNotNull(viewModel);
+            if (viewModel == null)
+            {
+                throw new System.ArgumentNullException($"Tried to clear sub {nameof(ViewModel)} but it was null at {nameof(UIControlService)}");
+            }
 
             bool removed = subViewModels.Remove(viewModel);
 
-            Contract.IsTrue(removed, "Tried to remove a SubViewModel but it was not added");
+            if (!removed)
+            {
+                throw new System.Exception($"Tried to clear sub {nameof(ViewModel)} but it was not contained at {nameof(UIControlService)}");
+            }
         }
 
         public async Task PopAllSubViewModels()
         {
             List<Task> toWait = new List<Task>();
 
-            List<ViewModel> subViewModelsCopy = new List<ViewModel>(subViewModels); 
+            List<ViewModel> subViewModelsCopy = new List<ViewModel>(subViewModels);
 
             for (int i = 0; i < subViewModelsCopy.Count; ++i)
             {

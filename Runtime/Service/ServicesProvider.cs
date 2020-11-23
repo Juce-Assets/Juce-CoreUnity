@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Juce.Utils.Singletons;
 using System.Collections.Generic;
-using Juce.Utils.Contracts;
-using Juce.Utils.Singletons;
 
-namespace Juce.Core.Service
+namespace Juce.CoreUnity.Service
 {
     public class ServicesProvider : AutoStartMonoSingleton<ServicesProvider>
     {
@@ -32,11 +30,17 @@ namespace Juce.Core.Service
 
         public void RegisterService<T>(T service) where T : IService
         {
-            Contract.IsNotNull(service, "Trying to register null service");
+            if (service == null)
+            {
+                throw new System.ArgumentNullException($"Tried to register null service at {nameof(ServicesProvider)}");
+            }
 
             bool alreadyExists = TryGetService<T>(out _);
 
-            Contract.IsFalse(alreadyExists, $"Service {nameof(T)} has been already added");
+            if (alreadyExists)
+            {
+                throw new System.Exception($"Service {nameof(T)} has been already added at {nameof(ServicesProvider)}");
+            }
 
             allServices.Add(service);
 
@@ -52,9 +56,18 @@ namespace Juce.Core.Service
 
         public void UnregisterService(IService service)
         {
-            Contract.IsNotNull(service, "Trying to unregister null service");
+            if (service == null)
+            {
+                throw new System.ArgumentNullException($"Tried to unregister null service at {nameof(ServicesProvider)}");
+            }
 
             bool found = allServices.Remove(service);
+
+            if (!found)
+            {
+                throw new System.Exception($"Tried to unregister service {service.GetType().Name} but it could" +
+                    $"not be found at {nameof(ServicesProvider)}");
+            }
 
             IUpdatableService updatableService = service as IUpdatableService;
 
@@ -63,18 +76,12 @@ namespace Juce.Core.Service
                 updatableServices.Remove(updatableService);
             }
 
-            Contract.IsTrue(found, $"Trying  to unregister service {service.GetType().Name} but it was not registered");
-
             service.CleanUp();
         }
 
         public T GetService<T>() where T : IService
         {
-            T service;
-
-            bool found = TryGetService<T>(out service);
-
-            Contract.IsTrue(found, $"Service {nameof(T)} could not be found");
+            TryGetService(out T service);
 
             return service;
         }

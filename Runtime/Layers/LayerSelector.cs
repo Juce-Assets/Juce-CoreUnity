@@ -1,8 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Juce.Core.Layers
-{ 
+namespace Juce.CoreUnity.Layers
+{
     public class LayerSelector : MonoBehaviour
     {
         [Header("Layer")]
@@ -10,6 +9,7 @@ namespace Juce.Core.Layers
 
         [Header("Targets")]
         [SerializeField] private Renderer targetRenderer = default;
+
         [SerializeField] private Canvas targetCanvas = default;
 
         private void Awake()

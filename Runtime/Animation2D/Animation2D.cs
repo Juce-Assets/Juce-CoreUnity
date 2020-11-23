@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Juce.Core.Animation2D
+namespace Juce.CoreUnity.Animation2D
 {
     [System.Serializable]
     public class Animation2D

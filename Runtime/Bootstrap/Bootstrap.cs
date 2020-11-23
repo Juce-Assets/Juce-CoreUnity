@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Juce.Core.Bootstrap
+namespace Juce.CoreUnity.Bootstrap
 {
     public abstract class Bootstrap : MonoBehaviour
     {

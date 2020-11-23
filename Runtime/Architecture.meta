@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 2dc80667ab1d48046b6c20abd27bec5e
+=======
+<<<<<<< HEAD:Runtime/UI/ViewModelBindings.meta
+guid: 9b56a60ba17cf394299b3503e6c89da0
+=======
+guid: 2dc80667ab1d48046b6c20abd27bec5e
+>>>>>>> develop:Runtime/Architecture.meta
+>>>>>>> develop
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

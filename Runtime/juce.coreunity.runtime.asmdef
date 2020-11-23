@@ -1,9 +1,9 @@
 {
-    "name": "Juce.Core.Editor",
-    "references": [],
-    "includePlatforms": [
-        "Editor"
+    "name": "Juce.CoreUnity.Runtime",
+    "references": [
+        "GUID:9a64ff96d3b16d7498c8f46b660d81a0"
     ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

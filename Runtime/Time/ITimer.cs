@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Juce.Core.Time
+namespace Juce.CoreUnity.Time
 {
     public interface ITimer
     {
@@ -8,7 +8,9 @@ namespace Juce.Core.Time
         TimeSpan Time { get; }
 
         void Start();
+
         void Reset();
+
         void Restart();
 
         bool HasReached(TimeSpan time);

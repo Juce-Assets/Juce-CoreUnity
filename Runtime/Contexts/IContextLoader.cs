@@ -1,7 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
-namespace Juce.Core.Contexts
+namespace Juce.CoreUnity.Contexts
 {
     public interface IContextLoader
     {

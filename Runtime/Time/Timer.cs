@@ -1,7 +1,6 @@
 ﻿using System;
-using Juce.Utils.Contracts;
 
-namespace Juce.Core.Time
+namespace Juce.CoreUnity.Time
 {
     public class Timer : ITimer
     {
@@ -10,11 +9,11 @@ namespace Juce.Core.Time
 
         public ITimeContext TimeContext { get; private set; }
 
-        public TimeSpan Time 
+        public TimeSpan Time
         {
             get
             {
-                if(!started)
+                if (!started)
                 {
                     return TimeSpan.Zero;
                 }
@@ -23,16 +22,19 @@ namespace Juce.Core.Time
             }
         }
 
-        public Timer(TickableTimeContext timeContext)
+        public Timer(TickableTimeContext tickableTimeContext)
         {
-            Contract.IsNotNull(timeContext);
+            if (tickableTimeContext == null)
+            {
+                throw new ArgumentNullException($"Null {nameof(TickableTimeContext)} at {nameof(Timer)}");
+            }
 
-            TimeContext = timeContext;
+            TimeContext = tickableTimeContext;
         }
 
         public void Start()
         {
-            if(started)
+            if (started)
             {
                 return;
             }

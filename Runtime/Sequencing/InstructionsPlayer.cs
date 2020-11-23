@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Juce.Utils.Contracts;
+﻿using System.Collections.Generic;
 
-namespace Juce.Core.Sequencing
+namespace Juce.CoreUnity.Sequencing
 {
     public class InstructionsPlayer
     {
@@ -10,7 +8,10 @@ namespace Juce.Core.Sequencing
 
         public void Play(Instruction instruction)
         {
-            Contract.IsNotNull(instruction);
+            if (instruction == null)
+            {
+                throw new System.ArgumentNullException($"Tried to play null {nameof(Instruction)} at {nameof(InstructionsPlayer)}");
+            }
 
             instructionQueue.Add(instruction);
         }

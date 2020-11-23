@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Juce.Utils.Singletons;
+using System;
 using System.Collections.Generic;
-using Juce.Utils.Contracts;
-using Juce.Utils.Singletons;
 
-namespace Juce.Core.Contexts
+namespace Juce.CoreUnity.Contexts
 {
     public class ContextsProvider : AutoStartMonoSingleton<ContextsProvider>
     {
@@ -21,31 +20,44 @@ namespace Juce.Core.Contexts
 
         public void RegisterContext<T>(T context) where T : Context
         {
-            Contract.IsNotNull(context, "Trying to register null context");
+            if (context == null)
+            {
+                throw new ArgumentNullException($"Trying to register null context at {nameof(ContextsProvider)}");
+            }
 
             bool alreadyExists = TryGetContext<T>(out _);
 
-            Contract.IsFalse(alreadyExists, $"Context {nameof(T)} has been already added");
+            if (context == null)
+            {
+                throw new Exception($"Context {nameof(T)} has been already added at {nameof(ContextsProvider)}");
+            }
 
             allContexts.Add(context);
         }
 
         public void UnregisterContext(Context context)
         {
-            Contract.IsNotNull(context, "Trying to unregister null context");
+            if (context == null)
+            {
+                throw new ArgumentNullException($"Trying to unregister null contex at {nameof(ContextsProvider)}");
+            }
 
             bool found = allContexts.Remove(context);
 
-            Contract.IsTrue(found, $"Trying  to unregister service {context.GetType().Name} but it was not registered");
+            if (!found)
+            {
+                throw new Exception($"Tried to unregister service {context.GetType().Name} but it was not registered at {nameof(ContextsProvider)}");
+            }
         }
 
         public T GetContext<T>() where T : Context
         {
-            T context;
+            bool found = TryGetContext<T>(out T context);
 
-            bool found = TryGetContext<T>(out context);
-
-            Contract.IsTrue(found, $"Context {nameof(T)} could not be found");
+            if (!found)
+            {
+                throw new Exception($"Context {nameof(T)} could not be found at {nameof(ContextsProvider)}");
+            }
 
             return context;
         }

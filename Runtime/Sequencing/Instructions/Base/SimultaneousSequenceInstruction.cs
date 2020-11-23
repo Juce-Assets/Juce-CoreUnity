@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Juce.Utils.Contracts;
+﻿using System.Collections.Generic;
 
-namespace Juce.Core.Sequencing
+namespace Juce.CoreUnity.Sequencing
 {
     public class SimultaneousSequenceInstruction : Instruction
     {
@@ -12,7 +10,7 @@ namespace Juce.Core.Sequencing
         {
             InstructionsHelper.AdvanceInstructionsSimultaneously(ref instructionQueue);
 
-            if(instructionQueue.Count == 0)
+            if (instructionQueue.Count == 0)
             {
                 MarkAsCompleted();
             }
@@ -20,12 +18,15 @@ namespace Juce.Core.Sequencing
 
         public void Add(Instruction instruction)
         {
-            if(Started || Finished)
+            if (Started || Finished)
             {
                 return;
             }
 
-            Contract.IsNotNull(instruction);
+            if (instruction == null)
+            {
+                throw new System.ArgumentNullException($"Tried to add null {nameof(Instruction)} at {nameof(SimultaneousSequenceInstruction)}");
+            }
 
             instructionQueue.Add(instruction);
         }

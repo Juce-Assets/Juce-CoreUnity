@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Juce.Utils.Contracts;
 
-namespace Juce.Core.Sequencing
+namespace Juce.CoreUnity.Sequencing
 {
     public class InstructionsSequence : Instruction
     {
@@ -14,7 +13,7 @@ namespace Juce.Core.Sequencing
         {
             InstructionsHelper.AdvanceInstructionsSequentially(ref instructionQueue);
 
-            if(instructionQueue.Count == 0)
+            if (instructionQueue.Count == 0)
             {
                 MarkAsCompleted();
             }
@@ -22,12 +21,15 @@ namespace Juce.Core.Sequencing
 
         public void Append(Instruction instruction)
         {
-            if(Started || Finished)
+            if (Started || Finished)
             {
                 return;
             }
 
-            Contract.IsNotNull(instruction);
+            if (instruction == null)
+            {
+                throw new ArgumentNullException($"Tried to append {nameof(Instruction)} but it was null at {nameof(InstructionsSequence)}");
+            }
 
             currSimultaneousGroupInstruction = new SimultaneousSequenceInstruction();
 
@@ -43,7 +45,10 @@ namespace Juce.Core.Sequencing
                 return;
             }
 
-            Contract.IsNotNull(instruction);
+            if (instruction == null)
+            {
+                throw new ArgumentNullException($"Tried to join {nameof(Instruction)} but it was null at {nameof(InstructionsSequence)}");
+            }
 
             if (currSimultaneousGroupInstruction == null)
             {

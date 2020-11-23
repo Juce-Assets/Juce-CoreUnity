@@ -1,10 +1,9 @@
-﻿using System;
-
-namespace Juce.Core.Service
+﻿namespace Juce.CoreUnity.Service
 {
     public interface IService
     {
         void Init();
+
         void CleanUp();
     }
 }

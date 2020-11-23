@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Juce.Utils.Contracts;
 
-namespace Juce.Core.EntryPoint
+namespace Juce.CoreUnity.EntryPoint
 {
     public abstract class EntryPoint
     {
@@ -46,7 +45,14 @@ namespace Juce.Core.EntryPoint
 
         public void AddCleanUpAction(Action action)
         {
+<<<<<<< HEAD
             Contract.IsNotNull(action);
+=======
+            if (action == null)
+            {
+                throw new ArgumentNullException($"Null CleanUp action at {nameof(EntryPoint)}");
+            }
+>>>>>>> develop
 
             cleanUpActions.Add(action);
         }

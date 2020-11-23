@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Juce.Core.Contexts
+namespace Juce.CoreUnity.Contexts
 {
     public abstract class Context : MonoBehaviour
     {

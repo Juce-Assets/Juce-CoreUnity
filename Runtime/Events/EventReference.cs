@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Juce.Core.Events
+namespace Juce.CoreUnity.Events
 {
     public class EventReference
     {
