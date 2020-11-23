@@ -14,12 +14,8 @@ namespace Juce.CoreUnity.Contexts
             CleanUp();
         }
 
-        protected virtual void Init()
-        {
-        }
+        protected abstract void Init();
 
-        protected virtual void CleanUp()
-        {
-        }
+        protected abstract void CleanUp();
     }
 }

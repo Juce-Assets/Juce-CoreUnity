@@ -11,7 +11,7 @@ namespace Juce.CoreUnity.Scenes
 
         public ScenesLoader(IReadOnlyList<string> scenes)
         {
-            scenes = new List<string>(scenes);
+            this.scenes = new List<string>(scenes);
         }
 
         private async Task<bool> LoadSceneAsync(string scene, LoadSceneMode mode)

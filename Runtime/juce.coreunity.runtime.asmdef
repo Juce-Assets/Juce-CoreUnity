@@ -1,7 +1,8 @@
 {
     "name": "Juce.CoreUnity.Runtime",
     "references": [
-        "GUID:9a64ff96d3b16d7498c8f46b660d81a0"
+        "GUID:9a64ff96d3b16d7498c8f46b660d81a0",
+        "GUID:9e2a0871e420eb64685e511167cd0d57"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
