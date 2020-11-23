@@ -10,9 +10,6 @@ namespace Juce.Core.Bootstrap
             Execute();
         }
 
-        protected virtual void Execute()
-        {
-
-        }
+        protected abstract void Execute();
     }
 }

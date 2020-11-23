@@ -7,24 +7,22 @@ using Juce.Utils.Contracts;
 
 namespace Juce.Core.Scenes
 {
-    public class ScenesContext
+    public class ScenesLoader
     {
-        private readonly List<string> scenes;
+        private readonly List<string> scenes = new List<string>();
 
-        public ScenesContext(List<string> scenes)
+        public ScenesLoader(IReadOnlyList<string> scenes)
         {
-            Contract.IsNotNull(scenes);
-
-            this.scenes = scenes;
+            this.scenes.AddRange(scenes);
         }
 
         private async Task<bool> LoadSceneAsync(string scene, LoadSceneMode mode)
         {
-            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+            TaskCompletionSource<bool> taskCompletionSource = new TaskCompletionSource<bool>();
 
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, mode);
 
-            if(asyncLoad == null)
+            if (asyncLoad == null)
             {
                 return false;
             }
@@ -37,15 +35,15 @@ namespace Juce.Core.Scenes
 
                 Contract.IsTrue(loadedScene.IsValid(), $"There was an error loading scene: {scene}. Loaded scene is invalid");
 
-                tcs.SetResult(true);
+                taskCompletionSource.SetResult(true);
             });
 
-            return await tcs.Task;
+            return await taskCompletionSource.Task;
         }
 
         private async Task<bool> UnloadSceneAsync(string scene)
         {
-            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+            TaskCompletionSource<bool> taskCompletionSource = new TaskCompletionSource<bool>();
 
             Scene loadedScene = SceneManager.GetSceneByName(scene);
 
@@ -60,30 +58,34 @@ namespace Juce.Core.Scenes
 
             asyncUnload.completed += ((UnityEngine.AsyncOperation operation) =>
             {
-                tcs.SetResult(true);
+                taskCompletionSource.SetResult(true);
             });
 
-            return await tcs.Task;
+            return await taskCompletionSource.Task;
         }
 
-        public async Task Load()
+        public Task Load()
         {
-            for(int i = 0; i < scenes.Count; ++i)
-            {
-                string currScene = scenes[i];
+            Task[] awaitAll = new Task[scenes.Count];
 
-                await LoadSceneAsync(currScene, LoadSceneMode.Additive);
-            }
-        }
-
-        public async Task Unload()
-        {
             for (int i = 0; i < scenes.Count; ++i)
             {
-                string currScene = scenes[i];
-
-                await UnloadSceneAsync(currScene);
+                awaitAll[i] = LoadSceneAsync(scenes[i], LoadSceneMode.Additive);
             }
+
+            return Task.WhenAll(awaitAll);
+        }
+
+        public Task Unload()
+        {
+            Task[] awaitAll = new Task[scenes.Count];
+
+            for (int i = 0; i < scenes.Count; ++i)
+            {
+                awaitAll[i] = UnloadSceneAsync(scenes[i]);
+            }
+
+            return Task.WhenAll(awaitAll);
         }
     }
 }

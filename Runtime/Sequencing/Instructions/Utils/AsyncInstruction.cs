@@ -7,7 +7,7 @@ namespace Juce.Core.Sequencing
     {
         protected override void OnStart()
         {
-            OnAsyncStart().ExecuteAsync(() =>
+            OnAsyncStart().RunAsync(() =>
             {
                 MarkAsCompleted();
             });

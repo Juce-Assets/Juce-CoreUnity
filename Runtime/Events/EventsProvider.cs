@@ -9,9 +9,7 @@ namespace Juce.Core.Events
     {
         private readonly Dictionary<Type, List<EventReference>> eventHandlers = new Dictionary<Type, List<EventReference>>();
 
-
-
-        public EventReference Subscribe<T>(Action<T> onInvoked) 
+        public EventReference Subscribe<T>(Action<T> onInvoked)
         {
             Type type = typeof(T);
 
@@ -27,7 +25,7 @@ namespace Juce.Core.Events
             List<EventReference> eventDataList;
             eventHandlers.TryGetValue(type, out eventDataList);
 
-            if(eventDataList == null)
+            if (eventDataList == null)
             {
                 eventDataList = new List<EventReference>();
                 eventHandlers.Add(type, eventDataList);
@@ -53,19 +51,19 @@ namespace Juce.Core.Events
             eventDataList.Remove(evHandler);
         }
 
-        public void Invoke<T>(T obj) 
+        public void Invoke<T>(T obj)
         {
             Type type = typeof(T);
 
             List<EventReference> eventDataList;
             eventHandlers.TryGetValue(type, out eventDataList);
 
-            if(eventDataList == null)
+            if (eventDataList == null)
             {
                 return;
             }
 
-            for(int i = 0; i < eventDataList.Count; ++i)
+            for (int i = 0; i < eventDataList.Count; ++i)
             {
                 eventDataList[i].Action?.Invoke(obj);
             }

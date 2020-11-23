@@ -14,11 +14,11 @@ namespace Juce.Core.Animation2D
 
         private Animation2D playingAnimation;
         private bool playinganimationNeedsToStart;
-        private int playingAnimationSpriteIndex = 0;
+        private int playingAnimationSpriteIndex;
 
         public ITimer Timer { get; set; }
 
-        public bool FlipX 
+        public bool FlipX
         {
             get { return spriteRenderer.flipX; }
             set { spriteRenderer.flipX = value; }
@@ -36,7 +36,7 @@ namespace Juce.Core.Animation2D
             UpdatePlayingAnimation();
         }
 
-        private void Construct(Animation2DPack animationPack, ITimer timer)
+        private void Init(Animation2DPack animationPack, ITimer timer)
         {
             Contract.IsNotNull(animationPack, $"{nameof(Animation2DPack)} cannot be null on {nameof(Animator2D)}");
             Contract.IsNotNull(timer, $"{nameof(ITimer)} cannot be null on {nameof(Animator2D)}");
@@ -47,7 +47,7 @@ namespace Juce.Core.Animation2D
 
         private void TryGetSpriteRenderer()
         {
-            if(spriteRenderer != null)
+            if (spriteRenderer != null)
             {
                 return;
             }
@@ -59,11 +59,11 @@ namespace Juce.Core.Animation2D
         {
             Contract.IsNotNull(animationPack, $"{nameof(Animation2DPack)} cannot be null on {nameof(Animator2D)}");
 
-            for(int i = 0; i < animationPack.Animations.Count; ++i)
+            for (int i = 0; i < animationPack.Animations.Count; ++i)
             {
                 Animation2D currAnimation = animationPack.Animations[i];
 
-                if(string.Equals(currAnimation.Name, name))
+                if (string.Equals(currAnimation.Name, name))
                 {
                     return currAnimation;
                 }
@@ -72,12 +72,11 @@ namespace Juce.Core.Animation2D
             return null;
         }
 
-
         public void PlayAnimation(string name)
         {
             if (playingAnimation != null)
             {
-                if(string.Equals(playingAnimation.Name, name))
+                if (string.Equals(playingAnimation.Name, name))
                 {
                     return;
                 }
@@ -85,7 +84,7 @@ namespace Juce.Core.Animation2D
 
             Animation2D animationToPlay = GetAnimation(name);
 
-            if(animationToPlay == null)
+            if (animationToPlay == null)
             {
                 return;
             }
@@ -116,7 +115,7 @@ namespace Juce.Core.Animation2D
                 Timer.Start();
             }
 
-            if(Timer.Time.TotalSeconds > playingAnimation.PlaybackSpeed)
+            if (Timer.Time.TotalSeconds > playingAnimation.PlaybackSpeed)
             {
                 ++playingAnimationSpriteIndex;
 

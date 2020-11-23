@@ -5,33 +5,22 @@ namespace Juce.Core.Contexts
 {
     public abstract class Context : MonoBehaviour
     {
-        public bool IsReady { get; protected set; }
-
         private void Awake()
         {
-            IsReady = false;
-
-            InitContext();
+            Init();
         }
 
         private void OnDestroy()
         {
-            CleanUpContext();
+            CleanUp();
         }
 
-        public void MarkAsReady()
+        protected virtual void Init()
         {
-            IsReady = true;
         }
 
-        protected virtual void InitContext()
+        protected virtual void CleanUp()
         {
-        
-        }
-
-        protected virtual void CleanUpContext()
-        {
-          
         }
     }
 }

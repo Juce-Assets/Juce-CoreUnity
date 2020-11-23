@@ -3,9 +3,10 @@ using System.Threading.Tasks;
 
 namespace Juce.Core.Contexts
 {
-    public interface IContextLoader 
+    public interface IContextLoader
     {
         Task Load();
+
         Task Unload();
     }
 }

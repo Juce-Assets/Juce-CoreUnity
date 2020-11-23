@@ -9,12 +9,6 @@ namespace Juce.Core.UI
     {
         private void Awake()
         {
-            Bind();
-        }
-
-        protected virtual void Bind()
-        {
-
         }
 
         public virtual Task Show()
