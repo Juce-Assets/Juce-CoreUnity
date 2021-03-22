@@ -26,16 +26,6 @@ public static class JuceCoreUnityGameObjectExtensions
         return goInstance.GetComponent<T>();
     }
 
-    public static void DestroyGameObject(this MonoBehaviour go)
-    {
-        if (go == null)
-        {
-            return;
-        }
-
-        MonoBehaviour.Destroy(go);
-    }
-
     public static void SetParent(this GameObject go, GameObject parent)
     {
         if (parent == null)

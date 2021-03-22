@@ -1,4 +1,5 @@
 ﻿using Juce.Utils.Singletons;
+using System;
 using System.Collections.Generic;
 
 namespace Juce.CoreUnity.Service
@@ -79,18 +80,20 @@ namespace Juce.CoreUnity.Service
             service.CleanUp();
         }
 
-        public T GetService<T>() where T : IService
+        public static T GetService<T>() where T : IService
         {
-            TryGetService(out T service);
+            Instance.TryGetService(out T service);
 
             return service;
         }
 
         private bool TryGetService<T>(out T outService) where T : IService
         {
+            Type serviceType = typeof(T);
+
             for (int i = 0; i < allServices.Count; ++i)
             {
-                if (allServices[i].GetType() == typeof(T))
+                if (allServices[i].GetType() == serviceType)
                 {
                     outService = (T)allServices[i];
                     return true;

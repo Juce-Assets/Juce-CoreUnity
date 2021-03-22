@@ -1,7 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Juce.CoreUnity.Scenes
 {

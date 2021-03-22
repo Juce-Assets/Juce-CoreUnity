@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Juce.CoreUnity.Physics
 {
-    public class PhysicsCallbacks : MonoBehaviour
+    public class PhysicsCallback : MonoBehaviour
     {
         public event Action<CollisionData> OnPhysicsCollisionEnter;
 

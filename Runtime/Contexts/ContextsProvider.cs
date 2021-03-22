@@ -50,9 +50,9 @@ namespace Juce.CoreUnity.Contexts
             }
         }
 
-        public T GetContext<T>() where T : Context
+        public static T GetContext<T>() where T : Context
         {
-            bool found = TryGetContext<T>(out T context);
+            bool found = Instance.TryGetContext<T>(out T context);
 
             if (!found)
             {

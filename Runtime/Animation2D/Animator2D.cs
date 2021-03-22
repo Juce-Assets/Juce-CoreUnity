@@ -1,4 +1,4 @@
-﻿using Juce.CoreUnity.Time;
+﻿using Juce.Core.Time;
 using System;
 using UnityEngine;
 

@@ -7,14 +7,16 @@ public static class JuceCoreUnityStringExtensions
     {
         string ret = str;
 
-        if (!string.IsNullOrEmpty(str))
+        if (string.IsNullOrEmpty(str))
         {
-            StringBuilder sb = new StringBuilder(ret);
-
-            sb[0] = char.ToUpper(sb[0]);
-
-            ret = sb.ToString();
+            return ret;
         }
+
+        StringBuilder sb = new StringBuilder(ret);
+
+        sb[0] = char.ToUpper(sb[0]);
+
+        ret = sb.ToString();
 
         return ret;
     }

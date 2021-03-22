@@ -1,5 +1,5 @@
-﻿using Juce.CoreUnity.Service;
-using Juce.CoreUnity.Tickable;
+﻿using Juce.Core.Tickable;
+using Juce.CoreUnity.Service;
 using System.Collections.Generic;
 
 namespace Juce.CoreUnity.Services
@@ -51,7 +51,7 @@ namespace Juce.CoreUnity.Services
 
             bool contained = tickables.Contains(tickable);
 
-            if (contained)
+            if (!contained)
             {
                 throw new System.Exception($"Tried to remove {nameof(ITickable)}, but it was not added " +
                 $"on the first place on {nameof(TickablesService)}");
