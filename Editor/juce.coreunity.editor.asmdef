@@ -1,6 +1,9 @@
 {
     "name": "Juce.CoreUnity.Editor",
-    "references": [],
+    "rootNamespace": "",
+    "references": [
+        "GUID:9e2a0871e420eb64685e511167cd0d57"
+    ],
     "includePlatforms": [
         "Editor"
     ],
