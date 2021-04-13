@@ -1,4 +1,5 @@
-﻿using Juce.CoreUnity.Events;
+﻿using Juce.Core.Events.Generic;
+using Juce.CoreUnity.Events.Consumer;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
