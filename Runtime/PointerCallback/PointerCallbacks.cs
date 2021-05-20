@@ -8,10 +8,14 @@ namespace Juce.CoreUnity.PointerCallback
     public class PointerCallbacks : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        [SerializeField] private bool triggerPointerUpOnPointerExit = true;
+
         private readonly EventConsumer<PointerCallbackEvents> eventConsumer = new EventConsumer<PointerCallbackEvents>();
 
         private PointerCallbackPressState pressState = PointerCallbackPressState.Up;
         private PointerCallbackPositionState positionState = PointerCallbackPositionState.Out;
+
+        public PointerCallbackPressState PressState => pressState;
 
         public event GenericEvent<PointerCallbacks, PointerEventData> OnEnter;
         public event GenericEvent<PointerCallbacks, PointerEventData> OnExit;
@@ -52,7 +56,11 @@ namespace Juce.CoreUnity.PointerCallback
         public void OnPointerExit(PointerEventData pointerEventData)
         {
             TrySetPositionState(PointerCallbackPositionState.Out, pointerEventData);
-            TrySetPressState(PointerCallbackPressState.Up, pointerEventData);
+
+            if (triggerPointerUpOnPointerExit)
+            {
+                TrySetPressState(PointerCallbackPressState.Up, pointerEventData);
+            }
         }
 
         public void OnPointerClick(PointerEventData eventData)

@@ -33,14 +33,14 @@ namespace Juce.CoreUnity.Service
         {
             if (service == null)
             {
-                throw new System.ArgumentNullException($"Tried to register null service at {nameof(ServicesProvider)}");
+                UnityEngine.Debug.LogError($"Tried to register null service at {nameof(ServicesProvider)}");
             }
 
             bool alreadyExists = TryGetService<T>(out _);
 
             if (alreadyExists)
             {
-                throw new System.Exception($"Service {nameof(T)} has been already added at {nameof(ServicesProvider)}");
+                UnityEngine.Debug.LogError($"Service {nameof(T)} has been already added at {nameof(ServicesProvider)}");
             }
 
             allServices.Add(service);
@@ -59,14 +59,14 @@ namespace Juce.CoreUnity.Service
         {
             if (service == null)
             {
-                throw new System.ArgumentNullException($"Tried to unregister null service at {nameof(ServicesProvider)}");
+                UnityEngine.Debug.LogError($"Tried to unregister null service at {nameof(ServicesProvider)}");
             }
 
             bool found = allServices.Remove(service);
 
             if (!found)
             {
-                throw new System.Exception($"Tried to unregister service {service.GetType().Name} but it could" +
+                UnityEngine.Debug.LogError($"Tried to unregister service {service.GetType().Name} but it could" +
                     $"not be found at {nameof(ServicesProvider)}");
             }
 

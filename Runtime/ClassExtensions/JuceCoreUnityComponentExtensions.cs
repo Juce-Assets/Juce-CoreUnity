@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public static class JuceUtilsComponent
+public static class JuceCoreUnityComponentExtensions
 {
     public static void DestroyGameObject(this Component component)
     {

@@ -3,7 +3,6 @@
     public interface IService
     {
         void Init();
-
         void CleanUp();
     }
 }

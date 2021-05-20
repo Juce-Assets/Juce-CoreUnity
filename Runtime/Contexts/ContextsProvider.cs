@@ -22,14 +22,14 @@ namespace Juce.CoreUnity.Contexts
         {
             if (context == null)
             {
-                throw new ArgumentNullException($"Trying to register null context at {nameof(ContextsProvider)}");
+                UnityEngine.Debug.LogError($"Trying to register null context at {nameof(ContextsProvider)}");
             }
 
             bool alreadyExists = TryGetContext<T>(out _);
 
             if (context == null)
             {
-                throw new Exception($"Context {nameof(T)} has been already added at {nameof(ContextsProvider)}");
+                UnityEngine.Debug.LogError($"Context {nameof(T)} has been already added at {nameof(ContextsProvider)}");
             }
 
             allContexts.Add(context);
