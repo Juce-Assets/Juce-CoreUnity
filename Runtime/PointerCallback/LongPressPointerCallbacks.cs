@@ -72,7 +72,7 @@ namespace Juce.CoreUnity.PointerCallback
         {
             lastOnDownPointerEventData = data;
 
-            nextLongPressActivationTime = Time.time + GetLongPressDelay();
+            nextLongPressActivationTime = UnityEngine.Time.unscaledTime + GetLongPressDelay();
         }
 
         private void OnUp(PointerCallbacks owner, PointerEventData data)
@@ -95,7 +95,7 @@ namespace Juce.CoreUnity.PointerCallback
 
         private void TryActivateLongPressDown()
         {
-            if (Time.time < nextLongPressActivationTime)
+            if (UnityEngine.Time.unscaledTime < nextLongPressActivationTime)
             {
                 return;
             }

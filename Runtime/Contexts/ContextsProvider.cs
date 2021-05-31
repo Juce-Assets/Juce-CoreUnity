@@ -10,12 +10,39 @@ namespace Juce.CoreUnity.Contexts
 
         public static void Register<T>(T service) where T : Context
         {
+            if (InstanceWasDestroyed)
+            {
+                return;
+            }
+
             Instance.RegisterContext(service);
         }
 
         public static void Unregister(Context context)
         {
+            if(InstanceWasDestroyed)
+            {
+                return;
+            }
+
             Instance.UnregisterContext(context);
+        }
+
+        public static T GetContext<T>() where T : Context
+        {
+            if (InstanceWasDestroyed)
+            {
+                return default;
+            }
+
+            bool found = Instance.TryGetContext<T>(out T context);
+
+            if (!found)
+            {
+                throw new Exception($"Context {nameof(T)} could not be found at {nameof(ContextsProvider)}");
+            }
+
+            return context;
         }
 
         public void RegisterContext<T>(T context) where T : Context
@@ -48,18 +75,6 @@ namespace Juce.CoreUnity.Contexts
             {
                 throw new Exception($"Tried to unregister service {context.GetType().Name} but it was not registered at {nameof(ContextsProvider)}");
             }
-        }
-
-        public static T GetContext<T>() where T : Context
-        {
-            bool found = Instance.TryGetContext<T>(out T context);
-
-            if (!found)
-            {
-                throw new Exception($"Context {nameof(T)} could not be found at {nameof(ContextsProvider)}");
-            }
-
-            return context;
         }
 
         private bool TryGetContext<T>(out T outContext) where T : Context

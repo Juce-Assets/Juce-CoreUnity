@@ -21,12 +21,45 @@ namespace Juce.CoreUnity.Service
 
         public static void Register<T>(T service) where T : IService
         {
+            if (InstanceWasDestroyed)
+            {
+                return;
+            }
+
             Instance.RegisterService(service);
         }
 
         public static void Unregister(IService service)
         {
+            if(InstanceWasDestroyed)
+            {
+                return;
+            }
+
             Instance.UnregisterService(service);
+        }
+
+        public static T GetService<T>() where T : IService
+        {
+            if (InstanceWasDestroyed)
+            {
+                return default;
+            }
+
+            Instance.TryGet(out T service);
+
+            return service;
+        }
+
+        public static bool TryGetService<T>(out T service) where T : IService
+        {
+            if(InstanceWasDestroyed)
+            {
+                service = default;
+                return false;
+            }
+
+            return Instance.TryGet(out service);
         }
 
         public void RegisterService<T>(T service) where T : IService
@@ -36,11 +69,11 @@ namespace Juce.CoreUnity.Service
                 UnityEngine.Debug.LogError($"Tried to register null service at {nameof(ServicesProvider)}");
             }
 
-            bool alreadyExists = TryGetService<T>(out _);
+            bool alreadyExists = TryGet<T>(out _);
 
             if (alreadyExists)
             {
-                UnityEngine.Debug.LogError($"Service {nameof(T)} has been already added at {nameof(ServicesProvider)}");
+                UnityEngine.Debug.LogError($"Service {typeof(T).Name} has been already added at {nameof(ServicesProvider)}");
             }
 
             allServices.Add(service);
@@ -80,14 +113,7 @@ namespace Juce.CoreUnity.Service
             service.CleanUp();
         }
 
-        public static T GetService<T>() where T : IService
-        {
-            Instance.TryGetService(out T service);
-
-            return service;
-        }
-
-        private bool TryGetService<T>(out T outService) where T : IService
+        private bool TryGet<T>(out T outService) where T : IService
         {
             Type serviceType = typeof(T);
 

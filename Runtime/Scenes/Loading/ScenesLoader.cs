@@ -8,21 +8,29 @@ namespace Juce.CoreUnity.Scenes
     public class ScenesLoader
     {
         private readonly IReadOnlyList<string> scenes;
+        private readonly List<Scene> loadedScenes = new List<Scene>();
+
+        public IReadOnlyList<Scene> LoadedScenes => loadedScenes;
 
         public ScenesLoader(params string[] scenes)
         {
             this.scenes = scenes;
         }
 
-        private Task<bool> LoadSceneAsync(string scene, LoadSceneMode mode)
+        public static void SetActiveScene(string scene)
         {
-            TaskCompletionSource<bool> taskCompletionSource = new TaskCompletionSource<bool>();
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(scene));
+        }
+
+        public async Task<SceneLoadResult> LoadScene(string scene, LoadSceneMode mode)
+        {
+            TaskCompletionSource<SceneLoadResult> taskCompletionSource = new TaskCompletionSource<SceneLoadResult>();
 
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, mode);
 
             if (asyncLoad == null)
             {
-                return Task.FromResult(false);
+                return new SceneLoadResult(false);
             }
 
             asyncLoad.completed += ((UnityEngine.AsyncOperation operation) =>
@@ -39,22 +47,32 @@ namespace Juce.CoreUnity.Scenes
                     UnityEngine.Debug.LogError($"There was an error loading scene: {scene}. Loaded scene is not valid at {nameof(ScenesLoader)}");
                 }
 
-                taskCompletionSource.SetResult(true);
+                loadedScenes.Add(loadedScene);
+
+                taskCompletionSource.SetResult(new SceneLoadResult(true, loadedScene));
             });
 
-            return taskCompletionSource.Task;
+            SceneLoadResult result = await taskCompletionSource.Task;
+
+            await Task.Yield();
+
+            return result;
         }
 
-        private Task<bool> UnloadSceneAsync(string scene)
+        public Task<bool> UnloadScene(string scene)
         {
             TaskCompletionSource<bool> taskCompletionSource = new TaskCompletionSource<bool>();
 
             Scene loadedScene = SceneManager.GetSceneByName(scene);
 
-            if (loadedScene == null)
+            if (loadedScene == null || !loadedScene.IsValid())
             {
                 UnityEngine.Debug.LogError($"There was an error unloading scene: {scene}. Scene to unload is null {nameof(ScenesLoader)}");
             }
+
+            ParentReminderHelper.TraceBackAllInScene(loadedScene);
+
+            loadedScenes.Remove(loadedScene);
 
             AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(scene);
 
@@ -77,7 +95,7 @@ namespace Juce.CoreUnity.Scenes
 
             for (int i = 0; i < scenes.Count; ++i)
             {
-                awaitAll[i] = LoadSceneAsync(scenes[i], LoadSceneMode.Additive);
+                awaitAll[i] = LoadScene(scenes[i], LoadSceneMode.Additive);
             }
 
             return Task.WhenAll(awaitAll);
@@ -89,7 +107,7 @@ namespace Juce.CoreUnity.Scenes
 
             for (int i = 0; i < scenes.Count; ++i)
             {
-                awaitAll[i] = UnloadSceneAsync(scenes[i]);
+                awaitAll[i] = UnloadScene(scenes[i]);
             }
 
             return Task.WhenAll(awaitAll);
