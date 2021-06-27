@@ -26,20 +26,33 @@ public static class JuceCoreUnityGameObjectExtensions
         return goInstance.GetComponent<T>();
     }
 
-    public static void SetParent(this GameObject go, GameObject parent)
+    public static void SetParent(this GameObject go, GameObject parent, bool worldPositionStays = true)
     {
         if (parent == null)
         {
-            go.transform.SetParent(null);
+            go.transform.SetParent(null, worldPositionStays);
         }
         else
         {
-            go.transform.SetParent(parent.transform);
+            go.transform.SetParent(parent.transform, worldPositionStays);
         }
     }
 
-    public static void RemoveParent(this GameObject go)
+
+    public static void SetParent(this GameObject go, Transform parent, bool worldPositionStays = true)
     {
-        go.transform.SetParent(null);
+        if (parent == null)
+        {
+            go.transform.SetParent(null, worldPositionStays);
+        }
+        else
+        {
+            go.transform.SetParent(parent, worldPositionStays);
+        }
+    }
+
+    public static void RemoveParent(this GameObject go, bool worldPositionStays = true)
+    {
+        go.transform.SetParent(null, worldPositionStays);
     }
 }

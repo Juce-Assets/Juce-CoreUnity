@@ -26,5 +26,13 @@ namespace Juce.CoreUnity.UI
             uiView.transform.SetParent(canvas.gameObject.transform, worldPositionStays: false);
             uiView.transform.SetAsLastSibling();
         }
+
+        public void PushAsForeground(UIView uiView)
+        {
+            int index = uiView.transform.childCount - 1;
+
+            uiView.transform.SetParent(canvas.gameObject.transform, worldPositionStays: false);
+            uiView.transform.SetSiblingIndex(index);
+        }
     }
 }

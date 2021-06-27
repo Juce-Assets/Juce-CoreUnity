@@ -53,16 +53,14 @@ namespace Juce.CoreUnity.Services
 
             if (!contained)
             {
-                throw new System.Exception($"Tried to remove {nameof(ITickable)}, but it was not added " +
-                $"on the first place on {nameof(TickablesService)}");
+                return;
             }
 
             bool alreadyToRemove = tickablesToRemove.Contains(tickable);
 
             if (alreadyToRemove)
             {
-                throw new System.Exception($"Tried to remove {nameof(ITickable)}, but it was not added " +
-                $"on the first place on {nameof(TickablesService)}");
+                return;
             }
 
             tickablesToRemove.Add(tickable);

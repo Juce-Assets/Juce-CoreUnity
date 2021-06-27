@@ -2,5 +2,6 @@
 {
     public interface UIInteractor
     {
+        void Refresh();
     }
 }
