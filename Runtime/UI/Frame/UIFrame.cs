@@ -1,5 +1,6 @@
 ﻿using Juce.CoreUnity.Contracts;
 using Juce.Utils.Singletons;
+using System;
 using UnityEngine;
 
 namespace Juce.CoreUnity.UI
@@ -21,15 +22,23 @@ namespace Juce.CoreUnity.UI
             uiView.transform.SetAsFirstSibling();
         }
 
-        public void Push(UIView uiView)
+        public void MoveBack(UIView uiView)
+        {
+            uiView.transform.SetParent(canvas.gameObject.transform, worldPositionStays: false);
+            uiView.transform.SetAsFirstSibling();
+        }
+
+        public void PushForeground(UIView uiView)
         {
             uiView.transform.SetParent(canvas.gameObject.transform, worldPositionStays: false);
             uiView.transform.SetAsLastSibling();
         }
 
-        public void PushAsForeground(UIView uiView)
+        public void PushBehindForeground(UIView uiView)
         {
-            int index = uiView.transform.childCount - 1;
+            int index = canvas.gameObject.transform.childCount - 2;
+
+            index = Math.Max(index, 0);
 
             uiView.transform.SetParent(canvas.gameObject.transform, worldPositionStays: false);
             uiView.transform.SetSiblingIndex(index);
