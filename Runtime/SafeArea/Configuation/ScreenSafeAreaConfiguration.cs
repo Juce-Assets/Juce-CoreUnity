@@ -28,17 +28,11 @@ namespace Juce.CoreUnity.SafeArea
         // during execution
         public SafeAreaData GetSafeAreaDataToUse()
         {
-#if !UNITY_EDITOR 
             if (cachedSafeAreaData == null)
             {
                 CacheSafeAreaDataToUse();
             }
-#else
-            if (!string.Equals(cachedDeviceName, SystemInfo.deviceModel))
-            {
-                CacheSafeAreaDataToUse();
-            }
-#endif
+
             return cachedSafeAreaData;
         }
 
@@ -46,25 +40,27 @@ namespace Juce.CoreUnity.SafeArea
         {
             string currDevice = SystemInfo.deviceModel;
 
-            if (!string.Equals(currDevice, SystemInfo.unsupportedIdentifier))
+            if(string.Equals(currDevice, SystemInfo.unsupportedIdentifier))
             {
-                cachedDeviceName = currDevice;
-
-                DeviceSafeAreaData deviceData = devicesData.FirstOrDefault(setting => setting.DeviceId == currDevice);
-
-                if (deviceData != null && deviceData.Settings != null)
-                {
-                    cachedSafeAreaData = deviceData.Settings.SafeAreaData;
-
-                    UnityEngine.Debug.Log($"Using custom safe area: {deviceData.Settings.DescriptiveName} " +
-                        $"for device: {currDevice}");
-                    return;
-                }
+                UnityEngine.Debug.Log($"Using default safe area for device: {currDevice}");
+                cachedSafeAreaData = defaultData;
+                return;
             }
 
-            cachedSafeAreaData = defaultData;
+            cachedDeviceName = currDevice;
 
-            UnityEngine.Debug.Log($"Using default safe area for device: {currDevice}");
+            DeviceSafeAreaData deviceData = devicesData.FirstOrDefault(setting => setting.DeviceId == currDevice);
+
+            if(deviceData == null || deviceData.Settings == null)
+            {
+                UnityEngine.Debug.Log($"Using default safe area for device: {currDevice}");
+                cachedSafeAreaData = defaultData;
+            }
+
+            cachedSafeAreaData = deviceData.Settings.SafeAreaData;
+
+            UnityEngine.Debug.Log($"Using custom safe area: {deviceData.Settings.DescriptiveName} " +
+                $"for device: {currDevice}");
         }
     }
 }
