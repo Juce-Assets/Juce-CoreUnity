@@ -55,6 +55,7 @@ namespace Juce.CoreUnity.SafeArea
             {
                 UnityEngine.Debug.Log($"Using default safe area for device: {currDevice}");
                 cachedSafeAreaData = defaultData;
+                return;
             }
 
             cachedSafeAreaData = deviceData.Settings.SafeAreaData;
