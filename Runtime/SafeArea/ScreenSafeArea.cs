@@ -85,6 +85,8 @@ namespace Juce.CoreUnity.SafeArea
                 return;
             }
 
+            UnityEngine.Debug.Log($"Orientation changed to {currOrientation}");
+
             lastOrientation = currOrientation;
 
             // Gets the safe area settings that we are going to use. It could be the

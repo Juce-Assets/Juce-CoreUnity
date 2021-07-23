@@ -55,12 +55,15 @@ namespace Juce.CoreUnity.SafeArea
                 if (deviceData != null && deviceData.Settings != null)
                 {
                     cachedSafeAreaData = deviceData.Settings.SafeAreaData;
-                    // UnityEngine.Debug.Log($"Using custom safe area: {deviceData.Settings.DescriptiveName} for device: {currDevice}");
+
+                    UnityEngine.Debug.Log($"Using custom safe area: {deviceData.Settings.DescriptiveName} " +
+                        $"for device: {currDevice}");
                     return;
                 }
             }
 
             cachedSafeAreaData = defaultData;
+
             UnityEngine.Debug.Log($"Using default safe area for device: {currDevice}");
         }
     }
