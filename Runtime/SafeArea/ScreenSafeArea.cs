@@ -37,11 +37,15 @@ namespace Juce.CoreUnity.SafeArea
             TryGetRectTransform();
 
             UpdateOrientation(force: true);
+
+            UpdateRectTransform(force: true);
         }
 
         private void Update()
         {
             UpdateOrientation();
+
+            UpdateRectTransform(force: false);
         }
 
         private void CheckSettings()
@@ -103,9 +107,6 @@ namespace Juce.CoreUnity.SafeArea
             rightSideData = GetSideData(currOrientation, SafeAreaData.RightIndex);
             upSideData = GetSideData(currOrientation, SafeAreaData.UpIndex);
             downSideData = GetSideData(currOrientation, SafeAreaData.DownIndex);
-
-            // We update the RectTransform with the new values
-            UpdateRectTransform(force);
         }
 
         /// <summary>
