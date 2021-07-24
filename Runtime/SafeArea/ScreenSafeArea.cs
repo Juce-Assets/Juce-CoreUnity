@@ -180,6 +180,8 @@ namespace Juce.CoreUnity.SafeArea
                 return;
             }
 
+            UnityEngine.Debug.Log("Updating safe area rect transform");
+
             lastSafeArea = safeAreaRect;
 
             safeAreaRect.x /= Screen.width;
@@ -187,8 +189,8 @@ namespace Juce.CoreUnity.SafeArea
             safeAreaRect.width /= Screen.width;
             safeAreaRect.height /= Screen.height;
 
-            var anchorMin = new Vector2(safeAreaRect.x, safeAreaRect.y);
-            var anchorMax = new Vector2(safeAreaRect.width, safeAreaRect.height);
+            Vector2 anchorMin = new Vector2(safeAreaRect.x, safeAreaRect.y);
+            Vector2 anchorMax = new Vector2(safeAreaRect.width, safeAreaRect.height);
 
             rectTransform.anchorMin = anchorMin;
             rectTransform.anchorMax = anchorMax;
