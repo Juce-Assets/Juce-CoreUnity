@@ -13,6 +13,8 @@ namespace Juce.CoreUnity.UI
         [SerializeField] private UIViewAnimation showAnimation = default;
         [SerializeField] private UIViewAnimation hideAnimation = default;
 
+        private bool active = true;
+
         public bool IsPopup => isPopup;
 
         public void Show(bool instantly)

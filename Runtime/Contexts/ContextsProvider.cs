@@ -35,7 +35,7 @@ namespace Juce.CoreUnity.Contexts
                 return default;
             }
 
-            bool found = Instance.TryGetContext<T>(out T context);
+            bool found = Instance.TryGet(out T context);
 
             if (!found)
             {
@@ -43,6 +43,17 @@ namespace Juce.CoreUnity.Contexts
             }
 
             return context;
+        }
+
+        public static bool TryGetContext<T>(out T context) where T : Context
+        {
+            if (InstanceWasDestroyed)
+            {
+                context = default;
+                return false;
+            }
+
+            return Instance.TryGet(out context);
         }
 
         public void RegisterContext<T>(T context) where T : Context
@@ -77,7 +88,7 @@ namespace Juce.CoreUnity.Contexts
             }
         }
 
-        private bool TryGetContext<T>(out T outContext) where T : Context
+        private bool TryGet<T>(out T outContext) where T : Context
         {
             for (int i = 0; i < allContexts.Count; ++i)
             {

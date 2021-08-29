@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Juce.CoreUnity.Contexts
 {
@@ -29,7 +27,6 @@ namespace Juce.CoreUnity.Contexts
         }
 
         protected abstract void Init();
-
         protected abstract void CleanUp();
     }
 }
