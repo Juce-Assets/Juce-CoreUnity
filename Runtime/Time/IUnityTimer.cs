@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 namespace Juce.CoreUnity.Time
@@ -13,5 +12,6 @@ namespace Juce.CoreUnity.Time
         void Restart();
         bool HasReached(float time);
         Task AwaitReach(float time, CancellationToken cancellationToken);
+        Task AwaitTime(float time, CancellationToken cancellationToken);
     }
 }

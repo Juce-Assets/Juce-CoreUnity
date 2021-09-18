@@ -63,5 +63,12 @@ namespace Juce.CoreUnity.Time
                 await Task.Yield();
             }
         }
+
+        public Task AwaitTime(float time, CancellationToken cancellationToken)
+        {
+            float timeToReach = Time + time;
+
+            return AwaitReach(timeToReach, cancellationToken);
+        }
     }
 }

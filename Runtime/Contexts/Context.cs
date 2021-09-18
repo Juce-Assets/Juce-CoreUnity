@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using Juce.Core.CleanUp;
+using System;
+using UnityEngine;
 
 namespace Juce.CoreUnity.Contexts
 {
     public abstract class Context : MonoBehaviour
     {
+        private readonly ICleanUpActionsRepository cleanUpActionsRepository = new CleanUpActionsRepository();
+
         private bool quitting;
 
         private void Awake()
@@ -18,7 +22,7 @@ namespace Juce.CoreUnity.Contexts
                 return;
             }
 
-            CleanUp();
+            cleanUpActionsRepository.CleanUp();
         }
 
         private void OnApplicationQuit()
@@ -26,7 +30,11 @@ namespace Juce.CoreUnity.Contexts
             quitting = true;
         }
 
+        protected void AddCleanupAction(Action action)
+        {
+            cleanUpActionsRepository.Add(action);
+        }
+
         protected abstract void Init();
-        protected abstract void CleanUp();
     }
 }
