@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace Juce.CoreUnity.Factories
 {
-    public abstract class MonoBehaviourFactory<TDefinition, TCreation> 
+    public abstract class MonoBehaviourKnownPrefabFactory<TDefinition, TCreation> 
         : IFactory<TDefinition, IDisposable<TCreation>> where TCreation : MonoBehaviour
     {
         private readonly TCreation prefab;
         private readonly Transform parent;
 
-        public MonoBehaviourFactory(TCreation prefab, Transform parent)
+        public MonoBehaviourKnownPrefabFactory(TCreation prefab, Transform parent)
         {
             this.prefab = prefab;
             this.parent = parent;
