@@ -43,9 +43,12 @@ namespace Juce.CoreUnity.Factories
                 return;
             }
 
+            CleanUp(toDispose);
+
             Object.Destroy(toDispose.gameObject);
         }
 
         protected abstract void Init(TDefinition definition, TCreation creation);
+        protected virtual void CleanUp(TCreation toDispose) { }
     }
 }

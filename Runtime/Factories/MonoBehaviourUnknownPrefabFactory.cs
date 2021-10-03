@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Juce.CoreUnity.Factories
 {
     public abstract class MonoBehaviourUnknownPrefabFactory<TDefinition, TCreation>
-        : IFactory<TDefinition, IDisposable<TCreation>> 
+        : IFactory<TDefinition, IDisposable<TCreation>>
         where TDefinition : MonoBehaviourUnknownPrefabFactoryDefinition<TCreation>
         where TCreation : MonoBehaviour
     {
@@ -43,9 +43,12 @@ namespace Juce.CoreUnity.Factories
                 return;
             }
 
+            CleanUp(toDispose);
+
             Object.Destroy(toDispose.gameObject);
         }
 
         protected abstract void Init(TDefinition definition, TCreation creation);
+        protected virtual void CleanUp(TCreation toDispose) { }
     }
 }
