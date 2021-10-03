@@ -14,7 +14,7 @@ namespace Juce.CoreUnity.SafeArea
     {
         [SerializeField] private ScreenOrientation referenceOrientation = ScreenOrientation.LandscapeLeft;
         [SerializeField] private SafeAreaData defaultData = default;
-        [SerializeField] [HideInInspector] private List<DeviceSafeAreaData> devicesData = default;
+        [SerializeField] [HideInInspector] private List<DeviceSafeAreaData> devicesData = new List<DeviceSafeAreaData>();
 
         private string cachedDeviceName;
         private SafeAreaData cachedSafeAreaData;
