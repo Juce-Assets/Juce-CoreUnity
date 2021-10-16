@@ -10,7 +10,7 @@ namespace Juce.CoreUnity.Factories
         private readonly TCreation prefab;
         private readonly Transform parent;
 
-        public MonoBehaviourKnownPrefabFactory(TCreation prefab, Transform parent)
+        public MonoBehaviourKnownPrefabFactory(TCreation prefab, Transform parent = null)
         {
             this.prefab = prefab;
             this.parent = parent;
