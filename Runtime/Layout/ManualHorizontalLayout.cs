@@ -74,6 +74,11 @@ namespace Juce.CoreUnity.Layout
 
         private void TryGetRectTransform()
         {
+            if(gameObject == null)
+            {
+                return;
+            }
+
             if(rectTransform != null)
             {
                 return;

@@ -43,6 +43,8 @@ namespace Juce.CoreUnity.Factories
                 return;
             }
 
+            toDispose.transform.SetParent(null);
+
             CleanUp(toDispose);
 
             Object.Destroy(toDispose.gameObject);

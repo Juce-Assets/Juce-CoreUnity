@@ -11,7 +11,7 @@ namespace Juce.CoreUnity.Factories
     {
         private readonly Transform parent;
 
-        public MonoBehaviourUnknownPrefabFactory(Transform parent)
+        public MonoBehaviourUnknownPrefabFactory(Transform parent = null)
         {
             this.parent = parent;
         }
@@ -42,6 +42,8 @@ namespace Juce.CoreUnity.Factories
             {
                 return;
             }
+
+            toDispose.transform.SetParent(null);
 
             CleanUp(toDispose);
 
