@@ -1,10 +1,10 @@
 {
   "name": "com.juce.coreunity",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "Juce-CoreUnity",
   "description": "Juce Core Unity",
   "dependencies": {
-  	"com.juce.utils": "https://github.com/Juce-Assets/Juce-Core#1.0.0"
+  	"com.juce.core": "https://github.com/Juce-Assets/Juce-Core#1.0.0"
   },
   "keywords": [
     "Juce",
