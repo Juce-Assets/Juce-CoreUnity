@@ -1,0 +1,20 @@
+{
+  "name": "com.juce.coreunity",
+  "version": "1.0.0",
+  "displayName": "Juce-CoreUnity",
+  "description": "Juce Core Unity",
+  "dependencies": {
+  	"com.juce.utils": "https://github.com/Juce-Assets/Juce-Core#1.0.0"
+  },
+  "keywords": [
+    "Juce",
+    "UnityCore"
+  ],
+  "author": {
+    "name": "Guillem Sunyer",
+    "email": "juce.unity@gmail.com",
+    "url": "https://github.com/Juce-Assets/Juce-CoreUnity"
+  },
+  "type": "template",
+  "hideInEditor": false
+}
