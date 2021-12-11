@@ -1,28 +1,27 @@
 ﻿using Juce.Core.Tickable;
-using Juce.CoreUnity.Service;
 using System.Collections.Generic;
+using UnityEngine;
 
-namespace Juce.CoreUnity.Services
+namespace Juce.CoreUnity.Tickables
 {
-    public class TickablesService : IUpdatableService
+    public class TickablesService : MonoBehaviour, ITickablesService
     {
         private readonly List<ITickable> tickables = new List<ITickable>();
+        private readonly List<ITickable> tickablesToAdd = new List<ITickable>();
         private readonly List<ITickable> tickablesToRemove = new List<ITickable>();
-
-        public void Init()
-        {
-        }
 
         public void Update()
         {
             ActuallyRemoveTickables();
 
             TickTickables();
+
+            ActuallyAddTickables();
         }
 
-        public void CleanUp()
+        public void OnDestroy()
         {
-            RemoveAllTickables();
+            Clear();
         }
 
         public void AddTickable(ITickable tickable)
@@ -37,6 +36,13 @@ namespace Juce.CoreUnity.Services
             if (contains)
             {
                 throw new System.Exception($"Tried to add {nameof(ITickable)} but it was already at {nameof(TickablesService)}");
+            }
+
+            bool alreadyToAdd = tickablesToAdd.Contains(tickable);
+
+            if(alreadyToAdd)
+            {
+                return;
             }
 
             tickables.Add(tickable);
@@ -66,28 +72,38 @@ namespace Juce.CoreUnity.Services
             tickablesToRemove.Add(tickable);
         }
 
-        private void ActuallyRemoveTickables()
-        {
-            for (int i = 0; i < tickablesToRemove.Count; ++i)
-            {
-                tickables.Remove(tickablesToRemove[i]);
-            }
-
-            tickablesToRemove.Clear();
-        }
-
-        private void RemoveAllTickables()
+        private void Clear()
         {
             tickablesToRemove.AddRange(tickables);
 
             ActuallyRemoveTickables();
         }
 
+        private void ActuallyAddTickables()
+        {
+            foreach(ITickable tickable in tickablesToAdd)
+            {
+                tickables.Add(tickable);
+            }
+
+            tickablesToAdd.Clear();
+        }
+
+        private void ActuallyRemoveTickables()
+        {
+            foreach (ITickable tickable in tickablesToRemove)
+            {
+                tickables.Remove(tickable);
+            }
+
+            tickablesToRemove.Clear();
+        }
+
         private void TickTickables()
         {
-            for (int i = 0; i < tickables.Count; ++i)
+            foreach (ITickable tickable in tickablesToRemove)
             {
-                tickables[i].Tick();
+                tickable.Tick();
             }
         }
     }

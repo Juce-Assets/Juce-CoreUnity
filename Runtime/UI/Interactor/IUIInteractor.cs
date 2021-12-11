@@ -1,6 +1,6 @@
 ﻿namespace Juce.CoreUnity.UI
 {
-    public interface UIInteractor
+    public interface IUIInteractor
     {
         void Refresh();
     }

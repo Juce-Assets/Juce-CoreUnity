@@ -8,9 +8,6 @@ namespace Juce.CoreUnity.Scenes
     public class ScenesLoader
     {
         private readonly IReadOnlyList<string> scenes;
-        private readonly List<Scene> loadedScenes = new List<Scene>();
-
-        public IReadOnlyList<Scene> LoadedScenes => loadedScenes;
 
         public ScenesLoader(params string[] scenes)
         {
@@ -22,7 +19,7 @@ namespace Juce.CoreUnity.Scenes
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(scene));
         }
 
-        public async Task<SceneLoadResult> LoadScene(string scene, LoadSceneMode mode)
+        public static async Task<SceneLoadResult> LoadScene(string scene, LoadSceneMode mode)
         {
             TaskCompletionSource<SceneLoadResult> taskCompletionSource = new TaskCompletionSource<SceneLoadResult>();
 
@@ -47,8 +44,6 @@ namespace Juce.CoreUnity.Scenes
                     UnityEngine.Debug.LogError($"There was an error loading scene: {scene}. Loaded scene is not valid at {nameof(ScenesLoader)}");
                 }
 
-                loadedScenes.Add(loadedScene);
-
                 taskCompletionSource.SetResult(new SceneLoadResult(true, loadedScene));
             });
 
@@ -59,7 +54,7 @@ namespace Juce.CoreUnity.Scenes
             return result;
         }
 
-        public Task<bool> UnloadScene(string scene)
+        public static Task<bool> UnloadScene(string scene)
         {
             TaskCompletionSource<bool> taskCompletionSource = new TaskCompletionSource<bool>();
 
@@ -71,8 +66,6 @@ namespace Juce.CoreUnity.Scenes
             }
 
             ParentReminderHelper.TraceBackAllInScene(loadedScene);
-
-            loadedScenes.Remove(loadedScene);
 
             AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(scene);
 
@@ -87,6 +80,26 @@ namespace Juce.CoreUnity.Scenes
             });
 
             return taskCompletionSource.Task;
+        }
+
+        public static bool TryFindFirstComponent<T>(
+            IReadOnlyList<GameObject> gameObjects, 
+            out T component
+            ) where T : MonoBehaviour
+        {
+            foreach(GameObject gameObject in gameObjects)
+            {
+                T foundComponent = gameObject.GetComponentInChildren<T>();
+
+                if(foundComponent != null)
+                {
+                    component = foundComponent;
+                    return true;
+                }
+            }
+
+            component = default;
+            return false;
         }
 
         public Task Load()

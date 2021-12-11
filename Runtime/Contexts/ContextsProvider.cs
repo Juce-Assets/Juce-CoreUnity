@@ -1,63 +1,21 @@
 ﻿using Juce.Utils.Singletons;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Juce.CoreUnity.Contexts
 {
     public class ContextsProvider : AutoStartMonoSingleton<ContextsProvider>
     {
-        private readonly List<Context> allContexts = new List<Context>();
+        private readonly Dictionary<Type, object> contexts = new Dictionary<Type, object>();
 
-        public static void Register<T>(T service) where T : Context
+        public static void Register<T>(T context) 
         {
             if (InstanceWasDestroyed)
             {
                 return;
             }
 
-            Instance.RegisterContext(service);
-        }
-
-        public static void Unregister(Context context)
-        {
-            if(InstanceWasDestroyed)
-            {
-                return;
-            }
-
-            Instance.UnregisterContext(context);
-        }
-
-        public static T GetContext<T>() where T : Context
-        {
-            if (InstanceWasDestroyed)
-            {
-                return default;
-            }
-
-            bool found = Instance.TryGet(out T context);
-
-            if (!found)
-            {
-                throw new Exception($"Context {nameof(T)} could not be found at {nameof(ContextsProvider)}");
-            }
-
-            return context;
-        }
-
-        public static bool TryGetContext<T>(out T context) where T : Context
-        {
-            if (InstanceWasDestroyed)
-            {
-                context = default;
-                return false;
-            }
-
-            return Instance.TryGet(out context);
-        }
-
-        public void RegisterContext<T>(T context) where T : Context
-        {
             if (context == null)
             {
                 UnityEngine.Debug.LogError($"Trying to register null context at {nameof(ContextsProvider)}");
@@ -70,37 +28,68 @@ namespace Juce.CoreUnity.Contexts
                 UnityEngine.Debug.LogError($"Context {nameof(T)} has been already added at {nameof(ContextsProvider)}");
             }
 
-            allContexts.Add(context);
+            Type type = typeof(T);
+
+            Instance.contexts.Add(type, context);
         }
 
-        public void UnregisterContext(Context context)
+        public static void Unregister<T>()
         {
-            if (context == null)
+            if(InstanceWasDestroyed)
             {
-                throw new ArgumentNullException($"Trying to unregister null contex at {nameof(ContextsProvider)}");
+                return;
             }
 
-            bool found = allContexts.Remove(context);
+            Type type = typeof(T);
+
+            bool found = Instance.contexts.Remove(type);
 
             if (!found)
             {
-                throw new Exception($"Tried to unregister service {context.GetType().Name} but it was not registered at {nameof(ContextsProvider)}");
+                throw new Exception($"Tried to unregister service {type.Name} but it " +
+                    $"was not registered at {nameof(ContextsProvider)}");
             }
         }
 
-        private bool TryGet<T>(out T outContext) where T : Context
+        public static T GetContext<T>()
         {
-            for (int i = 0; i < allContexts.Count; ++i)
+            if (InstanceWasDestroyed)
             {
-                if (allContexts[i].GetType() == typeof(T))
-                {
-                    outContext = (T)allContexts[i];
-                    return true;
-                }
+                return default;
             }
 
-            outContext = default;
-            return false;
+            Type type = typeof(T);
+
+            bool found = TryGetContext<T>(out T context);
+
+            if (!found)
+            {
+                throw new Exception($"Context {nameof(T)} could not be found at {nameof(ContextsProvider)}");
+            }
+
+            return context;
+        }
+
+        public static bool TryGetContext<T>(out T context) 
+        {
+            if (InstanceWasDestroyed)
+            {
+                context = default;
+                return false;
+            }
+
+            Type type = typeof(T);
+
+            bool found = Instance.contexts.TryGetValue(type, out object foundContext);
+
+            if (!found)
+            {
+                context = default;
+                return false;
+            }
+
+            context = (T)foundContext;
+            return true;
         }
     }
 }
