@@ -4,7 +4,7 @@
   "displayName": "Juce-CoreUnity",
   "description": "Juce Core Unity",
   "dependencies": {
-  	"com.juce.core": "https://github.com/Juce-Assets/Juce-Core#1.0.0"
+  	"com.juce.core": "https://github.com/Juce-Assets/Juce-Core#1.1.0"
   },
   "keywords": [
     "Juce",
