@@ -22,6 +22,20 @@ namespace Juce.CoreUnity.Service
             services.Add(type, service);
         }
 
+        public void Unregister<T>()
+        {
+            Type type = typeof(T);
+
+            bool alreadyAdded = services.ContainsKey(type);
+
+            if (!alreadyAdded)
+            {
+                throw new System.Exception($"Type {type} not found at {nameof(ServiceLocator)}");
+            }
+
+            services.Remove(type);
+        }
+
         public T Get<T>() 
         {
             Type type = typeof(T);
