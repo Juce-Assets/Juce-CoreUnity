@@ -24,7 +24,7 @@ namespace Juce.CoreUnity.Tickables
             Clear();
         }
 
-        public void AddTickable(ITickable tickable)
+        public void Add(ITickable tickable)
         {
             if (tickable == null)
             {
@@ -48,7 +48,7 @@ namespace Juce.CoreUnity.Tickables
             tickables.Add(tickable);
         }
 
-        public void RemoveTickable(ITickable tickable)
+        public void Remove(ITickable tickable)
         {
             if (tickable == null)
             {

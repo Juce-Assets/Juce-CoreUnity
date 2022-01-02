@@ -4,7 +4,7 @@ namespace Juce.CoreUnity.Tickables
 {
     public interface ITickablesService 
     {
-        void AddTickable(ITickable tickable);
-        void RemoveTickable(ITickable tickable);
+        void Add(ITickable tickable);
+        void Remove(ITickable tickable);
     }
 }
