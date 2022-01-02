@@ -8,39 +8,39 @@ namespace Juce.CoreUnity.Service
     {
         private readonly Dictionary<Type, object> services = new Dictionary<Type, object>();
 
-        public void Register<T>(T service)
+        public static void Register<T>(T service)
         {
             Type type = typeof(T);
 
-            bool alreadyAdded = services.ContainsKey(type);
+            bool alreadyAdded = Instance.services.ContainsKey(type);
 
             if(alreadyAdded)
             {
                 throw new System.Exception($"Type {type} already added at {nameof(ServiceLocator)}");
             }
 
-            services.Add(type, service);
+            Instance.services.Add(type, service);
         }
 
-        public void Unregister<T>()
+        public static void Unregister<T>()
         {
             Type type = typeof(T);
 
-            bool alreadyAdded = services.ContainsKey(type);
+            bool alreadyAdded = Instance.services.ContainsKey(type);
 
             if (!alreadyAdded)
             {
                 throw new System.Exception($"Type {type} not found at {nameof(ServiceLocator)}");
             }
 
-            services.Remove(type);
+            Instance.services.Remove(type);
         }
 
-        public T Get<T>() 
+        public static T Get<T>() 
         {
             Type type = typeof(T);
 
-            bool found = services.TryGetValue(type, out object value);
+            bool found = Instance.services.TryGetValue(type, out object value);
 
             if(!found)
             {

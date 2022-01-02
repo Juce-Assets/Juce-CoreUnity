@@ -9,8 +9,8 @@ namespace JuceUnity.Core.DI.Extensions
     {
         public static IDIBindingActionBuilder<T> ToServicesLocator<T>(this IDIBindingActionBuilder<T> builder)
         {
-            builder.WhenInit((c, o) => ServiceLocator.Instance.Register(o));
-            builder.WhenDispose((c, o) => ServiceLocator.Instance.Unregister<T>());
+            builder.WhenInit((c, o) => ServiceLocator.Register(o));
+            builder.WhenDispose((c, o) => ServiceLocator.Unregister<T>());
 
             return builder;
         }
@@ -19,7 +19,7 @@ namespace JuceUnity.Core.DI.Extensions
         {
             Func<IDIResolveContainer, T> function = (IDIResolveContainer resolver) =>
             {
-                return ServiceLocator.Instance.Get<T>(); 
+                return ServiceLocator.Get<T>(); 
             };
 
             return builder.FromFunction(function);
