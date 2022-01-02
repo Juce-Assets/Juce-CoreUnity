@@ -9,8 +9,8 @@ namespace JuceUnity.Core.DI.Extensions
     {
         public static IDIBindingActionBuilder<T> ToServicesLocator<T>(this IDIBindingActionBuilder<T> builder)
         {
-            builder.WhenInit((c, o) => ServiceLocator.Register(o));
-            builder.WhenDispose((c, o) => ServiceLocator.Unregister<T>());
+            builder.WhenInit((c, o) => ServiceLocator.Register(builder.IdentifierType, o));
+            builder.WhenDispose((c, o) => ServiceLocator.Unregister(builder.IdentifierType));
 
             return builder;
         }

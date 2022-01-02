@@ -12,9 +12,14 @@ namespace Juce.CoreUnity.Service
         {
             Type type = typeof(T);
 
+            Register(type, service);
+        }
+
+        public static void Register(Type type, object service)
+        {
             bool alreadyAdded = Instance.services.ContainsKey(type);
 
-            if(alreadyAdded)
+            if (alreadyAdded)
             {
                 throw new System.Exception($"Type {type} already added at {nameof(ServiceLocator)}");
             }
@@ -26,6 +31,11 @@ namespace Juce.CoreUnity.Service
         {
             Type type = typeof(T);
 
+            Unregister(type);
+        }
+
+        public static void Unregister(Type type)
+        {
             bool alreadyAdded = Instance.services.ContainsKey(type);
 
             if (!alreadyAdded)
