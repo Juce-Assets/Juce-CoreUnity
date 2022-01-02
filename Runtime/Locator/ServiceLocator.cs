@@ -44,7 +44,7 @@ namespace Juce.CoreUnity.Service
 
             if(!found)
             {
-                throw new System.Exception($"Type {type} coulg not be found at {nameof(ServiceLocator)}");
+                throw new System.Exception($"Type {type} could not be found at {nameof(ServiceLocator)}");
             }
 
             return (T)value;
