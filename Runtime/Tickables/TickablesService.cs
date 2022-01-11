@@ -101,7 +101,7 @@ namespace Juce.CoreUnity.Tickables
 
         private void TickTickables()
         {
-            foreach (ITickable tickable in tickablesToRemove)
+            foreach (ITickable tickable in tickables)
             {
                 tickable.Tick();
             }
