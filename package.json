@@ -1,6 +1,6 @@
 {
   "name": "com.juce.coreunity",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "displayName": "Juce-CoreUnity",
   "description": "Juce Core Unity",
   "dependencies": {
