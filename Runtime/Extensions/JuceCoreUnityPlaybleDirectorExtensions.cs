@@ -39,4 +39,14 @@ public static class JuceCoreUnityPlaybleDirectorExtensions
 
         return taskCompletionSource.Task;
     }
+
+    public static void Complete(this PlayableDirector component)
+    {
+        if (component.state != PlayState.Playing)
+        {
+            return;
+        }
+
+        component.playableGraph.GetRootPlayable(0).SetSpeed(double.MaxValue);
+    }
 }

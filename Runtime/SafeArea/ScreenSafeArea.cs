@@ -13,8 +13,6 @@ namespace Juce.CoreUnity.SafeArea
 
         private RectTransform rectTransform = default;
 
-        private bool prevExecuteInEditMode = false;
-
         private SafeAreaData safeAreaData;
         private IReadOnlyList<SafeAreaSideData> sidesData;
 
