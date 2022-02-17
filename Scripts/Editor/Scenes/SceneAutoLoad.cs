@@ -19,6 +19,10 @@ namespace Juce.CoreUnity.Scenes
     [InitializeOnLoad]
     internal static class SceneAutoLoader
     {
+        private static string EditorPrefLoadMasterOnPlay => $"{GetProjectName()}.SceneAutoLoader.LoadMasterOnPlay";
+        private static string EditorPrefMasterScene => $"{GetProjectName()}.SceneAutoLoader.MasterScene";
+        private static string EditorPrefPreviousScene => $"{GetProjectName()}.SceneAutoLoader.PreviousScene";
+
         // Static constructor binds a playmode-changed callback.
         // [InitializeOnLoad] above makes sure this gets executed.
         static SceneAutoLoader()
@@ -109,28 +113,31 @@ namespace Juce.CoreUnity.Scenes
             }
         }
 
-        // Properties are remembered as editor preferences.
-        private const string cEditorPrefLoadMasterOnPlay = "SceneAutoLoader.LoadMasterOnPlay";
-
-        private const string cEditorPrefMasterScene = "SceneAutoLoader.MasterScene";
-        private const string cEditorPrefPreviousScene = "SceneAutoLoader.PreviousScene";
-
         private static bool LoadMasterOnPlay
         {
-            get { return EditorPrefs.GetBool(cEditorPrefLoadMasterOnPlay, false); }
-            set { EditorPrefs.SetBool(cEditorPrefLoadMasterOnPlay, value); }
+            get { return EditorPrefs.GetBool(EditorPrefLoadMasterOnPlay, false); }
+            set { EditorPrefs.SetBool(EditorPrefLoadMasterOnPlay, value); }
         }
 
         private static string MasterScene
         {
-            get { return EditorPrefs.GetString(cEditorPrefMasterScene, "Master.unity"); }
-            set { EditorPrefs.SetString(cEditorPrefMasterScene, value); }
+            get { return EditorPrefs.GetString(EditorPrefMasterScene, "Master.unity"); }
+            set { EditorPrefs.SetString(EditorPrefMasterScene, value); }
         }
 
         private static string PreviousScene
         {
-            get { return EditorPrefs.GetString(cEditorPrefPreviousScene, EditorSceneManager.GetActiveScene().path); }
-            set { EditorPrefs.SetString(cEditorPrefPreviousScene, value); }
+            get { return EditorPrefs.GetString(EditorPrefPreviousScene, EditorSceneManager.GetActiveScene().path); }
+            set { EditorPrefs.SetString(EditorPrefPreviousScene, value); }
+        }
+
+        private static string GetProjectName()
+        {
+            string[] s = Application.dataPath.Split('/');
+
+            string projectName = s[s.Length - 2];
+
+            return projectName;
         }
     }
 }
