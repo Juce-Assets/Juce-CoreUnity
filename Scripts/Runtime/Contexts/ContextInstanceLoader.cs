@@ -1,17 +1,18 @@
-﻿using Juce.CoreUnity.Scenes;
+﻿using Juce.SceneManagement.Loader;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Juce.CoreUnity.Contexts
 {
-    public static class ContextLoader
+    public static class ContextInstanceLoader
     {
         public static async Task<TContextInstance> Load<TContextInstance>(
             string contextSceneName
             ) where TContextInstance : MonoBehaviour
         {
-            SceneLoadResult sceneLoadResult = await ScenesLoader.LoadScene(
+            SceneLoadResult sceneLoadResult = await RuntimeSceneLoader.LoadFromName(
                contextSceneName,
                LoadSceneMode.Additive
                );
@@ -22,7 +23,7 @@ namespace Juce.CoreUnity.Contexts
                     $"context");
             }
 
-            bool found = ScenesLoader.TryFindFirstComponent(
+            bool found = TryFindFirstComponent(
                 sceneLoadResult.Scene.GetRootGameObjects(),
                 out TContextInstance instance
                 );
@@ -40,7 +41,26 @@ namespace Juce.CoreUnity.Contexts
             string contextSceneName
             )
         {
-            return ScenesLoader.UnloadScene(contextSceneName);
+            return RuntimeSceneLoader.UnloadFromName(contextSceneName);
+        }
+
+        private static bool TryFindFirstComponent<T>(
+            IReadOnlyList<GameObject> gameObjects,
+            out T component
+            ) where T : MonoBehaviour
+        {
+            foreach(GameObject gameObject in gameObjects)
+            {
+                component = gameObject.GetComponentInChildren<T>();
+
+                if(component != null)
+                {
+                    return true;
+                }
+            }
+
+            component = default;
+            return false;
         }
     }
 }
