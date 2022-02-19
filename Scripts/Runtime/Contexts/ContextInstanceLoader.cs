@@ -30,7 +30,7 @@ namespace Juce.CoreUnity.Contexts
 
             if (!found)
             {
-                throw new System.Exception($"{nameof(TContextInstance)} not found for " +
+                throw new System.Exception($"{typeof(TContextInstance).Name} not found for " +
                     $"context scene {contextSceneName}");
             }
 
