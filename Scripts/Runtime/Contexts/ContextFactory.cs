@@ -21,7 +21,7 @@ namespace Juce.CoreUnity.Contexts
             this.contextInstaller = contextInstaller;
         }
 
-        public async Task<ITaskDisposable<TInteractor>> TryCreate(params IDIContainer[] parentContainers)
+        public async Task<ITaskDisposable<TInteractor>> Create(params IDIContainer[] parentContainers)
         {
             TInstance contextInstance = await ContextInstanceLoader.Load<TInstance>(contextSceneName);
 
