@@ -1,23 +1,22 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Juce.CoreUnity.Layers
 {
     public class CanvasLayerSelector : MonoBehaviour
     {
+        [Header("Target")]
+        [SerializeField] private List<Canvas> targets = default;
+
         [Header("Layer")]
         [SerializeField] private Layer layer = default;
 
-        [Header("Target")]
-        [SerializeField] private Canvas target = default;
-
         private void Awake()
         {
-            if (target == null)
+            foreach (Canvas target in targets)
             {
-                return;
+                target.sortingOrder = layer.LayerValue;
             }
-
-            target.sortingOrder = layer.LayerValue;
         }
     }
 }

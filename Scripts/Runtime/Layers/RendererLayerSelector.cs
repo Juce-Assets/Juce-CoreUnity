@@ -1,23 +1,22 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Juce.CoreUnity.Layers
 {
     public class RendererLayerSelector : MonoBehaviour
     {
+        [Header("Target")]
+        [SerializeField] private List<Renderer> targets = default;
+
         [Header("Layer")]
         [SerializeField] private Layer layer = default;
 
-        [Header("Target")]
-        [SerializeField] private Renderer target = default;
-
         private void Awake()
         {
-            if (target == null)
+            foreach (Renderer target in targets)
             {
-                return;
+                target.sortingOrder = layer.LayerValue;
             }
-
-            target.sortingOrder = layer.LayerValue;
         }
     }
 }
