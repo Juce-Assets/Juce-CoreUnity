@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Juce.CoreUnity.Contexts
 {
-    public class ContextFactory<TInteractor, TInstance> where TInstance : MonoBehaviour, IContextFactory<TInteractor, TInstance>
+    public class ContextFactory<TInteractor, TInstance> : IContextFactory<TInteractor, TInstance> where TInstance : MonoBehaviour
     {
         private readonly string contextSceneName;
         private readonly IContextInstaller<TInstance> contextInstaller;
