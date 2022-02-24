@@ -50,7 +50,7 @@ namespace Juce.CoreUnity.TweenComponent
                     continue;
                 }
 
-                toWait.Add(toPlay.Play(cancellationToken));
+                toWait.Add(toPlay.Play(instantly, cancellationToken));
             }
 
             return Task.WhenAll(toWait);
