@@ -3,19 +3,19 @@ using Juce.CoreUnity.PointerCallback;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Juce.CoreUnity.UI
+namespace Juce.CoreUnity.Ui
 {
-    public class PointerCallbacksAnimationPlayer : MonoBehaviour
+    public class PointerCallbacksTweenPlayer : MonoBehaviour
     {
-        [Header("Settings")]
+        [Header("References")]
         [SerializeField] private PointerCallbacks pointerCallbacks = default;
 
         [Header("Animations")]
-        [SerializeField] private UIViewAnimation onUpAnimation = default;
-        [SerializeField] private UIViewAnimation onDownAnimation = default;
-        [SerializeField] private UIViewAnimation onEnterAnimation = default;
-        [SerializeField] private UIViewAnimation onExitAnimation = default;
-        [SerializeField] private UIViewAnimation onClickAnimation = default;
+        [SerializeField] private TaskAnimationMonoBehaviour onUpAnimation = default;
+        [SerializeField] private TaskAnimationMonoBehaviour onDownAnimation = default;
+        [SerializeField] private TaskAnimationMonoBehaviour onEnterAnimation = default;
+        [SerializeField] private TaskAnimationMonoBehaviour onExitAnimation = default;
+        [SerializeField] private TaskAnimationMonoBehaviour onClickAnimation = default;
 
         private void Awake()
         {

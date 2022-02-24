@@ -1,47 +1,38 @@
-﻿using Juce.CoreUnity.Contracts;
-using Juce.Utils.Singletons;
-using System;
+﻿using System;
 using UnityEngine;
 
-namespace Juce.CoreUnity.UI
+namespace Juce.CoreUnity.Ui.Frame
 {
-    public class UIFrame : MonoSingleton<UIFrame>
+    public class UiFrame : MonoBehaviour, IUiFrame
     {
         [SerializeField] private Canvas canvas = default;
 
-        private void Awake()
+        public void Register(Transform transform)
         {
-            Contract.IsNotNull(canvas, this);
-
-            InitInstance(this);
+            transform.SetParent(canvas.gameObject.transform, worldPositionStays: false);
+            transform.SetAsFirstSibling();
         }
 
-        public void Register(UIView uiView)
+        public void MoveToBackground(Transform transform)
         {
-            uiView.transform.SetParent(canvas.gameObject.transform, worldPositionStays: false);
-            uiView.transform.SetAsFirstSibling();
+            transform.SetParent(canvas.gameObject.transform, worldPositionStays: false);
+            transform.SetAsFirstSibling();
         }
 
-        public void MoveBack(UIView uiView)
+        public void MoveToForeground(Transform transform)
         {
-            uiView.transform.SetParent(canvas.gameObject.transform, worldPositionStays: false);
-            uiView.transform.SetAsFirstSibling();
+            transform.SetParent(canvas.gameObject.transform, worldPositionStays: false);
+            transform.SetAsLastSibling();
         }
 
-        public void PushForeground(UIView uiView)
-        {
-            uiView.transform.SetParent(canvas.gameObject.transform, worldPositionStays: false);
-            uiView.transform.SetAsLastSibling();
-        }
-
-        public void PushBehindForeground(UIView uiView)
+        public void MoveBehindForeground(Transform transform)
         {
             int index = canvas.gameObject.transform.childCount - 2;
 
             index = Math.Max(index, 0);
 
-            uiView.transform.SetParent(canvas.gameObject.transform, worldPositionStays: false);
-            uiView.transform.SetSiblingIndex(index);
+            transform.SetParent(canvas.gameObject.transform, worldPositionStays: false);
+            transform.SetSiblingIndex(index);
         }
     }
 }

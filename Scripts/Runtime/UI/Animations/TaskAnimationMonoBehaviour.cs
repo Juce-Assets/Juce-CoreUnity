@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Juce.CoreUnity.UI
+namespace Juce.CoreUnity.Ui
 {
-    public abstract class UIViewAnimation : MonoBehaviour
+    public abstract class TaskAnimationMonoBehaviour : MonoBehaviour
     {
         public virtual Task Execute(bool instantly, CancellationToken cancellationToken) 
         {
