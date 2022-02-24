@@ -1,6 +1,5 @@
 ﻿using Juce.Core.DI.Builder;
 using Juce.Core.DI.Container;
-using Juce.Core.DI.Installers;
 using Juce.Core.Disposables;
 using Juce.CoreUnity.Service;
 using System;
@@ -9,7 +8,7 @@ using UnityEngine;
 
 namespace Juce.CoreUnity.Contexts
 {
-    public class ContextFactory<TInteractor, TInstance> where TInstance : MonoBehaviour
+    public class ContextFactory<TInteractor, TInstance> where TInstance : MonoBehaviour, IContextFactory<TInteractor, TInstance>
     {
         private readonly string contextSceneName;
         private readonly IContextInstaller<TInstance> contextInstaller;
