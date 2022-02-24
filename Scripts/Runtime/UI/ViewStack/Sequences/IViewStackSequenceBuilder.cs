@@ -1,4 +1,7 @@
-﻿namespace Juce.CoreUnity.ViewStack.Sequences
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+namespace Juce.CoreUnity.ViewStack.Sequences
 {
     public interface IViewStackSequenceBuilder
     {
@@ -8,5 +11,8 @@
         IViewStackSequenceBuilder ShowLast(bool instantly);
         IViewStackSequenceBuilder ShowLastBehindForeground(bool instantly);
         IViewStackSequenceBuilder MoveToBackground<T>();
+
+        Task Execute(CancellationToken cancellationToken);
+        void Execute();
     }
 }
