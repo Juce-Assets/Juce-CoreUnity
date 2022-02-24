@@ -12,11 +12,11 @@ namespace Juce.CoreUnity.Contexts
     public class ContextFactory<TInteractor, TInstance> where TInstance : MonoBehaviour
     {
         private readonly string contextSceneName;
-        private readonly IInstaller contextInstaller;
+        private readonly IContextInstaller<TInstance> contextInstaller;
 
         public ContextFactory(
             string contextSceneName,
-            IInstaller contextInstaller
+            IContextInstaller<TInstance> contextInstaller
             )
         {
             this.contextSceneName = contextSceneName;
@@ -30,9 +30,8 @@ namespace Juce.CoreUnity.Contexts
             IDIContainerBuilder containerBuilder = new DIContainerBuilder();
 
             containerBuilder.Bind(parentContainers);
-            containerBuilder.Bind<TInstance>().FromInstance(contextInstance);
 
-            contextInstaller.Install(containerBuilder);
+            contextInstaller.Install(containerBuilder, contextInstance);
 
             IDIContainer container = containerBuilder.Build();
 
