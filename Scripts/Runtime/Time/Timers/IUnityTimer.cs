@@ -1,17 +1,18 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Juce.CoreUnity.Time
 {
     public interface IUnityTimer
     {
-        float Time { get; }
+        TimeSpan Time { get; }
 
         void Start();
         void Reset();
         void Restart();
-        bool HasReached(float time);
-        Task AwaitReach(float time, CancellationToken cancellationToken);
-        Task AwaitTime(float time, CancellationToken cancellationToken);
+        bool HasReached(TimeSpan time);
+        Task AwaitReach(TimeSpan time, CancellationToken cancellationToken);
+        Task AwaitTime(TimeSpan time, CancellationToken cancellationToken);
     }
 }

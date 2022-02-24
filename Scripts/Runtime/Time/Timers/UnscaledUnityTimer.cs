@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Juce.CoreUnity.Time
@@ -6,18 +7,18 @@ namespace Juce.CoreUnity.Time
     public class UnscaledUnityTimer : IUnityTimer
     {
         private bool started;
-        private float startTime;
+        private TimeSpan startTime;
 
-        public float Time
+        public TimeSpan Time
         {
             get
             {
                 if (!started)
                 {
-                    return 0.0f;
+                    return TimeSpan.Zero;
                 }
 
-                return UnityEngine.Time.unscaledTime - startTime;
+                return TimeSpan.FromSeconds(UnityEngine.Time.unscaledTime) - startTime;
             }
         }
 
@@ -30,14 +31,14 @@ namespace Juce.CoreUnity.Time
 
             started = true;
 
-            startTime = UnityEngine.Time.unscaledTime;
+            startTime = TimeSpan.FromSeconds(UnityEngine.Time.unscaledTime);
         }
 
         public void Reset()
         {
             started = false;
 
-            startTime = 0.0f;
+            startTime = TimeSpan.Zero;
         }
 
         public void Restart()
@@ -46,7 +47,7 @@ namespace Juce.CoreUnity.Time
             Start();
         }
 
-        public bool HasReached(float time)
+        public bool HasReached(TimeSpan time)
         {
             if(!started)
             {
@@ -56,7 +57,7 @@ namespace Juce.CoreUnity.Time
             return Time >= time;
         }
 
-        public async Task AwaitReach(float time, CancellationToken cancellationToken)
+        public async Task AwaitReach(TimeSpan time, CancellationToken cancellationToken)
         {
             while(!HasReached(time) && !cancellationToken.IsCancellationRequested)
             {
@@ -64,9 +65,9 @@ namespace Juce.CoreUnity.Time
             }
         }
 
-        public Task AwaitTime(float time, CancellationToken cancellationToken)
+        public Task AwaitTime(TimeSpan time, CancellationToken cancellationToken)
         {
-            float timeToReach = Time + time;
+            TimeSpan timeToReach = Time + time;
 
             return AwaitReach(timeToReach, cancellationToken);
         }
