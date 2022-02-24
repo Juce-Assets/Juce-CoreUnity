@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Juce.CoreUnity.Ui.Frame
@@ -7,10 +8,26 @@ namespace Juce.CoreUnity.Ui.Frame
     {
         [SerializeField] private Canvas canvas = default;
 
+        private readonly Dictionary<Transform, Transform> originalParents = new Dictionary<Transform, Transform>();
+
         public void Register(Transform transform)
         {
+            originalParents.Add(transform, transform.parent);
+
             transform.SetParent(canvas.gameObject.transform, worldPositionStays: false);
             transform.SetAsFirstSibling();
+        }
+
+        public void Unregister(Transform transform)
+        {
+            bool found = originalParents.TryGetValue(transform, out Transform originalParent);
+
+            if(!found)
+            {
+                return;
+            }
+
+            transform.SetParent(originalParent, worldPositionStays: false);
         }
 
         public void MoveToBackground(Transform transform)

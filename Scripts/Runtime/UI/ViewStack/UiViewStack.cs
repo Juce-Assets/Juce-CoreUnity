@@ -13,7 +13,7 @@ namespace Juce.CoreUnity.ViewStack
         private readonly IKeyValueRepository<Type, IViewStackEntry> entriesRepository = new SimpleKeyValueRepository<Type, IViewStackEntry>();
         private readonly ISingleRepository<IViewContext> currentContextRepository = new SimpleSingleRepository<IViewContext>();
         private readonly Queue<Type> viewStackQueue = new Queue<Type>();
-        private readonly Sequencer sequencer = new Sequencer();
+        private readonly ISequencer sequencer = new Sequencer();
 
         private readonly IUiFrame frame;
 
@@ -40,56 +40,19 @@ namespace Juce.CoreUnity.ViewStack
         public void Unregister(IViewStackEntry entry)
         {
             entriesRepository.Remove(entry.Id);
+
+            frame.Unregister(entry.Transform);
         }
 
         public IViewStackSequenceBuilder New()
         {
-            throw new NotImplementedException();
+            return new ViewStackSequenceBuilder(
+                frame,
+                entriesRepository,
+                currentContextRepository,
+                viewStackQueue,
+                sequencer
+                );
         }
-
-        //public void Register<T>(T uiInteractor, UIView uiView) where T : IUIInteractor
-        //{
-        //    registeredInteractorsRepository.Add(uiView, uiInteractor);
-        //    interactorsRepository.Add(typeof(T), uiInteractor);
-        //    registeredViewsRepository.Add(uiView);
-
-        //    UIFrame.Instance.Register(uiView);
-        //}
-
-        //public void Unregister(UIView uiView)
-        //{
-        //    registeredInteractorsRepository.Remove(uiView);
-        //    registeredViewsRepository.Remove(uiView);
-
-        //    if(uiView.IsPopup)
-        //    {
-        //        bool found = viewContexRepository.TryGetPopup(uiView, out ViewContex viewContext);
-
-        //        if(found)
-        //        {
-        //            viewContext.PopupUIViews.Remove(uiView);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        bool found = viewContexRepository.TryGet(uiView, out ViewContex viewContext);
-
-        //        if (found)
-        //        {
-        //            viewContexRepository.Remove(viewContext);
-        //        }
-        //    }
-        //}
-
-        //public ViewStackSequence New()
-        //{
-        //    return new ViewStackSequence(
-        //        registeredViewsRepository, 
-        //        viewContexRepository,
-        //        viewQueueRepository,
-        //        registeredInteractorsRepository,
-        //        sequencer
-        //        );
-        //}
     }
 }
