@@ -5,6 +5,7 @@ using Juce.CoreUnity.ViewStack.Context;
 using Juce.CoreUnity.ViewStack.Sequences;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Juce.CoreUnity.ViewStack
 {
@@ -31,6 +32,8 @@ namespace Juce.CoreUnity.ViewStack
                 UnityEngine.Debug.LogError($"{nameof(IViewStackEntry)} with id {entry.Id} already registered");
                 return;
             }
+
+            entry.Visible.SetVisible(visible: false, instantly: true, CancellationToken.None);
 
             entriesRepository.Add(entry.Id, entry);
 
