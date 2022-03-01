@@ -59,5 +59,28 @@ namespace Juce.CoreUnity.Service
 
             return (T)value;
         }
+
+        public static bool TryGet<T>(out T item)
+        {
+            Type type = typeof(T);
+
+            bool found = Instance.services.TryGetValue(type, out object value);
+
+            if (!found)
+            {
+                item = default;
+                return false;
+            }
+
+            item = (T)value;
+            return true;
+        }
+
+        public static bool Has<T>()
+        {
+            Type type = typeof(T);
+
+            return Instance.services.TryGetValue(type, out _); ;
+        }
     }
 }
