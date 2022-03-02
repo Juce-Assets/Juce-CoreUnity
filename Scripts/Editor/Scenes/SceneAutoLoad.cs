@@ -113,7 +113,7 @@ namespace Juce.CoreUnity.Scenes
             }
         }
 
-        private static bool LoadMasterOnPlay
+        public static bool LoadMasterOnPlay
         {
             get { return EditorPrefs.GetBool(EditorPrefLoadMasterOnPlay, false); }
             set { EditorPrefs.SetBool(EditorPrefLoadMasterOnPlay, value); }
