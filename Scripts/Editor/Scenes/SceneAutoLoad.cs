@@ -17,7 +17,7 @@ namespace Juce.CoreUnity.Scenes
     /// http://forum.unity3d.com/threads/157502-Executing-first-scene-in-build-settings-when-pressing-play-button-in-editor
     /// </description>
     [InitializeOnLoad]
-    internal static class SceneAutoLoader
+    public static class SceneAutoLoader
     {
         private static string EditorPrefLoadMasterOnPlay => $"{GetProjectName()}.SceneAutoLoader.LoadMasterOnPlay";
         private static string EditorPrefMasterScene => $"{GetProjectName()}.SceneAutoLoader.MasterScene";
