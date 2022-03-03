@@ -15,8 +15,12 @@ namespace Juce.CoreUnity.Ui
 
         public override void OnInspectorGUI()
         {
+            serializedObject.Update();
+
             EditorGUILayout.PropertyField(pointerCallbacksProperty);
             EditorGUILayout.PropertyField(navigationProperty);
+
+            serializedObject.ApplyModifiedProperties();
         }
 
         private void GatherSerializedProperties()
