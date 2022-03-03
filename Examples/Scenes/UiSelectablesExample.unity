@@ -559,7 +559,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 0, b: 0, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.972549, g: 0.105882354, b: 0.105882354, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -993,7 +993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: -1
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -1021,7 +1021,7 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 841685749}
-  pointerCallbacks: {fileID: 841685752}
+  firstSelected: 1
 --- !u!114 &841685752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1259,15 +1259,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 841685748}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8ff4784f499cf64a9b9d565be859850, type: 3}
+  m_Script: {fileID: 11500000, guid: b50a4ea51d4c4b544b5cb803435f8f92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pointerCallbacks: {fileID: 841685752}
+  selectableCallbacks: {fileID: 841685751}
   onUpAnimation: {fileID: 0}
   onDownAnimation: {fileID: 0}
-  onEnterAnimation: {fileID: 841685757}
-  onExitAnimation: {fileID: 841685756}
-  onClickAnimation: {fileID: 0}
+  onEnterSelectAnimation: {fileID: 841685757}
+  onExitDeselectAnimation: {fileID: 841685756}
+  onClickSubmitAnimation: {fileID: 0}
 --- !u!1 &860642939
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,7 +1326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 203872763}
+  m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &860642942

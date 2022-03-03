@@ -1,6 +1,6 @@
 ﻿namespace Juce.CoreUnity.PointerCallback
 {
-    internal enum PointerCallbackPositionState
+    public enum PointerCallbackPositionState
     {
         In,
         Out,

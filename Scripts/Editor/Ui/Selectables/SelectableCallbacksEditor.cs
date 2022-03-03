@@ -2,10 +2,10 @@
 
 namespace Juce.CoreUnity.Ui
 {
-    [CustomEditor(typeof(PointerCallbacksSelectable))]
-    public class PointerCallbacksSelectableEditor : Editor
+    [CustomEditor(typeof(SelectableCallbacks))]
+    public class SelectableCallbacksEditor : Editor
     {
-        private SerializedProperty pointerCallbacksProperty;
+        private SerializedProperty firstSelectedProperty;
         private SerializedProperty navigationProperty;
 
         private void OnEnable()
@@ -17,7 +17,7 @@ namespace Juce.CoreUnity.Ui
         {
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(pointerCallbacksProperty);
+            EditorGUILayout.PropertyField(firstSelectedProperty);
             EditorGUILayout.PropertyField(navigationProperty);
 
             serializedObject.ApplyModifiedProperties();
@@ -25,7 +25,7 @@ namespace Juce.CoreUnity.Ui
 
         private void GatherSerializedProperties()
         {
-            pointerCallbacksProperty = serializedObject.FindProperty("pointerCallbacks");
+            firstSelectedProperty = serializedObject.FindProperty("firstSelected");
             navigationProperty = serializedObject.FindProperty("m_Navigation");
         }
     }

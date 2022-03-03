@@ -1,5 +1,4 @@
-﻿using Juce.CoreUnity.Contracts;
-using Juce.CoreUnity.PointerCallback;
+﻿using Juce.CoreUnity.PointerCallback;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -19,8 +18,6 @@ namespace Juce.CoreUnity.Ui
 
         private void Awake()
         {
-            Contract.IsNotNull(pointerCallbacks, this);
-
             pointerCallbacks.OnUp += OnPointerCallbacksUp;
             pointerCallbacks.OnDown += OnPointerCallbacksDown;
             pointerCallbacks.OnEnter += OnPointerCallbacksEnter;

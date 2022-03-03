@@ -12,10 +12,8 @@ namespace Juce.CoreUnity.PointerCallback
 
         private readonly EventConsumer<PointerCallbackEvents> eventConsumer = new EventConsumer<PointerCallbackEvents>();
 
-        private PointerCallbackPressState pressState = PointerCallbackPressState.Up;
-        private PointerCallbackPositionState positionState = PointerCallbackPositionState.Out;
-
-        public PointerCallbackPressState PressState => pressState;
+        public PointerCallbackPressState PressState { get; private set; } = PointerCallbackPressState.Up;
+        public PointerCallbackPositionState PositionState { get; private set; } = PointerCallbackPositionState.Out;
 
         public event GenericEvent<PointerCallbacks, PointerEventData> OnEnter;
         public event GenericEvent<PointerCallbacks, PointerEventData> OnExit;
@@ -79,9 +77,9 @@ namespace Juce.CoreUnity.PointerCallback
             {
                 case PointerCallbackPressState.Up:
                     {
-                        if (this.pressState == PointerCallbackPressState.Down)
+                        if (PressState == PointerCallbackPressState.Down)
                         {
-                            this.pressState = pressState;
+                            PressState = pressState;
 
                             bool alreadyConsumed = eventConsumer.Pop(PointerCallbackEvents.Up);
 
@@ -95,9 +93,9 @@ namespace Juce.CoreUnity.PointerCallback
 
                 case PointerCallbackPressState.Down:
                     {
-                        if (this.pressState == PointerCallbackPressState.Up)
+                        if (PressState == PointerCallbackPressState.Up)
                         {
-                            this.pressState = pressState;
+                            PressState = pressState;
 
                             bool alreadyConsumed = eventConsumer.Pop(PointerCallbackEvents.Down);
 
@@ -117,9 +115,9 @@ namespace Juce.CoreUnity.PointerCallback
             {
                 case PointerCallbackPositionState.In:
                     {
-                        if (this.positionState == PointerCallbackPositionState.Out)
+                        if (PositionState == PointerCallbackPositionState.Out)
                         {
-                            this.positionState = positionState;
+                            PositionState = positionState;
 
                             bool alreadyConsumed = eventConsumer.Pop(PointerCallbackEvents.Enter);
 
@@ -133,9 +131,9 @@ namespace Juce.CoreUnity.PointerCallback
 
                 case PointerCallbackPositionState.Out:
                     {
-                        if (this.positionState == PointerCallbackPositionState.In)
+                        if (PositionState == PointerCallbackPositionState.In)
                         {
-                            this.positionState = positionState;
+                            PositionState = positionState;
 
                             bool alreadyConsumed = eventConsumer.Pop(PointerCallbackEvents.Exit);
 
