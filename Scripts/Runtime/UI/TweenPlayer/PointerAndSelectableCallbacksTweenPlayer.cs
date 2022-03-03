@@ -21,7 +21,7 @@ namespace Juce.CoreUnity.Ui.TweenPlayer
         [SerializeField] private TaskAnimationMonoBehaviour onClickSubmitAnimation = default;
 
         [Header("Configuration")]
-        [SerializeField] private bool executeSelectedAfterSubmit = true;
+        [SerializeField] private bool executeSelectedOrDeselectedAfterSubmit = true;
 
         private void Awake()
         {
@@ -153,12 +153,19 @@ namespace Juce.CoreUnity.Ui.TweenPlayer
         {
             await onClickSubmitAnimation.Execute(instantly: false, cancellationToken);
 
-            if (!executeSelectedAfterSubmit)
+            if (!executeSelectedOrDeselectedAfterSubmit)
             {
                 return;
             }
 
-            await onEnterSelectAnimation.Execute(instantly: false, cancellationToken);
+            if (selectableCallbacks.Selected)
+            {
+                await onEnterSelectAnimation.Execute(instantly: false, cancellationToken);
+            }
+            else
+            {
+                await onExitDeselectAnimation.Execute(instantly: false, cancellationToken);
+            }
         }
     }
 }
