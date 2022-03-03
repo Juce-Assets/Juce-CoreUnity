@@ -153,11 +153,6 @@ namespace Juce.CoreUnity.Ui.TweenPlayer
         {
             await onClickSubmitAnimation.Execute(instantly: false, cancellationToken);
 
-            if (!selectableCallbacks.Selected)
-            {
-                return;
-            }
-
             if (!executeSelectedAfterSubmit)
             {
                 return;
