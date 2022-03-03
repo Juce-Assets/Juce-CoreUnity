@@ -15,13 +15,16 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
         private void Awake()
         {
             inputSystemUIInputModule.move.action.performed += OnMovePerformed;
-            inputSystemUIInputModule.leftClick.action.performed += OnClickPerformed;
         }
 
         private void OnDestroy()
         {
             inputSystemUIInputModule.move.action.performed -= OnMovePerformed;
-            inputSystemUIInputModule.leftClick.action.performed -= OnClickPerformed;
+        }
+
+        private void Update()
+        {
+            RegisterLastSelected();
         }
 
         private void LateUpdate()
@@ -32,11 +35,6 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
         private void OnMovePerformed(CallbackContext callbackContext)
         {
             TrySelectLast();
-        }
-
-        private void OnClickPerformed(CallbackContext callbackContext)
-        {
-            RegisterLastSelected();
         }
 
         private void RegisterLastSelected()
