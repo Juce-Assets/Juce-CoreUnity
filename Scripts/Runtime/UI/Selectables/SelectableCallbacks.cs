@@ -1,11 +1,10 @@
 ﻿using Juce.Core.Events.Generic;
-using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Juce.CoreUnity.Ui.SelectableCallback
 {
-    public class SelectableCallbacks : Selectable
+    public class SelectableCallbacks : Selectable, ISubmitHandler
     {
         public bool Selected { get; private set; }
 
