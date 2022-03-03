@@ -92,13 +92,18 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
         {
             bool isOver = EventSystem.current.IsPointerOverGameObject();
 
-            if(!isOver || wasOver)
+            bool lastWasOver = wasOver;
+            wasOver = isOver;
+
+            if (!isOver)
             {
-                wasOver = isOver;
                 return;
             }
 
-            wasOver = isOver;
+            if(!lastWasOver)
+            {
+                return;
+            }
 
             EventSystem.current.SetSelectedGameObject(null);
         }
