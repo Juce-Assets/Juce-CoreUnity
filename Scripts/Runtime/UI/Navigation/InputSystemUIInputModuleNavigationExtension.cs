@@ -12,6 +12,8 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
         private GameObject lastSelectedSelectable;
         private GameObject toSelect;
 
+        private bool wasOver;
+
         private void Awake()
         {
             inputSystemUIInputModule.move.action.performed += OnMovePerformed;
@@ -25,6 +27,8 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
         private void Update()
         {
             RegisterLastSelected();
+
+            TryDeselectIfMouseInput();
         }
 
         private void LateUpdate()
@@ -82,6 +86,21 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
             EventSystem.current.SetSelectedGameObject(toSelect);
 
             toSelect = null;
+        }
+
+        private void TryDeselectIfMouseInput()
+        {
+            bool isOver = EventSystem.current.IsPointerOverGameObject();
+
+            if(!isOver || wasOver)
+            {
+                wasOver = isOver;
+                return;
+            }
+
+            wasOver = isOver;
+
+            EventSystem.current.SetSelectedGameObject(null);
         }
     }
 }
