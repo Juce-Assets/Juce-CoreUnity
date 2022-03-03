@@ -38,6 +38,13 @@ namespace Playground.Services.ViewStack.Instructions
 
         protected override Task OnExecute(CancellationToken cancellationToken)
         {
+            if(viewStackQueue.Count == 0)
+            {
+                UnityEngine.Debug.LogError($"Tried to Show last entry, but view stack queue is empty. " +
+                    $"Maybe you wanted to use HideAndPush at some point, instead of just Hide.");
+                return Task.CompletedTask;
+            }
+
             Type entryId = viewStackQueue.Dequeue();
 
             bool found = entriesRepository.TryGet(entryId, out IViewStackEntry entry);
