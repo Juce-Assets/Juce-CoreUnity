@@ -100,7 +100,7 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
                 return;
             }
 
-            if(!lastWasOver)
+            if(lastWasOver)
             {
                 return;
             }
