@@ -33,6 +33,7 @@ namespace Juce.CoreUnity.ViewStack
                 return;
             }
 
+            entry.Visible.SetVisible(visible: true, instantly: true, CancellationToken.None);
             entry.Visible.SetVisible(visible: false, instantly: true, CancellationToken.None);
 
             entriesRepository.Add(entry.Id, entry);
