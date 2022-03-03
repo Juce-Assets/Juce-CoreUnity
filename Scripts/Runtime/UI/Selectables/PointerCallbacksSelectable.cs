@@ -1,20 +1,25 @@
 ﻿using Juce.CoreUnity.PointerCallback;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Juce.CoreUnity.Ui
 {
-    public class PointerCallbacksSelectable : MonoBehaviour, ISelectHandler, IDeselectHandler, ISubmitHandler
+    public class PointerCallbacksSelectable : Selectable
     {
         [SerializeField] private PointerCallbacks pointerCallbacks = default;
 
-        public void OnSelect(BaseEventData eventData)
+        public override void OnSelect(BaseEventData eventData)
         {
+            base.OnSelect(eventData);
+
             pointerCallbacks.OnPointerEnter(new PointerEventData(EventSystem.current));
         }
 
-        public void OnDeselect(BaseEventData eventData)
+        public override void OnDeselect(BaseEventData eventData)
         {
+            base.OnDeselect(eventData);
+
             pointerCallbacks.OnPointerExit(new PointerEventData(EventSystem.current));
         }
 
