@@ -1,8 +1,9 @@
 ﻿using Juce.CoreUnity.PointerCallback;
+using Juce.CoreUnity.Ui.SelectableCallback;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Juce.CoreUnity.Ui
+namespace Juce.CoreUnity.Ui.TweenPlayer
 {
     public class PointerAndSelectableCallbacksTweenPlayer : MonoBehaviour
     {

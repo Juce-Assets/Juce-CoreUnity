@@ -1,6 +1,6 @@
 ﻿using Juce.Core.Refresh;
 
-namespace Juce.CoreUnity.Ui
+namespace Juce.CoreUnity.Ui.SelectableCallback
 {
     public class SetAsSelectedRefreshable : IRefreshable
     {

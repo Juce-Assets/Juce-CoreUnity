@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Juce.CoreUnity.Ui
+namespace Juce.CoreUnity.Ui.TweenPlayer
 {
     public class PointerCallbacksTweenPlayer : MonoBehaviour
     {

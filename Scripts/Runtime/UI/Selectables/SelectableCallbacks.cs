@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Juce.CoreUnity.Ui
+namespace Juce.CoreUnity.Ui.SelectableCallback
 {
     public class SelectableCallbacks : Selectable
     {

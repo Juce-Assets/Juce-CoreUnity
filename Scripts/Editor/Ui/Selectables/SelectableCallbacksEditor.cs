@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 
-namespace Juce.CoreUnity.Ui
+namespace Juce.CoreUnity.Ui.SelectableCallback
 {
     [CustomEditor(typeof(SelectableCallbacks))]
     public class SelectableCallbacksEditor : Editor
