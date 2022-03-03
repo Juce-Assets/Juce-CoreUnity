@@ -7,35 +7,14 @@ namespace Juce.CoreUnity.Ui
 {
     public class SelectableCallbacks : Selectable
     {
-        [SerializeField] private bool firstSelected = default;
-
         public bool Selected { get; private set; }
 
         public event GenericEvent<SelectableCallbacks, BaseEventData> OnSelected;
         public event GenericEvent<SelectableCallbacks, BaseEventData> OnDeselected;
         public event GenericEvent<SelectableCallbacks, BaseEventData> OnSubmited;
 
-        private new void Start()
+        public void SetAsSelected()
         {
-            base.OnEnable();
-
-            TrySetAsFirstSelected();
-        }
-
-        private new void OnEnable()
-        {
-            base.OnEnable();
-
-            TrySetAsFirstSelected();
-        }
-
-        private void TrySetAsFirstSelected()
-        {
-            if(!firstSelected)
-            {
-                return;
-            }
-
             Select();
 
             OnSelect(new BaseEventData(EventSystem.current));
