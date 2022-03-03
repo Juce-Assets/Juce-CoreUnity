@@ -1,5 +1,7 @@
 ﻿using Juce.CoreUnity.PointerCallback;
 using Juce.CoreUnity.Ui.SelectableCallback;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -17,6 +19,9 @@ namespace Juce.CoreUnity.Ui.TweenPlayer
         [SerializeField] private TaskAnimationMonoBehaviour onEnterSelectAnimation = default;
         [SerializeField] private TaskAnimationMonoBehaviour onExitDeselectAnimation = default;
         [SerializeField] private TaskAnimationMonoBehaviour onClickSubmitAnimation = default;
+
+        [Header("Configuration")]
+        [SerializeField] private bool executeSelectedAfterSubmit = true;
 
         private void Awake()
         {
@@ -141,7 +146,24 @@ namespace Juce.CoreUnity.Ui.TweenPlayer
                 return;
             }
 
-            onClickSubmitAnimation.Execute(instantly: false, default).RunAsync();
+            ExecuteSubmit(CancellationToken.None).RunAsync();
+        }
+
+        private async Task ExecuteSubmit(CancellationToken cancellationToken)
+        {
+            await onClickSubmitAnimation.Execute(instantly: false, cancellationToken);
+
+            if (!selectableCallbacks.Selected)
+            {
+                return;
+            }
+
+            if (!executeSelectedAfterSubmit)
+            {
+                return;
+            }
+
+            await onEnterSelectAnimation.Execute(instantly: false, cancellationToken);
         }
     }
 }
