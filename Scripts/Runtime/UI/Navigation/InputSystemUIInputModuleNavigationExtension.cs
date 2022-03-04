@@ -18,8 +18,12 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
         private GameObject lastUiGameObjectWasOver;
         private bool wasOver;
 
+        public static InputSystemUIInputModuleNavigationExtension Current = null;
+
         private void Awake()
         {
+            Current = this;
+
             inputSystemUIInputModule.move.action.performed += OnMovePerformed;
         }
 
@@ -38,6 +42,16 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
         private void LateUpdate()
         {
             TrySelectDesignated();
+        }
+
+        public void SetFallbackSelectable(Selectable fallbackSelectable)
+        {
+            if(fallbackSelectable == null)
+            {
+                return;
+            }
+
+            lastSelectedSelectable = fallbackSelectable.gameObject;
         }
 
         private void OnMovePerformed(CallbackContext callbackContext)

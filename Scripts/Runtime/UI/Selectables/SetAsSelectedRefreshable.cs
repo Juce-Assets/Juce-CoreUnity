@@ -1,4 +1,6 @@
 ﻿using Juce.Core.Refresh;
+using Juce.CoreUnity.Ui.Others.Navigation;
+using UnityEngine.EventSystems;
 
 namespace Juce.CoreUnity.Ui.SelectableCallback
 {
@@ -15,6 +17,18 @@ namespace Juce.CoreUnity.Ui.SelectableCallback
 
         public void Refresh()
         {
+            if(!EventSystem.current.alreadySelecting)
+            {
+                if(InputSystemUIInputModuleNavigationExtension.Current == null)
+                {
+                    return;
+                }
+
+                InputSystemUIInputModuleNavigationExtension.Current.SetFallbackSelectable(selectableCallbacks);
+
+                return;
+            }
+
             selectableCallbacks.SetAsSelected();
         }
     }
