@@ -14,6 +14,7 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
 
         private GameObject lastSelectedSelectable;
         private GameObject toSelect;
+        private GameObject nextFallbackSelectable;
 
         private GameObject lastUiGameObjectWasOver;
         private bool wasOver;
@@ -48,12 +49,12 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
 
         public void SetFallbackSelectable(Selectable fallbackSelectable)
         {
-            if(fallbackSelectable == null)
+            if (fallbackSelectable == null)
             {
                 return;
             }
 
-            lastSelectedSelectable = fallbackSelectable.gameObject;
+            nextFallbackSelectable = fallbackSelectable.gameObject;
         }
 
         private void OnMovePerformed(CallbackContext callbackContext)
@@ -68,7 +69,7 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
                 return;
             }
 
-            if(EventSystem.current.currentSelectedGameObject == null)
+            if (EventSystem.current.currentSelectedGameObject == null)
             {
                 return;
             }
@@ -83,17 +84,23 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
                 return;
             }
 
-            if(IsUsingSelectables)
+            if (IsUsingSelectables)
             {
                 return;
             }
 
-            if(EventSystem.current.alreadySelecting)
+            if (EventSystem.current.alreadySelecting)
             {
                 return;
             }
 
-            if(lastSelectedSelectable == null)
+            if (nextFallbackSelectable != null)
+            {
+                toSelect = nextFallbackSelectable;
+                nextFallbackSelectable = null;
+            }
+
+            if (lastSelectedSelectable == null)
             {
                 return;
             }
@@ -103,7 +110,7 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
 
         private void TrySelectDesignated()
         {
-            if(toSelect == null)
+            if (toSelect == null)
             {
                 return;
             }
@@ -127,7 +134,7 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
                 return;
             }
 
-            if(lastUiGameObjectWasOver == gameObject)
+            if (lastUiGameObjectWasOver == gameObject)
             {
                 lastUiGameObjectWasOver = gameObject;
                 return;
@@ -145,7 +152,7 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
                 return;
             }
 
-            if(wasOver)
+            if (wasOver)
             {
                 wasOver = isOver;
                 return;
@@ -170,7 +177,7 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
 
             IPointerExitHandler[] pointerExits = gameObject.GetComponents<IPointerExitHandler>();
 
-            if(pointerExits.Length == 0)
+            if (pointerExits.Length == 0)
             {
                 return;
             }
@@ -187,7 +194,7 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
         {
             bool isOver = inputSystemUIInputModule.IsPointerOverGameObject(0);
 
-            if(!isOver)
+            if (!isOver)
             {
                 gameObject = default;
                 return false;
@@ -202,7 +209,7 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
 
             EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
 
-            if(results.Count == 0)
+            if (results.Count == 0)
             {
                 gameObject = default;
                 return false;
