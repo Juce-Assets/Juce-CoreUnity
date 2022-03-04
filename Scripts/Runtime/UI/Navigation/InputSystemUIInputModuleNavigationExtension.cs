@@ -18,6 +18,8 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
         private GameObject lastUiGameObjectWasOver;
         private bool wasOver;
 
+        public bool IsUsingSelectables { get; private set; } = false;
+
         public static InputSystemUIInputModuleNavigationExtension Current = null;
 
         private void Awake()
@@ -101,6 +103,8 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
                 return;
             }
 
+            IsUsingSelectables = true;
+
             EventSystem.current.SetSelectedGameObject(toSelect);
 
             toSelect = null;
@@ -145,6 +149,8 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
             wasOver = isOver;
 
             EventSystem.current.SetSelectedGameObject(null);
+
+            IsUsingSelectables = false;
         }
 
         private void TryPointerExitIfMouseOverUi()
@@ -164,7 +170,9 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
                 return;
             }
 
-            foreach(IPointerExitHandler exitHandler in pointerExits)
+            IsUsingSelectables = true;
+
+            foreach (IPointerExitHandler exitHandler in pointerExits)
             {
                 exitHandler.OnPointerExit(new PointerEventData(EventSystem.current));
             }

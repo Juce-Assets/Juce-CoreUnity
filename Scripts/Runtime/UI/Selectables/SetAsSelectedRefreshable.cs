@@ -17,14 +17,16 @@ namespace Juce.CoreUnity.Ui.SelectableCallback
 
         public void Refresh()
         {
-            if(!EventSystem.current.alreadySelecting)
+            if(InputSystemUIInputModuleNavigationExtension.Current != null)
             {
-                if(InputSystemUIInputModuleNavigationExtension.Current == null)
+                if(InputSystemUIInputModuleNavigationExtension.Current.IsUsingSelectables)
                 {
-                    return;
+                    selectableCallbacks.SetAsSelected();
                 }
-
-                InputSystemUIInputModuleNavigationExtension.Current.SetFallbackSelectable(selectableCallbacks);
+                else
+                {
+                    InputSystemUIInputModuleNavigationExtension.Current.SetFallbackSelectable(selectableCallbacks);
+                }
 
                 return;
             }
