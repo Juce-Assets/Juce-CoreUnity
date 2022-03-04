@@ -77,22 +77,12 @@ namespace Juce.CoreUnity.Ui.TweenPlayer
                 return;
             }
 
-            if(selectableCallbacks.Selected)
-            {
-                return;
-            }
-
             onEnterSelectAnimation.Execute(instantly: false, default).RunAsync();
         }
 
         private void OnPointerCallbacksExit(PointerCallbacks pointerCallbacks, PointerEventData pointerEventData)
         {
             if (onExitDeselectAnimation == null)
-            {
-                return;
-            }
-
-            if (selectableCallbacks.Selected)
             {
                 return;
             }
