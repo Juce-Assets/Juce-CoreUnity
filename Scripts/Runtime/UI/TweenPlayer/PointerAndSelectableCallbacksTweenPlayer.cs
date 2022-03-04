@@ -22,6 +22,7 @@ namespace Juce.CoreUnity.Ui.TweenPlayer
 
         [Header("Configuration")]
         [SerializeField] private bool executeSelectedOrDeselectedAfterSubmit = true;
+        [SerializeField] private bool executeExitAfterClick = true;
 
         private void Awake()
         {
@@ -106,7 +107,7 @@ namespace Juce.CoreUnity.Ui.TweenPlayer
                 return;
             }
 
-            onClickSubmitAnimation.Execute(instantly: false, default).RunAsync();
+            ExecuteClick(CancellationToken.None).RunAsync();
         }
 
         private void OnSelectableCallbacksSelected(SelectableCallbacks selectableCallbacks, BaseEventData baseEventData)
@@ -147,6 +148,18 @@ namespace Juce.CoreUnity.Ui.TweenPlayer
             }
 
             ExecuteSubmit(CancellationToken.None).RunAsync();
+        }
+
+        private async Task ExecuteClick(CancellationToken cancellationToken)
+        {
+            await onClickSubmitAnimation.Execute(instantly: false, cancellationToken);
+
+            if (!executeExitAfterClick)
+            {
+                return;
+            }
+
+            await onExitDeselectAnimation.Execute(instantly: false, cancellationToken);
         }
 
         private async Task ExecuteSubmit(CancellationToken cancellationToken)
