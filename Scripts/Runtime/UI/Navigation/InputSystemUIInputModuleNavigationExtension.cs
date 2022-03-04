@@ -83,7 +83,7 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
                 return;
             }
 
-            if(EventSystem.current.currentSelectedGameObject != null)
+            if(IsUsingSelectables)
             {
                 return;
             }
