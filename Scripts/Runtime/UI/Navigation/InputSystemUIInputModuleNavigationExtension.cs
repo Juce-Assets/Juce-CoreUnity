@@ -83,7 +83,12 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
                 return;
             }
 
-            if(EventSystem.current.currentSelectedGameObject != null && EventSystem.current.alreadySelecting)
+            if(EventSystem.current.currentSelectedGameObject != null)
+            {
+                return;
+            }
+
+            if(EventSystem.current.alreadySelecting)
             {
                 return;
             }
