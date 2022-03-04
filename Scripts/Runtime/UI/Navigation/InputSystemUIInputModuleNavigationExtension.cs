@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.UI;
 using static UnityEngine.InputSystem.InputAction;
 
 namespace Juce.CoreUnity.Ui.Others.Navigation
@@ -12,6 +15,7 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
         private GameObject lastSelectedSelectable;
         private GameObject toSelect;
 
+        private GameObject lastUiGameObjectWasOver;
         private bool wasOver;
 
         private void Awake()
@@ -28,7 +32,7 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
         {
             RegisterLastSelected();
 
-            TryDeselectIfMouseInput();
+            TryDeselectIfMouseOverUi();
         }
 
         private void LateUpdate()
@@ -86,26 +90,99 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
             EventSystem.current.SetSelectedGameObject(toSelect);
 
             toSelect = null;
+
+            TryPointerExitIfMouseOverUi();
         }
 
-        private void TryDeselectIfMouseInput()
+        private void TryDeselectIfMouseOverUi()
         {
-            bool isOver = EventSystem.current.IsPointerOverGameObject();
+            bool isOverUi = TryGetPointerOverUiObject(out GameObject gameObject);
 
-            bool lastWasOver = wasOver;
-            wasOver = isOver;
+            if (!isOverUi)
+            {
+                wasOver = false;
+                return;
+            }
+
+            if(lastUiGameObjectWasOver == gameObject)
+            {
+                lastUiGameObjectWasOver = gameObject;
+                return;
+            }
+
+            lastUiGameObjectWasOver = gameObject;
+
+            Selectable selectable = gameObject.GetComponent<Selectable>();
+
+            bool isOver = selectable != null;
 
             if (!isOver)
             {
+                wasOver = false;
                 return;
             }
 
-            if(lastWasOver)
+            if(wasOver)
+            {
+                wasOver = isOver;
+                return;
+            }
+
+            wasOver = isOver;
+
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+
+        private void TryPointerExitIfMouseOverUi()
+        {
+            bool isOverUi = TryGetPointerOverUiObject(out GameObject gameObject);
+
+            if (!isOverUi)
+            {
+                wasOver = false;
+                return;
+            }
+
+            IPointerExitHandler[] pointerExits = gameObject.GetComponents<IPointerExitHandler>();
+
+            if(pointerExits.Length == 0)
             {
                 return;
             }
 
-            EventSystem.current.SetSelectedGameObject(null);
+            foreach(IPointerExitHandler exitHandler in pointerExits)
+            {
+                exitHandler.OnPointerExit(new PointerEventData(EventSystem.current));
+            }
+        }
+
+        public bool TryGetPointerOverUiObject(out GameObject gameObject)
+        {
+            bool isOver = inputSystemUIInputModule.IsPointerOverGameObject(0);
+
+            if(!isOver)
+            {
+                gameObject = default;
+                return false;
+            }
+
+            Vector3 mousePosition = Mouse.current.position.ReadValue();
+
+            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+            eventDataCurrentPosition.position = new Vector2(mousePosition.x, mousePosition.y);
+
+            List<RaycastResult> results = new List<RaycastResult>();
+
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+
+            if(results.Count == 0)
+            {
+                gameObject = default;
+                return false;
+            }
+
+            gameObject = results[0].gameObject;
+            return true;
         }
     }
 }
