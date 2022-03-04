@@ -23,11 +23,6 @@ namespace Juce.CoreUnity.Ui.SelectableCallback
         {
             base.OnSelect(eventData);
 
-            if (Selected)
-            {
-                return;
-            }
-
             Selected = true;
 
             OnSelected?.Invoke(this, eventData);
@@ -36,11 +31,6 @@ namespace Juce.CoreUnity.Ui.SelectableCallback
         public override void OnDeselect(BaseEventData eventData)
         {
             base.OnDeselect(eventData);
-
-            if (!Selected)
-            {
-                return;
-            }
 
             Selected = false;
 
