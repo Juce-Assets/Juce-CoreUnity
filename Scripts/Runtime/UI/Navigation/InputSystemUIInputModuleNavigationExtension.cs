@@ -98,6 +98,7 @@ namespace Juce.CoreUnity.Ui.Others.Navigation
             {
                 toSelect = nextFallbackSelectable;
                 nextFallbackSelectable = null;
+                return;
             }
 
             if (lastSelectedSelectable == null)
