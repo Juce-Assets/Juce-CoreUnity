@@ -1694,6 +1694,7 @@ MonoBehaviour:
   onExitDeselectAnimation: {fileID: 841685756}
   onClickSubmitAnimation: {fileID: 841685756}
   executeSelectedOrDeselectedAfterSubmit: 1
+  executeExitAfterClick: 1
 --- !u!1 &860642939
 GameObject:
   m_ObjectHideFlags: 0
@@ -1782,6 +1783,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputSystemUIInputModule: {fileID: 860642940}
+  lastSelectedSelectable: {fileID: 0}
+  toSelect: {fileID: 0}
+  nextFallbackSelectable: {fileID: 0}
+  lastUiGameObjectWasOver: {fileID: 0}
+  wasOver: 0
+  <IsUsingSelectables>k__BackingField: 0
 --- !u!1 &884317852
 GameObject:
   m_ObjectHideFlags: 0
@@ -2516,7 +2523,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -4214,6 +4221,7 @@ MonoBehaviour:
   onExitDeselectAnimation: {fileID: 2035285151}
   onClickSubmitAnimation: {fileID: 2035285159}
   executeSelectedOrDeselectedAfterSubmit: 1
+  executeExitAfterClick: 1
 --- !u!114 &2035285154
 MonoBehaviour:
   m_ObjectHideFlags: 0
