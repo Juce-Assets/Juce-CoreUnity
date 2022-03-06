@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1efb9a59400de1a42900a218c64af9e9, type: 3}
+  m_Name: GamepadControlSchemes
+  m_EditorClassIdentifier: 
+  Items:
+  - id: 0
+  - id: 1
+  - id: 2
+  - id: 3
+  - id: 4
+  - id: 5
+  - id: 6
+  - id: 7
+  - id: 8
+  - id: 9
+  - id: 10
+  - id: 11
+  - id: 12
+  - id: 13
+  - id: 14
+  - id: 15
+  references:
+    version: 1
+    00000000:
+      type: {class: GamepadControlSchemeItem, ns: Juce.CoreUnity.ControlSchemes.Gamepad, asm: Juce.CoreUnity.Runtime}
+      data:
+        Key: 0
+        Sprite: {fileID: 0}
+    00000001:
+      type: {class: GamepadControlSchemeItem, ns: Juce.CoreUnity.ControlSchemes.Gamepad, asm: Juce.CoreUnity.Runtime}
+      data:
+        Key: 1
+        Sprite: {fileID: 0}
+    00000002:
+      type: {class: GamepadControlSchemeItem, ns: Juce.CoreUnity.ControlSchemes.Gamepad, asm: Juce.CoreUnity.Runtime}
+      data:
+        Key: 2
+        Sprite: {fileID: 0}
+    00000003:
+      type: {class: GamepadControlSchemeItem, ns: Juce.CoreUnity.ControlSchemes.Gamepad, asm: Juce.CoreUnity.Runtime}
+      data:
+        Key: 3
+        Sprite: {fileID: 0}
+    00000004:
+      type: {class: GamepadControlSchemeItem, ns: Juce.CoreUnity.ControlSchemes.Gamepad, asm: Juce.CoreUnity.Runtime}
+      data:
+        Key: 4
+        Sprite: {fileID: 0}
+    00000005:
+      type: {class: GamepadControlSchemeItem, ns: Juce.CoreUnity.ControlSchemes.Gamepad, asm: Juce.CoreUnity.Runtime}
+      data:
+        Key: 5
+        Sprite: {fileID: 0}
+    00000006:
+      type: {class: GamepadControlSchemeItem, ns: Juce.CoreUnity.ControlSchemes.Gamepad, asm: Juce.CoreUnity.Runtime}
+      data:
+        Key: 6
+        Sprite: {fileID: 0}
+    00000007:
+      type: {class: GamepadControlSchemeItem, ns: Juce.CoreUnity.ControlSchemes.Gamepad, asm: Juce.CoreUnity.Runtime}
+      data:
+        Key: 7
+        Sprite: {fileID: 0}
+    00000008:
+      type: {class: GamepadControlSchemeItem, ns: Juce.CoreUnity.ControlSchemes.Gamepad, asm: Juce.CoreUnity.Runtime}
+      data:
+        Key: 8
+        Sprite: {fileID: 0}
+    00000009:
+      type: {class: GamepadControlSchemeItem, ns: Juce.CoreUnity.ControlSchemes.Gamepad, asm: Juce.CoreUnity.Runtime}
+      data:
+        Key: 9
+        Sprite: {fileID: 0}
+    0000000A:
+      type: {class: GamepadControlSchemeItem, ns: Juce.CoreUnity.ControlSchemes.Gamepad, asm: Juce.CoreUnity.Runtime}
+      data:
+        Key: 10
+        Sprite: {fileID: 0}
+    0000000B:
+      type: {class: GamepadControlSchemeItem, ns: Juce.CoreUnity.ControlSchemes.Gamepad, asm: Juce.CoreUnity.Runtime}
+      data:
+        Key: 11
+        Sprite: {fileID: 0}
+    0000000C:
+      type: {class: GamepadControlSchemeItem, ns: Juce.CoreUnity.ControlSchemes.Gamepad, asm: Juce.CoreUnity.Runtime}
+      data:
+        Key: 12
+        Sprite: {fileID: 0}
+    0000000D:
+      type: {class: GamepadControlSchemeItem, ns: Juce.CoreUnity.ControlSchemes.Gamepad, asm: Juce.CoreUnity.Runtime}
+      data:
+        Key: 13
+        Sprite: {fileID: 0}
+    0000000E:
+      type: {class: GamepadControlSchemeItem, ns: Juce.CoreUnity.ControlSchemes.Gamepad, asm: Juce.CoreUnity.Runtime}
+      data:
+        Key: 32
+        Sprite: {fileID: 0}
+    0000000F:
+      type: {class: GamepadControlSchemeItem, ns: Juce.CoreUnity.ControlSchemes.Gamepad, asm: Juce.CoreUnity.Runtime}
+      data:
+        Key: 33
+        Sprite: {fileID: 0}
