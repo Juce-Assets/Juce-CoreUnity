@@ -68,7 +68,7 @@ namespace Playground.Services.ViewStack.Instructions
                 await HandleNonPopup(context, cancellationToken);
             }
 
-            await entry.Visible.SetVisible(visible: false, instantly, cancellationToken);
+            await Hide(entry, instantly, cancellationToken);
         }
 
         private void HandlePopup(IViewContext context)
@@ -103,7 +103,7 @@ namespace Playground.Services.ViewStack.Instructions
                     return Task.CompletedTask; 
                 }
 
-                hideTasks.Add(popupEntry.Visible.SetVisible(visible: false, instantly, cancellationToken));
+                hideTasks.Add(Hide(popupEntry, instantly, cancellationToken));
             }
 
             if (pushToViewQueue)
@@ -112,6 +112,13 @@ namespace Playground.Services.ViewStack.Instructions
             }
 
             return Task.WhenAll(hideTasks);
+        }
+
+        private async Task Hide(IViewStackEntry viewStackEntry, bool instantly, CancellationToken cancellationToken)
+        {
+            await viewStackEntry.Visible.SetVisible(visible: false, instantly, cancellationToken);
+
+            viewStackEntry.HideRefreshable.Refresh();
         }
     }
 }

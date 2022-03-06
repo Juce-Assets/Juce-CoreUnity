@@ -59,7 +59,7 @@ namespace Playground.Services.ViewStack.Instructions
 
             currentContextRepository.Set(new ViewContext(entry.Id));
 
-            entry.Refreshable.Refresh();
+            entry.ShowRefreshable.Refresh();
 
             if (behindForeground)
             {

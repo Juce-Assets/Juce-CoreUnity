@@ -10,21 +10,24 @@ namespace Juce.CoreUnity.ViewStack
         public Type Id { get; }
         public Transform Transform { get; }
         public IVisible Visible { get; }
-        public IRefreshable Refreshable { get; }
+        public IRefreshable ShowRefreshable { get; }
+        public IRefreshable HideRefreshable { get; }
         public bool IsPopup { get; }
 
         public ViewStackEntry(
             Type id,
             Transform transform, 
             IVisible visible, 
-            IRefreshable refreshable,
+            IRefreshable showRefreshable,
+            IRefreshable hideRefreshable,
             bool isPopup
             )
         {
             Id = id;
             Transform = transform;
             Visible = visible;
-            Refreshable = refreshable;
+            ShowRefreshable = showRefreshable;
+            HideRefreshable = hideRefreshable;
             IsPopup = isPopup;
         }
     }
