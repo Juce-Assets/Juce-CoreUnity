@@ -34,7 +34,6 @@ namespace Juce.CoreUnity.ViewStack.Sequences
             this.currentContextRepository = currentContextRepository;
             this.viewStackQueue = viewStackQueue;
             this.sequencer = sequencer;
-            this.sequencer = sequencer;
         }
 
         public IViewStackSequenceBuilder Show<T>(bool instantly)
