@@ -11,7 +11,7 @@ namespace Juce.CoreUnity.ViewStack.Entries
         Type Id { get; }
         Transform Transform { get; }
         IVisible Visible { get; }
-        IReadOnlyList<ViewStackEntryRefresh> RefreshList { get; }
         bool IsPopup { get; }
+        IReadOnlyList<ViewStackEntryRefresh> RefreshList { get; }
     }
 }

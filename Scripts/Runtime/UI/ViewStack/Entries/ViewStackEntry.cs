@@ -10,22 +10,22 @@ namespace Juce.CoreUnity.ViewStack.Entries
         public Type Id { get; }
         public Transform Transform { get; }
         public IVisible Visible { get; }
-        public IReadOnlyList<ViewStackEntryRefresh> RefreshList { get; }
         public bool IsPopup { get; }
+        public IReadOnlyList<ViewStackEntryRefresh> RefreshList { get; }
 
         public ViewStackEntry(
             Type id,
             Transform transform, 
             IVisible visible,
-            IReadOnlyList<ViewStackEntryRefresh> refreshList,
-            bool isPopup
+            bool isPopup,
+            params ViewStackEntryRefresh[] refreshList
             )
         {
             Id = id;
             Transform = transform;
             Visible = visible;
-            RefreshList = refreshList;
             IsPopup = isPopup;
+            RefreshList = refreshList;
         }
     }
 }
