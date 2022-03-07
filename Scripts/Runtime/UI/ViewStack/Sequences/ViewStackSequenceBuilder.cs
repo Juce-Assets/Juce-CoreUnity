@@ -2,6 +2,7 @@
 using Juce.Core.Sequencing;
 using Juce.CoreUnity.Ui.Frame;
 using Juce.CoreUnity.ViewStack.Context;
+using Juce.CoreUnity.ViewStack.Entries;
 using Playground.Services.ViewStack.Instructions;
 using System;
 using System.Collections.Generic;

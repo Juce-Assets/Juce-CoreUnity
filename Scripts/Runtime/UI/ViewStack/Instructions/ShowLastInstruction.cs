@@ -1,8 +1,8 @@
 ﻿using Juce.Core.Repositories;
 using Juce.Core.Sequencing;
 using Juce.CoreUnity.Ui.Frame;
-using Juce.CoreUnity.ViewStack;
 using Juce.CoreUnity.ViewStack.Context;
+using Juce.CoreUnity.ViewStack.Entries;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -36,13 +36,13 @@ namespace Playground.Services.ViewStack.Instructions
             this.instantly = instantly;
         }
 
-        protected override Task OnExecute(CancellationToken cancellationToken)
+        protected async override Task OnExecute(CancellationToken cancellationToken)
         {
             if(viewStackQueue.Count == 0)
             {
                 UnityEngine.Debug.LogError($"Tried to Show last entry, but view stack queue is empty. " +
                     $"Maybe you wanted to use HideAndPush at some point, instead of just Hide.");
-                return Task.CompletedTask;
+                return;
             }
 
             Type entryId = viewStackQueue.Dequeue();
@@ -54,12 +54,12 @@ namespace Playground.Services.ViewStack.Instructions
                 UnityEngine.Debug.LogError($"Tried to Show {nameof(IViewStackEntry)} of type {entryId}, " +
                     $"but it was not registered, at {nameof(ShowLastInstruction)}");
 
-                return Task.CompletedTask;
+                return;
             }
 
             currentContextRepository.Set(new ViewContext(entry.Id));
 
-            entry.ShowRefreshable.Refresh();
+            ViewStackEntryUtils.Refresh(entry, RefreshType.BeforeShow);
 
             if (behindForeground)
             {
@@ -70,7 +70,9 @@ namespace Playground.Services.ViewStack.Instructions
                 frame.MoveToBackground(entry.Transform);
             }
 
-            return entry.Visible.SetVisible(visible: true, instantly, cancellationToken);
+            await entry.Visible.SetVisible(visible: true, instantly, cancellationToken);
+
+            ViewStackEntryUtils.Refresh(entry, RefreshType.AfterShow);
         }
     }
 }

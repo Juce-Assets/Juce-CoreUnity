@@ -1,4 +1,5 @@
-﻿using Juce.CoreUnity.ViewStack.Sequences;
+﻿using Juce.CoreUnity.ViewStack.Entries;
+using Juce.CoreUnity.ViewStack.Sequences;
 
 namespace Juce.CoreUnity.ViewStack
 {

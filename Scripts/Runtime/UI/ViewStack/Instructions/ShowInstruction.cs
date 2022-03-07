@@ -1,8 +1,8 @@
 ﻿using Juce.Core.Repositories;
 using Juce.Core.Sequencing;
 using Juce.CoreUnity.Ui.Frame;
-using Juce.CoreUnity.ViewStack;
 using Juce.CoreUnity.ViewStack.Context;
+using Juce.CoreUnity.ViewStack.Entries;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -32,7 +32,7 @@ namespace Playground.Services.ViewStack.Instructions
             this.instantly = instantly;
         }
 
-        protected override Task OnExecute(CancellationToken cancellationToken)
+        protected async override Task OnExecute(CancellationToken cancellationToken)
         {
             bool found = entriesRepository.TryGet(entryId, out IViewStackEntry entry);
 
@@ -41,7 +41,7 @@ namespace Playground.Services.ViewStack.Instructions
                 UnityEngine.Debug.LogError($"Tried to Show {nameof(IViewStackEntry)} of type {entryId}, " +
                     $"but it was not registered, at {nameof(ShowInstruction)}");
 
-                return Task.CompletedTask;
+                return;
             }
 
             if(entry.IsPopup)
@@ -52,7 +52,7 @@ namespace Playground.Services.ViewStack.Instructions
                 {
                     UnityEngine.Debug.LogError($"Tried to Show {nameof(entry.Id)} as Popup, " +
                         $"but it there was not a main view to attach to, at {nameof(ShowInstruction)}");
-                    return Task.CompletedTask;
+                    return;
                 }
 
                 context.PopupsViewIds.Add(entry.Id);
@@ -62,11 +62,13 @@ namespace Playground.Services.ViewStack.Instructions
                 currentContextRepository.Set(new ViewContext(entry.Id));
             }
 
-            entry.ShowRefreshable.Refresh();
+            ViewStackEntryUtils.Refresh(entry, RefreshType.BeforeShow);
 
             frame.MoveToForeground(entry.Transform);
 
-            return entry.Visible.SetVisible(visible: true, instantly, cancellationToken);
+            await entry.Visible.SetVisible(visible: true, instantly, cancellationToken);
+
+            ViewStackEntryUtils.Refresh(entry, RefreshType.AfterShow);
         }
     }
 }

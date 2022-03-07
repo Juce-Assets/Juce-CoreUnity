@@ -1,8 +1,8 @@
 ﻿using Juce.Core.Repositories;
 using Juce.Core.Sequencing;
 using Juce.CoreUnity.Ui.Frame;
-using Juce.CoreUnity.ViewStack;
 using Juce.CoreUnity.ViewStack.Context;
+using Juce.CoreUnity.ViewStack.Entries;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -116,9 +116,11 @@ namespace Playground.Services.ViewStack.Instructions
 
         private async Task Hide(IViewStackEntry viewStackEntry, bool instantly, CancellationToken cancellationToken)
         {
+            ViewStackEntryUtils.Refresh(viewStackEntry, RefreshType.BeforeHide);
+
             await viewStackEntry.Visible.SetVisible(visible: false, instantly, cancellationToken);
 
-            viewStackEntry.HideRefreshable.Refresh();
+            ViewStackEntryUtils.Refresh(viewStackEntry, RefreshType.AfterHide);
         }
     }
 }
