@@ -19,6 +19,8 @@ namespace Juce.CoreUnity.Ui.Text
         [SerializeField] private bool height = default;
         [SerializeField] private float heightPadding = default;
 
+        private bool needsToUpdate;
+
         private void Awake()
         {
             TMPro_EventManager.TEXT_CHANGED_EVENT.Add(OnTextChanged);
@@ -27,6 +29,11 @@ namespace Juce.CoreUnity.Ui.Text
         private void OnEnable()
         {
             CopySize();
+        }
+
+        private void Update()
+        {
+            TryCopySize();
         }
 
         private void OnDestroy()
@@ -41,10 +48,22 @@ namespace Juce.CoreUnity.Ui.Text
                 return;
             }
 
+            needsToUpdate = true;
+        }
+
+        private void TryCopySize()
+        {
+            if (!needsToUpdate)
+            {
+                return;
+            }
+
+            needsToUpdate = false;
+
             CopySize();
         }
 
-        private void CopySize()
+        public void CopySize()
         {
             Vector2 newSize = rectTransform.sizeDelta;
 
