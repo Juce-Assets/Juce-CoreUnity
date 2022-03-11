@@ -11,9 +11,13 @@ namespace Juce.CoreUnity.Ui.Text
         [SerializeField] private TMPro.TextMeshProUGUI text = default;
         [SerializeField] private RectTransform rectTransform = default;
 
-        [Header("Values")]
+        [Header("Width")]
         [SerializeField] private bool width = default;
+        [SerializeField] private float widthPadding = default;
+
+        [Header("Height")]
         [SerializeField] private bool height = default;
+        [SerializeField] private float heightPadding = default;
 
         private void Awake()
         {
@@ -46,12 +50,12 @@ namespace Juce.CoreUnity.Ui.Text
 
             if (width)
             {
-                newSize.x = text.preferredWidth;
+                newSize.x = text.preferredWidth + widthPadding;
             }
 
             if (height)
             {
-                newSize.y = text.preferredHeight;
+                newSize.y = text.preferredHeight + heightPadding;
             }
 
             rectTransform.sizeDelta = newSize;
