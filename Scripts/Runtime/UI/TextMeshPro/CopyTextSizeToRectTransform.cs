@@ -5,6 +5,7 @@ namespace Juce.CoreUnity.Ui.Text
 {
 #if JUCE_TEXT_MESH_PRO_EXTENSIONS
 
+    [ExecuteInEditMode]
     public class CopyTextSizeToRectTransform : MonoBehaviour
     {
         [Header("References")]
@@ -12,7 +13,7 @@ namespace Juce.CoreUnity.Ui.Text
         [SerializeField] private RectTransform rectTransform = default;
 
         [Header("Width")]
-        [SerializeField] private bool width = default;
+        [SerializeField] private bool width = true;
         [SerializeField] private float widthPadding = default;
 
         [Header("Height")]
@@ -33,7 +34,13 @@ namespace Juce.CoreUnity.Ui.Text
 
         private void Update()
         {
-            TryCopySize();
+            if (Application.isPlaying)
+            {
+                TryCopySize();
+                return;
+            }
+
+            CopySize();
         }
 
         private void OnDestroy()
@@ -65,16 +72,29 @@ namespace Juce.CoreUnity.Ui.Text
 
         public void CopySize()
         {
+            if(rectTransform == null)
+            {
+                return;
+            }
+
+            if(text == null)
+            {
+                return;
+            }
+
             Vector2 newSize = rectTransform.sizeDelta;
+            Vector2 textSize = text.GetRenderedValues();
 
             if (width)
             {
-                newSize.x = text.preferredWidth + widthPadding;
+                textSize.x = Mathf.Max(0, textSize.x);
+                newSize.x = textSize.x + widthPadding;
             }
 
             if (height)
             {
-                newSize.y = text.preferredHeight + heightPadding;
+                textSize.y = Mathf.Max(0, textSize.y);
+                newSize.y = textSize.y + heightPadding;
             }
 
             rectTransform.sizeDelta = newSize;
