@@ -1,0 +1,16 @@
+{
+    "name": "Juce.CoreUnity.Examples",
+    "rootNamespace": "",
+    "references": [
+        "GUID:66f84fddbd56756439bdf88a8207ce7e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

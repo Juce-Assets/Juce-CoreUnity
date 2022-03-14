@@ -27,25 +27,20 @@ namespace Juce.CoreUnity.Ui.Text
             TMPro_EventManager.TEXT_CHANGED_EVENT.Add(OnTextChanged);
         }
 
+                private void OnDestroy()
+        {
+            TMPro_EventManager.TEXT_CHANGED_EVENT.Remove(OnTextChanged);
+        }
+
         private void OnEnable()
         {
+            TryRefreshMesh();
             CopySize();
         }
 
         private void Update()
         {
-            if (Application.isPlaying)
-            {
-                TryCopySize();
-                return;
-            }
-
-            CopySize();
-        }
-
-        private void OnDestroy()
-        {
-            TMPro_EventManager.TEXT_CHANGED_EVENT.Remove(OnTextChanged);
+            TryCopySize();
         }
 
         private void OnTextChanged(Object obj)
@@ -60,6 +55,12 @@ namespace Juce.CoreUnity.Ui.Text
 
         private void TryCopySize()
         {
+            if(!Application.isPlaying)
+            {
+                TryRefreshMesh();
+                CopySize();
+            }
+
             if (!needsToUpdate)
             {
                 return;
@@ -68,6 +69,16 @@ namespace Juce.CoreUnity.Ui.Text
             needsToUpdate = false;
 
             CopySize();
+        }
+
+        private void TryRefreshMesh()
+        {
+            if (Application.isPlaying)
+            {
+                return;
+            }
+
+            text.ForceMeshUpdate(true);
         }
 
         public void CopySize()

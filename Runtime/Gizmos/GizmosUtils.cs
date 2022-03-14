@@ -19,5 +19,13 @@ namespace Juce.CoreUnity.Guizmos
             UnityEditor.Handles.DrawWireDisc(center, normal, radius);
             UnityEditor.Handles.color = lastColor;
         }
+
+        public static void DrawWireCube(Vector3 center, Vector3 size, Color color)
+        {
+            Color lastColor = UnityEditor.Handles.color;
+            UnityEditor.Handles.color = color;
+            UnityEditor.Handles.DrawWireCube(center, size);
+            UnityEditor.Handles.color = lastColor;
+        }
     }
 }
