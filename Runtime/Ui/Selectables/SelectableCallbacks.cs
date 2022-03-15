@@ -23,13 +23,6 @@ namespace Juce.CoreUnity.Ui.SelectableCallback
         {
             base.OnSelect(eventData);
 
-            bool isInteractable = IsInteractable();
-
-            if (!isInteractable)
-            {
-                return;
-            }
-
             Selected = true;
 
             OnSelected?.Invoke(this, eventData);
