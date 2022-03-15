@@ -57,6 +57,8 @@ namespace Playground.Services.ViewStack.Instructions
                 return;
             }
 
+            ViewStackEntryUtils.SetInteractable(entry, false);
+
             currentContextRepository.Set(new ViewContext(entry.Id));
 
             ViewStackEntryUtils.Refresh(entry, RefreshType.BeforeShow);
@@ -73,6 +75,8 @@ namespace Playground.Services.ViewStack.Instructions
             await entry.Visible.SetVisible(visible: true, instantly, cancellationToken);
 
             ViewStackEntryUtils.Refresh(entry, RefreshType.AfterShow);
+
+            ViewStackEntryUtils.SetInteractable(entry, true);
         }
     }
 }

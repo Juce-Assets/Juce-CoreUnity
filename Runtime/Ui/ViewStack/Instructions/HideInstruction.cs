@@ -51,6 +51,8 @@ namespace Playground.Services.ViewStack.Instructions
                 return;
             }
 
+            ViewStackEntryUtils.SetInteractable(entry, false);
+
             bool hasCurrentContext = currentContextRepository.TryGet(out IViewContext context);
 
             if (!hasCurrentContext)

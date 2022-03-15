@@ -44,7 +44,9 @@ namespace Playground.Services.ViewStack.Instructions
                 return;
             }
 
-            if(entry.IsPopup)
+            ViewStackEntryUtils.SetInteractable(entry, false);
+
+            if (entry.IsPopup)
             {
                 bool hasItem = currentContextRepository.TryGet(out IViewContext context);
 
@@ -69,6 +71,8 @@ namespace Playground.Services.ViewStack.Instructions
             await entry.Visible.SetVisible(visible: true, instantly, cancellationToken);
 
             ViewStackEntryUtils.Refresh(entry, RefreshType.AfterShow);
+
+            ViewStackEntryUtils.SetInteractable(entry, true);
         }
     }
 }

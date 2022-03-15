@@ -11,6 +11,7 @@ namespace Juce.CoreUnity.ViewStack.Sequences
         IViewStackSequenceBuilder ShowLast(bool instantly);
         IViewStackSequenceBuilder ShowLastBehindForeground(bool instantly);
         IViewStackSequenceBuilder MoveToBackground<T>();
+        IViewStackSequenceBuilder SetInteractable<T>(bool set);
 
         Task Execute(CancellationToken cancellationToken);
         void Execute();

@@ -126,6 +126,20 @@ namespace Juce.CoreUnity.ViewStack.Sequences
             return this;
         }
 
+        public IViewStackSequenceBuilder SetInteractable<T>(bool set)
+        {
+            Type entryId = typeof(T);
+
+            instructionsToPlay.Add(new SetInteractableInstruction(
+                frame,
+                entriesRepository,
+                entryId,
+                set
+                ));
+
+            return this;
+        }
+
         public Task Execute(CancellationToken cancellationToken)
         {
             foreach(Instruction instruction in instructionsToPlay)
