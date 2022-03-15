@@ -3,7 +3,6 @@ using Juce.Core.Sequencing;
 using Juce.CoreUnity.Ui.Frame;
 using Juce.CoreUnity.ViewStack.Entries;
 using System;
-using UnityEngine;
 
 namespace Playground.Services.ViewStack.Instructions
 {
@@ -33,7 +32,7 @@ namespace Playground.Services.ViewStack.Instructions
 
             if (!found)
             {
-                UnityEngine.Debug.LogError($"Tried to Show {nameof(IViewStackEntry)} of type {entryId}, " +
+                UnityEngine.Debug.LogError($"Tried to SetInteractable {nameof(IViewStackEntry)} of type {entryId}, " +
                     $"but it was not registered, at {nameof(SetInteractableInstruction)}");
 
                 return;
