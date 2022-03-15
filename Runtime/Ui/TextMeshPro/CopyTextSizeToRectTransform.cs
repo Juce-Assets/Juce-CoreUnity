@@ -78,6 +78,11 @@ namespace Juce.CoreUnity.Ui.Text
                 return;
             }
 
+            if (text == null)
+            {
+                return;
+            }
+
             text.ForceMeshUpdate(true);
         }
 
