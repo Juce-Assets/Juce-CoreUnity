@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Juce.CoreUnity.Layers
 {
-    public class RendererLayerSelector : MonoBehaviour
+    public class RendererLayerSelector : LayerSelector
     {
         [Header("Target")]
         [SerializeField] private List<Renderer> targets = default;
@@ -11,7 +11,7 @@ namespace Juce.CoreUnity.Layers
         [Header("Layer")]
         [SerializeField] private Layer layer = default;
 
-        private void Awake()
+        public override void SetLayer()
         {
             foreach (Renderer target in targets)
             {

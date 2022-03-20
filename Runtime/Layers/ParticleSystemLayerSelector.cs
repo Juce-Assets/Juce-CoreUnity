@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Juce.CoreUnity.Layers
 {
-    public class ParticleSystemLayerSelector : MonoBehaviour
+    public class ParticleSystemLayerSelector : LayerSelector
     {
         [Header("Target")]
         [SerializeField] private List<ParticleSystem> targets = default;
@@ -11,7 +11,7 @@ namespace Juce.CoreUnity.Layers
         [Header("Layer")]
         [SerializeField] private Layer layer = default;
 
-        private void Awake()
+        public override void SetLayer()
         {
             foreach (ParticleSystem target in targets)
             {
