@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Juce.CoreUnity.ViewStack.Sequences
@@ -13,6 +14,7 @@ namespace Juce.CoreUnity.ViewStack.Sequences
         IViewStackSequenceBuilder MoveToBackground<T>();
         IViewStackSequenceBuilder SetInteractable<T>(bool set);
         IViewStackSequenceBuilder CurrentSetInteractable(bool set);
+        IViewStackSequenceBuilder Callback(Action callback);
 
         Task Execute(CancellationToken cancellationToken);
         void Execute();

@@ -152,6 +152,13 @@ namespace Juce.CoreUnity.ViewStack.Sequences
             return this;
         }
 
+        public IViewStackSequenceBuilder Callback(Action callback)
+        {
+            instructionsToPlay.Add(new ActionInstruction(callback));
+
+            return this;
+        }
+
         public Task Execute(CancellationToken cancellationToken)
         {
             foreach(Instruction instruction in instructionsToPlay)
