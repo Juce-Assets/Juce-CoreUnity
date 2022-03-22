@@ -92,11 +92,6 @@ namespace Juce.CoreUnity.Ui.TweenPlayer
 
         private void OnPointerCallbacksClick(PointerCallbacks pointerCallbacks, PointerEventData pointerEventData)
         {
-            if (onClickSubmitAnimation == null)
-            {
-                return;
-            }
-
             ExecuteClick(CancellationToken.None).RunAsync();
         }
 
@@ -132,19 +127,24 @@ namespace Juce.CoreUnity.Ui.TweenPlayer
 
         private void OnSelectableCallbacksSubmited(SelectableCallbacks selectableCallbacks, BaseEventData baseEventData)
         {
-            if (onClickSubmitAnimation == null)
-            {
-                return;
-            }
-
             ExecuteSubmit(CancellationToken.None).RunAsync();
         }
 
         private async Task ExecuteClick(CancellationToken cancellationToken)
         {
+            if (onClickSubmitAnimation == null)
+            {
+                return;
+            }
+
             await onClickSubmitAnimation.Execute(instantly: false, cancellationToken);
 
             if (!executeExitAfterClick)
+            {
+                return;
+            }
+
+            if(onExitDeselectAnimation == null)
             {
                 return;
             }
@@ -154,6 +154,11 @@ namespace Juce.CoreUnity.Ui.TweenPlayer
 
         private async Task ExecuteSubmit(CancellationToken cancellationToken)
         {
+            if (onClickSubmitAnimation == null)
+            {
+                return;
+            }
+
             await onClickSubmitAnimation.Execute(instantly: false, cancellationToken);
 
             if (!executeSelectedOrDeselectedAfterSubmit)
@@ -163,10 +168,20 @@ namespace Juce.CoreUnity.Ui.TweenPlayer
 
             if (selectableCallbacks.Selected)
             {
+                if(onEnterSelectAnimation == null)
+                {
+                    return;
+                }
+
                 await onEnterSelectAnimation.Execute(instantly: false, cancellationToken);
             }
             else
             {
+                if (onExitDeselectAnimation == null)
+                {
+                    return;
+                }
+
                 await onExitDeselectAnimation.Execute(instantly: false, cancellationToken);
             }
         }
