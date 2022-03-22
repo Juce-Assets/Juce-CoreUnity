@@ -45,84 +45,59 @@ namespace Juce.CoreUnity.Ui.Audio
             selectableCallbacks.OnSubmited -= OnSelectableCallbacksSubmited;
         }
 
-        private void OnPointerCallbacksUp(PointerCallbacks pointerCallbacks, PointerEventData pointerEventData)
+        private void Play(AudioClip audioClip)
         {
-            if (onUpClip == null)
+            if(audioClip == null)
             {
                 return;
             }
 
-            audioSource.PlayOneShot(onUpClip);
+            if(!audioSource.isActiveAndEnabled)
+            {
+                return;
+            }
+
+            audioSource.PlayOneShot(audioClip);
+        }
+
+        private void OnPointerCallbacksUp(PointerCallbacks pointerCallbacks, PointerEventData pointerEventData)
+        {
+            Play(onUpClip);
         }
 
         private void OnPointerCallbacksDown(PointerCallbacks pointerCallbacks, PointerEventData pointerEventData)
         {
-            if (onDownClip == null)
-            {
-                return;
-            }
-
-            audioSource.PlayOneShot(onDownClip);
+            Play(onDownClip);
         }
 
         private void OnPointerCallbacksEnter(PointerCallbacks pointerCallbacks, PointerEventData pointerEventData)
         {
-            if (onEnterSelectClip == null)
-            {
-                return;
-            }
-
-            audioSource.PlayOneShot(onEnterSelectClip);
+            Play(onEnterSelectClip);
         }
 
         private void OnPointerCallbacksExit(PointerCallbacks pointerCallbacks, PointerEventData pointerEventData)
         {
-            if (onExitDeselectClip == null)
-            {
-                return;
-            }
-
-            audioSource.PlayOneShot(onExitDeselectClip);
+            Play(onExitDeselectClip);
         }
 
         private void OnPointerCallbacksClick(PointerCallbacks pointerCallbacks, PointerEventData pointerEventData)
         {
-            if (onClickSubmitClip == null)
-            {
-                return;
-            }
-
-            audioSource.PlayOneShot(onClickSubmitClip);
+            Play(onClickSubmitClip);
         }
 
         private void OnSelectableCallbacksSelected(SelectableCallbacks selectableCallbacks, BaseEventData baseEventData)
         {
-            if (onEnterSelectClip == null)
-            {
-                return;
-            }
-
-            audioSource.PlayOneShot(onEnterSelectClip);
+            Play(onEnterSelectClip);
         }
 
         private void OnSelectableCallbacksDeselected(SelectableCallbacks selectableCallbacks, BaseEventData baseEventData)
         {
-            if (onExitDeselectClip == null)
-            {
-                return;
-            }
-
-            audioSource.PlayOneShot(onExitDeselectClip);
+            Play(onExitDeselectClip);
         }
 
         private void OnSelectableCallbacksSubmited(SelectableCallbacks selectableCallbacks, BaseEventData baseEventData)
         {
-            if (onClickSubmitClip == null)
-            {
-                return;
-            }
-
-            audioSource.PlayOneShot(onClickSubmitClip);
+            Play(onClickSubmitClip);
         }
     }
 }
