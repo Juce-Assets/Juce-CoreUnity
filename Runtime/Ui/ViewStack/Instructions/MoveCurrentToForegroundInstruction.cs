@@ -15,11 +15,13 @@ namespace Playground.Services.ViewStack.Instructions
 
         public MoveCurrentToForegroundInstruction(
             IUiFrame frame,
-            IKeyValueRepository<Type, IViewStackEntry> entriesRepository
+            IKeyValueRepository<Type, IViewStackEntry> entriesRepository,
+            ISingleRepository<IViewContext> currentContextRepository
             )
         {
             this.frame = frame;
             this.entriesRepository = entriesRepository;
+            this.currentContextRepository = currentContextRepository;
         }
 
         protected override void OnInstantExecute()

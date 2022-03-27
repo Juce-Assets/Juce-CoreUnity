@@ -130,7 +130,8 @@ namespace Juce.CoreUnity.ViewStack.Sequences
         {
             instructionsToPlay.Add(new MoveCurrentToForegroundInstruction(
                 frame,
-                entriesRepository
+                entriesRepository,
+                currentContextRepository
                 ));
 
             return this;
