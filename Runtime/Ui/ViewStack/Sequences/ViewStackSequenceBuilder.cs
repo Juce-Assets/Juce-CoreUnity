@@ -128,8 +128,6 @@ namespace Juce.CoreUnity.ViewStack.Sequences
 
         public IViewStackSequenceBuilder MoveCurrentToForeground<T>()
         {
-            Type entryId = typeof(T);
-
             instructionsToPlay.Add(new MoveCurrentToForegroundInstruction(
                 frame,
                 entriesRepository
