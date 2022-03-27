@@ -15,7 +15,7 @@ namespace Playground.Services.ViewStack.Instructions
         private readonly IUiFrame frame;
         private readonly IKeyValueRepository<Type, IViewStackEntry> entriesRepository;
         private readonly ISingleRepository<IViewContext> currentContextRepository;
-        private readonly Queue<Type> viewStackQueue;
+        private readonly Stack<Type> viewStackQueue;
         private readonly Type entryId;
         private readonly bool pushToViewQueue;
         private readonly bool instantly;
@@ -24,7 +24,7 @@ namespace Playground.Services.ViewStack.Instructions
             IUiFrame frame,
             IKeyValueRepository<Type, IViewStackEntry> entriesRepository,
             ISingleRepository<IViewContext> currentContextRepository,
-            Queue<Type> viewStackQueue,
+            Stack<Type> viewStackQueue,
             Type entryId,
             bool pushToViewQueue,
             bool instantly
@@ -110,7 +110,7 @@ namespace Playground.Services.ViewStack.Instructions
 
             if (pushToViewQueue)
             {
-                viewStackQueue.Enqueue(entryId);
+                viewStackQueue.Push(entryId);
             }
 
             return Task.WhenAll(hideTasks);

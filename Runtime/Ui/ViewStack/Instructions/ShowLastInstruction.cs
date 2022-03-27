@@ -15,7 +15,7 @@ namespace Playground.Services.ViewStack.Instructions
         private readonly IUiFrame frame;
         private readonly IKeyValueRepository<Type, IViewStackEntry> entriesRepository;
         private readonly ISingleRepository<IViewContext> currentContextRepository;
-        private readonly Queue<Type> viewStackQueue;
+        private readonly Stack<Type> viewStackQueue;
         private readonly bool behindForeground;
         private readonly bool instantly;
 
@@ -23,7 +23,7 @@ namespace Playground.Services.ViewStack.Instructions
             IUiFrame frame,
             IKeyValueRepository<Type, IViewStackEntry> entriesRepository,
             ISingleRepository<IViewContext> currentContextRepository,
-            Queue<Type> viewStackQueue,
+            Stack<Type> viewStackQueue,
             bool behindForeground,
             bool instantly
             )
@@ -45,7 +45,7 @@ namespace Playground.Services.ViewStack.Instructions
                 return;
             }
 
-            Type entryId = viewStackQueue.Dequeue();
+            Type entryId = viewStackQueue.Pop();
 
             bool found = entriesRepository.TryGet(entryId, out IViewStackEntry entry);
 

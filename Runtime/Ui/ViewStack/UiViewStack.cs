@@ -14,7 +14,7 @@ namespace Juce.CoreUnity.ViewStack
     {
         private readonly IKeyValueRepository<Type, IViewStackEntry> entriesRepository = new SimpleKeyValueRepository<Type, IViewStackEntry>();
         private readonly ISingleRepository<IViewContext> currentContextRepository = new SimpleSingleRepository<IViewContext>();
-        private readonly Queue<Type> viewStackQueue = new Queue<Type>();
+        private readonly Stack<Type> viewStackQueue = new Stack<Type>();
         private readonly ISequencer sequencer = new Sequencer();
 
         private readonly IUiFrame frame;

@@ -18,14 +18,14 @@ namespace Juce.CoreUnity.ViewStack.Sequences
         private readonly IUiFrame frame;
         private readonly IKeyValueRepository<Type, IViewStackEntry> entriesRepository;
         private readonly ISingleRepository<IViewContext> currentContextRepository;
-        private readonly Queue<Type> viewStackQueue;
+        private readonly Stack<Type> viewStackQueue;
         private readonly ISequencer sequencer;
 
         public ViewStackSequenceBuilder(
             IUiFrame frame,
             IKeyValueRepository<Type, IViewStackEntry> entriesRepository,
             ISingleRepository<IViewContext> currentContextRepository,
-            Queue<Type> viewStackQueue,
+            Stack<Type> viewStackQueue,
             ISequencer sequencer
             )
         {
