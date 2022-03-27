@@ -80,8 +80,6 @@ namespace Playground.Services.ViewStack.Instructions
 
             if (!pupupFound)
             {
-                UnityEngine.Debug.LogError($"Tried to Hide {entryId} as Popup, " +
-                    $"but it was not showing on the first place, at {nameof(HideInstruction)}");
                 return;
             }
 
@@ -90,7 +88,10 @@ namespace Playground.Services.ViewStack.Instructions
 
         private Task HandleNonPopup(IViewContext context, CancellationToken cancellationToken)
         {
-            currentContextRepository.Clear();
+            if (context.ViewId == entryId)
+            {
+                currentContextRepository.Clear();
+            }
 
             List<Task> hideTasks = new List<Task>();
 
