@@ -126,7 +126,7 @@ namespace Juce.CoreUnity.ViewStack.Sequences
             return this;
         }
 
-        public IViewStackSequenceBuilder MoveCurrentToForeground<T>()
+        public IViewStackSequenceBuilder MoveCurrentToForeground()
         {
             instructionsToPlay.Add(new MoveCurrentToForegroundInstruction(
                 frame,
