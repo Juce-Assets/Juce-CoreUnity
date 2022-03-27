@@ -32,6 +32,7 @@ namespace Playground.Services.ViewStack.Instructions
             {
                 UnityEngine.Debug.LogError($"Tried to MoveCurrentToForeground " +
                     $"but it there was not a current view context, at {nameof(MoveCurrentToForegroundInstruction)}");
+                return;
             }
 
             bool found = entriesRepository.TryGet(context.ViewId, out IViewStackEntry entry);

@@ -34,7 +34,6 @@ namespace Playground.Services.ViewStack.Instructions
             {
                 UnityEngine.Debug.LogError($"Tried to SetInteractable {nameof(IViewStackEntry)} of type {entryId}, " +
                     $"but it was not registered, at {nameof(SetInteractableInstruction)}");
-
                 return;
             }
 

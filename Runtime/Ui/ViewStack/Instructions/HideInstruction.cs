@@ -59,6 +59,7 @@ namespace Playground.Services.ViewStack.Instructions
             {
                 UnityEngine.Debug.LogError($"Tried to Hide {nameof(entry.Id)} as Popup, " +
                     $"but it there was not a current view context, at {nameof(HideInstruction)}");
+                return;
             }
 
             if (entry.IsPopup)

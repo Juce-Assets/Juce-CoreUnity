@@ -40,7 +40,6 @@ namespace Playground.Services.ViewStack.Instructions
             {
                 UnityEngine.Debug.LogError($"Tried to Show {nameof(IViewStackEntry)} of type {entryId}, " +
                     $"but it was not registered, at {nameof(ShowInstruction)}");
-
                 return;
             }
 
