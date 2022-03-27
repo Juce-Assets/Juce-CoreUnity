@@ -126,6 +126,19 @@ namespace Juce.CoreUnity.ViewStack.Sequences
             return this;
         }
 
+        public IViewStackSequenceBuilder MoveToForeground<T>()
+        {
+            Type entryId = typeof(T);
+
+            instructionsToPlay.Add(new MoveToForegroundInstruction(
+                frame,
+                entriesRepository,
+                entryId
+                ));
+
+            return this;
+        }
+
         public IViewStackSequenceBuilder SetInteractable<T>(bool set)
         {
             Type entryId = typeof(T);
