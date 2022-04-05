@@ -5,7 +5,7 @@ using System;
 
 namespace JuceUnity.Core.DI.Extensions
 {
-    public static class DiServicesLocatorExtensionsA
+    public static class DiServicesLocatorExtensions
     {
         public static IDiBindingActionBuilder<T> ToServicesLocator<T>(this IDiBindingActionBuilder<T> builder)
         {

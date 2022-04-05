@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace JuceUnity.Core.DI.Extensions
 {
-    public static class DiGameObjectExtensionsA
+    public static class DiGameObjectExtensions
     {
         public static IDiBindingActionBuilder<T> FromGameObject<T>(
             this IDiBindingBuilder<T> builder, 
