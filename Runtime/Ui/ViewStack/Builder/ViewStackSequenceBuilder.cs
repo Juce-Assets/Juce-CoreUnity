@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Juce.CoreUnity.ViewStack.Sequences
+namespace Juce.CoreUnity.ViewStack.Builder
 {
     public class ViewStackSequenceBuilder : IViewStackSequenceBuilder
     {

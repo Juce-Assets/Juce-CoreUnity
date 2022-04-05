@@ -1,15 +1,27 @@
 ﻿using Juce.Core.Di.Builder;
-using Juce.Core.Subscribables;
+using Juce.CoreUnity.ViewStack;
+using Juce.CoreUnity.ViewStack.Entries;
 
-namespace Juce.Core.Di.Extensions
+namespace JuceUnity.Core.Di.Extensions
 {
     public static class DiViewStackExtensions
     {
         public static IDiBindingActionBuilder<T> LinkToViewStack<T>(this IDiBindingActionBuilder<T> actionBuilder)
-            where T : ISubscribable
+            where T : IViewStackEntry
         {
-            actionBuilder.WhenInit((c, o) => o.Subscribe());
-            actionBuilder.WhenDispose((o) => o.Unsubscribe());
+            actionBuilder.WhenInit((c, o) =>
+            {
+                IUiViewStack uiViewStack = c.Resolve<IUiViewStack>();
+
+                uiViewStack.Register(o);
+            });
+
+            actionBuilder.WhenDispose((c, o) =>
+            {
+                IUiViewStack uiViewStack = c.Resolve<IUiViewStack>();
+
+                uiViewStack.Unregister(o);
+            });
 
             return actionBuilder;
         }

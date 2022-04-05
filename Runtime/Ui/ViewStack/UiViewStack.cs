@@ -3,7 +3,7 @@ using Juce.Core.Sequencing;
 using Juce.CoreUnity.Ui.Frame;
 using Juce.CoreUnity.ViewStack.Context;
 using Juce.CoreUnity.ViewStack.Entries;
-using Juce.CoreUnity.ViewStack.Sequences;
+using Juce.CoreUnity.ViewStack.Builder;
 using System;
 using System.Collections.Generic;
 using System.Threading;
