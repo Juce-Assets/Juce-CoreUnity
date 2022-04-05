@@ -10,10 +10,11 @@ Unity does not support resolving dependences from a git url. Because of that, yo
 ```
 "dependencies": {
    "com.juce.utils": "git+https://github.com/Juce-Assets/Juce-Utils",
-   "com.juce.core": "git+https://github.com/Juce-Assets/Juce-Core",
    "com.juce.tween": "git+https://github.com/Juce-Assets/Juce-Core",
    "com.juce.scenemanagement": "git+https://github.com/Juce-Assets/Juce-SceneManagement",
    "com.juce.tweencomponent": "git+https://github.com/Juce-Assets/Juce-TweenPlayer",
-   "com.juce.input": "git+https://github.com/Juce-Assets/Juce-Input"
+   "com.juce.input": "git+https://github.com/Juce-Assets/Juce-Input",
+   "com.juce.core": "git+https://github.com/Juce-Assets/Juce-Core",
+   "com.juce.coreunity": "git+https://github.com/Juce-Assets/Juce-CoreUnity"
 },
 ```
