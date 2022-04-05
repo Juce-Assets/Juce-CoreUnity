@@ -1,13 +1,13 @@
-﻿using Juce.Core.DI.Builder;
-using Juce.Core.DI.Container;
+﻿using Juce.Core.Di.Builder;
+using Juce.Core.Di.Container;
 using Juce.CoreUnity.Service;
 using System;
 
 namespace JuceUnity.Core.DI.Extensions
 {
-    public static class DIServicesLocatorExtensions
+    public static class DiServicesLocatorExtensionsA
     {
-        public static IDIBindingActionBuilder<T> ToServicesLocator<T>(this IDIBindingActionBuilder<T> builder)
+        public static IDiBindingActionBuilder<T> ToServicesLocator<T>(this IDiBindingActionBuilder<T> builder)
         {
             builder.WhenInit((c, o) => ServiceLocator.Register(builder.IdentifierType, o));
             builder.WhenDispose((c, o) => ServiceLocator.Unregister(builder.IdentifierType));
@@ -15,9 +15,9 @@ namespace JuceUnity.Core.DI.Extensions
             return builder;
         }
 
-        public static IDIBindingActionBuilder<T> FromServicesLocator<T>(this IDIBindingBuilder<T> builder)
+        public static IDiBindingActionBuilder<T> FromServicesLocator<T>(this IDiBindingBuilder<T> builder)
         {
-            Func<IDIResolveContainer, T> function = (IDIResolveContainer resolver) =>
+            Func<IDiResolveContainer, T> function = (IDiResolveContainer resolver) =>
             {
                 return ServiceLocator.Get<T>(); 
             };

@@ -1,18 +1,18 @@
-﻿using Juce.Core.DI.Builder;
-using Juce.Core.DI.Container;
+﻿using Juce.Core.Di.Builder;
+using Juce.Core.Di.Container;
 using System;
 using UnityEngine;
 
 namespace JuceUnity.Core.DI.Extensions
 {
-    public static class DIGameObjectExtensions
+    public static class DiGameObjectExtensionsA
     {
-        public static IDIBindingActionBuilder<T> FromGameObject<T>(
-            this IDIBindingBuilder<T> builder, 
+        public static IDiBindingActionBuilder<T> FromGameObject<T>(
+            this IDiBindingBuilder<T> builder, 
             GameObject gameObject
             ) where T : MonoBehaviour
         {
-            Func<IDIResolveContainer, T> function = (IDIResolveContainer resolver) =>
+            Func<IDiResolveContainer, T> function = (IDiResolveContainer resolver) =>
             {
                 Type type = typeof(T);
 
@@ -36,12 +36,12 @@ namespace JuceUnity.Core.DI.Extensions
             return builder.FromFunction(function);
         }
 
-        public static IDIBindingActionBuilder<T> FromGameObjectInChildren<T>(
-            this IDIBindingBuilder<T> builder,
+        public static IDiBindingActionBuilder<T> FromGameObjectInChildren<T>(
+            this IDiBindingBuilder<T> builder,
             GameObject gameObject
             ) where T : MonoBehaviour
         {
-            Func<IDIResolveContainer, T> function = (IDIResolveContainer resolver) =>
+            Func<IDiResolveContainer, T> function = (IDiResolveContainer resolver) =>
             {
                 Type type = typeof(T);
 

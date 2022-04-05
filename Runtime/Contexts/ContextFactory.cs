@@ -1,5 +1,5 @@
-﻿using Juce.Core.DI.Builder;
-using Juce.Core.DI.Container;
+﻿using Juce.Core.Di.Builder;
+using Juce.Core.Di.Container;
 using Juce.Core.Disposables;
 using Juce.CoreUnity.Service;
 using System;
@@ -22,17 +22,17 @@ namespace Juce.CoreUnity.Contexts
             this.contextInstaller = contextInstaller;
         }
 
-        public async Task<ITaskDisposable<TInteractor>> Create(params IDIContainer[] parentContainers)
+        public async Task<ITaskDisposable<TInteractor>> Create(params IDiContainer[] parentContainers)
         {
             TInstance contextInstance = await ContextInstanceLoader.Load<TInstance>(contextSceneName);
 
-            IDIContainerBuilder containerBuilder = new DIContainerBuilder();
+            IDiContainerBuilder containerBuilder = new DiContainerBuilder();
 
             containerBuilder.Bind(parentContainers);
 
             contextInstaller.Install(containerBuilder, contextInstance);
 
-            IDIContainer container = containerBuilder.Build();
+            IDiContainer container = containerBuilder.Build();
 
             TInteractor interactor = container.Resolve<TInteractor>();
 
