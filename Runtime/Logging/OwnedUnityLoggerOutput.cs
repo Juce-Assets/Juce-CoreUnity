@@ -2,11 +2,11 @@
 
 namespace Juce.CoreUnity.Logging
 {
-    public class OwnedUnityLogger : ILoggerOutput
+    public class OwnedUnityLoggerOutput : ILoggerOutput
     {
         private readonly ILoggerOwner owner;
 
-        public OwnedUnityLogger(ILoggerOwner owner)
+        public OwnedUnityLoggerOutput(ILoggerOwner owner)
         {
             this.owner = owner;
         }
