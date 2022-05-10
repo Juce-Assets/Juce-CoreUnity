@@ -1,9 +1,9 @@
 ﻿using Juce.CoreUnity.ViewStack.Entries;
 using Juce.CoreUnity.ViewStack.Builder;
 
-namespace Juce.CoreUnity.ViewStack
+namespace Juce.CoreUnity.ViewStack.Services
 {
-    public interface IUiViewStack
+    public interface IUiViewStackService
     {
         void Register(IViewStackEntry entry);
         void Unregister(IViewStackEntry entry);

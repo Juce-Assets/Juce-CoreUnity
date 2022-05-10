@@ -8,9 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Juce.CoreUnity.ViewStack
+namespace Juce.CoreUnity.ViewStack.Services
 {
-    public class UiViewStack : IUiViewStack
+    public class UiViewStackService : IUiViewStackService
     {
         private readonly IKeyValueRepository<Type, IViewStackEntry> entriesRepository = new SimpleKeyValueRepository<Type, IViewStackEntry>();
         private readonly ISingleRepository<IViewContext> currentContextRepository = new SimpleSingleRepository<IViewContext>();
@@ -19,7 +19,7 @@ namespace Juce.CoreUnity.ViewStack
 
         private readonly IUiFrame frame;
 
-        public UiViewStack(IUiFrame frame)
+        public UiViewStackService(IUiFrame frame)
         {
             this.frame = frame;
         }
