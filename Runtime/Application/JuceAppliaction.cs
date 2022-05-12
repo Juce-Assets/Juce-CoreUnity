@@ -2,6 +2,8 @@
 {
     public static class JuceAppliaction
     {
+        public static bool IsDebug => UnityEngine.Application.isEditor || UnityEngine.Debug.isDebugBuild;
+
         public static void Quit()
         {
 #if UNITY_EDITOR
