@@ -1,13 +1,13 @@
 ﻿using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
-using Juce.Loc.Configuration;
-using Juce.Loc.Results;
+using Juce.Core.Results;
+using Juce.Localization.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Juce.Loc.Dawers
+namespace Juce.Localization.Dawers
 {
     public static class TryDownloadSpreadsheetFromGoogleQuery
     {
@@ -28,7 +28,7 @@ namespace Juce.Loc.Dawers
             if(!serviceFound)
             {
                 UnityEngine.Debug.Log($"Query can't continue, Sheets Service not found");
-                return TaskResult<List<ValueRange>>.FromError();
+                return TaskResult<List<ValueRange>>.FromEmpty();
             }
 
             UnityEngine.Debug.Log($"2.Downloading spreadsheets...");
@@ -46,13 +46,13 @@ namespace Juce.Loc.Dawers
             catch (Exception exception)
             {
                 UnityEngine.Debug.Log($"There was an error downloading spreadsheet: {exception.Message}");
-                return TaskResult<List<ValueRange>>.FromError();
+                return TaskResult<List<ValueRange>>.FromEmpty();
             }
 
             if(spreadSheetData == null)
             {
                 UnityEngine.Debug.Log($"Query can't continue, spreadsheets could not be found");
-                return TaskResult<List<ValueRange>>.FromError();
+                return TaskResult<List<ValueRange>>.FromEmpty();
             }
 
             UnityEngine.Debug.Log($"3.Spreadsheet downloaded: {spreadSheetData.Properties.Title}");

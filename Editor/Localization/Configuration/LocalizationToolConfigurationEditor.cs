@@ -1,7 +1,7 @@
-﻿using Juce.Loc.Dawers;
+﻿using Juce.Localization.Dawers;
 using UnityEditor;
 
-namespace Juce.Loc.Configuration
+namespace Juce.Localization.Configuration
 {
     [CustomEditor(typeof(LocalizationToolConfiguration))]
     public class LocalizationToolConfigurationEditor : Editor

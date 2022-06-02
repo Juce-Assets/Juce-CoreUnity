@@ -1,5 +1,5 @@
-﻿using Juce.Loc.Constants;
-using Juce.Loc.Data;
+﻿using Juce.Localization.Constants;
+using Juce.Localization.Data;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEditor;
 
-namespace Juce.Loc.Dawers
+namespace Juce.Localization.Dawers
 {
     public static class SaveLocalizationDataToDiskQuery
     {

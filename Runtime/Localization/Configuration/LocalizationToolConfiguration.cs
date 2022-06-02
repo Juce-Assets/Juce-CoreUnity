@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Juce.Loc.Configuration
+namespace Juce.Localization.Configuration
 {
     [CreateAssetMenu(fileName = nameof(LocalizationToolConfiguration), 
         menuName = "Juce/Localization/" + nameof(LocalizationToolConfiguration), order = 1)]

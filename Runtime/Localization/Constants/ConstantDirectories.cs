@@ -1,4 +1,4 @@
-﻿namespace Juce.Loc.Constants
+﻿namespace Juce.Localization.Constants
 {
     public static class ConstantDirectories
     {

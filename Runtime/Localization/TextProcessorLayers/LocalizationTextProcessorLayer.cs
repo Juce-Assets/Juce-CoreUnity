@@ -1,6 +1,6 @@
 ﻿using Juce.CoreUnity.Service;
 using Juce.CoreUnity.TextProcessors;
-using Juce.Loc.Services;
+using Juce.Localization.Services;
 using UnityEngine;
 
 namespace Juce.CoreUnity.Localization.TextProcessorLayers

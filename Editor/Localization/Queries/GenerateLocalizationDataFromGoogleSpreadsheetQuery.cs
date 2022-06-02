@@ -1,11 +1,10 @@
 ﻿using Google.Apis.Sheets.v4.Data;
-using Juce.Loc.Configuration;
-using Juce.Loc.Constants;
-using Juce.Loc.Data;
-using Juce.Loc.Results;
+using Juce.Core.Results;
+using Juce.Localization.Configuration;
+using Juce.Localization.Data;
 using System.Collections.Generic;
 
-namespace Juce.Loc.Dawers
+namespace Juce.Localization.Dawers
 {
     public static class GenerateLocalizationDataFromGoogleSpreadsheetQuery
     {

@@ -1,12 +1,12 @@
-﻿using Juce.Loc.Constants;
-using Juce.Loc.Data;
-using Juce.Loc.Results;
+﻿using Juce.Core.Results;
+using Juce.Localization.Constants;
+using Juce.Localization.Data;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Juce.Loc.Requests
+namespace Juce.Localization.Requests
 {
     public static class LoadLocalizationDataRequest
     {
@@ -16,7 +16,7 @@ namespace Juce.Loc.Requests
 
             if (resourceRequest == null)
             {
-                return TaskResult<LocalizationData>.FromError();
+                return TaskResult<LocalizationData>.FromEmpty();
             }
 
             TaskCompletionSource<bool> taskCompletitionSource = new TaskCompletionSource<bool>();
@@ -33,7 +33,7 @@ namespace Juce.Loc.Requests
 
             if (textAsset == null)
             {
-                return TaskResult<LocalizationData>.FromError();
+                return TaskResult<LocalizationData>.FromEmpty();
             }
 
             LocalizationData localizationData;
@@ -48,7 +48,7 @@ namespace Juce.Loc.Requests
                     $"at {nameof(LoadLocalizationDataRequest)}, " +
                     $"with the exception {exception.Message}");
 
-                return TaskResult<LocalizationData>.FromError();
+                return TaskResult<LocalizationData>.FromEmpty();
             }
 
             return TaskResult<LocalizationData>.FromResult(localizationData);

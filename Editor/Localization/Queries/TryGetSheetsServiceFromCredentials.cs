@@ -1,11 +1,11 @@
 ﻿using Google.Apis.Auth.OAuth2;
 using Google.Apis.Services;
 using Google.Apis.Sheets.v4;
-using Juce.Loc.Configuration;
+using Juce.Localization.Configuration;
 using System.IO;
 using static Google.Apis.Auth.OAuth2.ServiceAccountCredential;
 
-namespace Juce.Loc.Dawers
+namespace Juce.Localization.Dawers
 {
 	public static class TryGetSheetsServiceFromCredentials
 	{
