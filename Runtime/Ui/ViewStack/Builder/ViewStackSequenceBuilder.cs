@@ -1,4 +1,5 @@
-﻿using Juce.Core.Repositories;
+﻿using Juce.Core.Extensions;
+using Juce.Core.Repositories;
 using Juce.Core.Sequencing;
 using Juce.CoreUnity.Ui.Frame;
 using Juce.CoreUnity.ViewStack.Context;

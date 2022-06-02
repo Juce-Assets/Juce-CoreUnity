@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Juce.Extensions;
+using UnityEngine;
 
 namespace Juce.CoreUnity.ViewStack.Entries
 {
