@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 
-namespace Juce.Persistence.Serialization
+namespace Juce.CoreUnity.Persistence.Serialization
 {
     public static class SerializableDataUtils
     {

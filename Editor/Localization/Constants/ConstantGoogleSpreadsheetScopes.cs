@@ -1,6 +1,6 @@
 ﻿using Google.Apis.Sheets.v4;
 
-namespace Juce.Localization.Constants
+namespace Juce.CoreUnity.Localization.Constants
 {
     public static class ConstantGoogleSpreadsheetScopes
     {

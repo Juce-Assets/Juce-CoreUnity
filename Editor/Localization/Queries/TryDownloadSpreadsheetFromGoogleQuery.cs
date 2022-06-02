@@ -1,13 +1,13 @@
 ﻿using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
 using Juce.Core.Results;
-using Juce.Localization.Configuration;
+using Juce.CoreUnity.Localization.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Juce.Localization.Dawers
+namespace Juce.CoreUnity.Localization.Dawers
 {
     public static class TryDownloadSpreadsheetFromGoogleQuery
     {

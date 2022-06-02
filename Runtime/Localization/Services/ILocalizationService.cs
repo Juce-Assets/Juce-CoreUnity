@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Juce.Localization.Services
+namespace Juce.CoreUnity.Localization.Services
 {
     public interface ILocalizationService
     {

@@ -1,11 +1,11 @@
 ﻿using Juce.Core.Results;
-using Juce.Localization.Data;
-using Juce.Localization.Requests;
+using Juce.CoreUnity.Localization.Data;
+using Juce.CoreUnity.Localization.Requests;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Juce.Localization.Services
+namespace Juce.CoreUnity.Localization.Services
 {
     public class LocalizationService : ILocalizationService
     {

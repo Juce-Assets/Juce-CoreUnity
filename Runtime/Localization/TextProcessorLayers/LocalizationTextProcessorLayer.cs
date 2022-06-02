@@ -1,9 +1,9 @@
-﻿using Juce.CoreUnity.Service;
+﻿using Juce.CoreUnity.Localization.Services;
+using Juce.CoreUnity.Service;
 using Juce.CoreUnity.TextProcessors;
-using Juce.Localization.Services;
 using UnityEngine;
 
-namespace Juce.CoreUnity.Localization.TextProcessorLayers
+namespace Juce.CoreUnity.CoreUnity.Localization.TextProcessorLayers
 {
     public class LocalizationTextProcessorLayer : TextProcessorLayer
     {

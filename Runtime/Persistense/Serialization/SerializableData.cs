@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Juce.Persistence.Serialization
+namespace Juce.CoreUnity.Persistence.Serialization
 {
     public class SerializableData<T> where T : class
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Juce.Localization.Data
+namespace Juce.CoreUnity.Localization.Data
 {
     public class LocalizationData 
     {

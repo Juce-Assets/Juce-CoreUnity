@@ -1,12 +1,12 @@
 ﻿using Juce.Core.Results;
-using Juce.Localization.Constants;
-using Juce.Localization.Data;
+using Juce.CoreUnity.Localization.Constants;
+using Juce.CoreUnity.Localization.Data;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Juce.Localization.Requests
+namespace Juce.CoreUnity.Localization.Requests
 {
     public static class LoadLocalizationDataRequest
     {
