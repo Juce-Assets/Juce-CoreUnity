@@ -17,6 +17,5 @@ Unity does not support resolving dependences from a git url. Because of that, yo
    "com.juce.tween": "git+https://github.com/Juce-Assets/Juce-Tween",
    "com.juce.tweencomponent": "git+https://github.com/Juce-Assets/Juce-TweenPlayer",
    "com.juce.input": "git+https://github.com/Juce-Assets/Juce-Input",
-   "com.juce.loc": "git+https://github.com/Juce-Assets/Juce-Loc"
 },
 ```
