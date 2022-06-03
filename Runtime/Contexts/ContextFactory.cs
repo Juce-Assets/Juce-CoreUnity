@@ -11,20 +11,23 @@ namespace Juce.CoreUnity.Contexts
     public class ContextFactory<TInteractor, TInstance> : IContextFactory<TInteractor, TInstance> where TInstance : MonoBehaviour
     {
         private readonly string contextSceneName;
+        private readonly bool setAsActiveScene;
         private readonly IContextInstaller<TInstance> contextInstaller;
 
         public ContextFactory(
             string contextSceneName,
-            IContextInstaller<TInstance> contextInstaller
+            IContextInstaller<TInstance> contextInstaller,
+            bool setAsActiveScene = false
             )
         {
             this.contextSceneName = contextSceneName;
             this.contextInstaller = contextInstaller;
+            this.setAsActiveScene = setAsActiveScene;
         }
 
         public async Task<ITaskDisposable<TInteractor>> Create(params IDiContainer[] parentContainers)
         {
-            TInstance contextInstance = await ContextInstanceLoader.Load<TInstance>(contextSceneName);
+            TInstance contextInstance = await ContextInstanceLoader.Load<TInstance>(contextSceneName, setAsActiveScene);
 
             IDiContainerBuilder containerBuilder = new DiContainerBuilder();
 

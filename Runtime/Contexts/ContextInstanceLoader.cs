@@ -9,15 +9,17 @@ namespace Juce.CoreUnity.Contexts
     public static class ContextInstanceLoader
     {
         public static async Task<TContextInstance> Load<TContextInstance>(
-            string contextSceneName
+            string contextSceneName,
+            bool setAsActiveScene = false
             ) where TContextInstance : MonoBehaviour
         {
             SceneLoadResult sceneLoadResult = await RuntimeSceneLoader.LoadFromName(
                contextSceneName,
-               LoadSceneMode.Additive
+               LoadSceneMode.Additive,
+               setAsActiveScene
                );
 
-            if(!sceneLoadResult.Success)
+            if (!sceneLoadResult.Success)
             {
                 throw new System.Exception($"Scene {contextSceneName} could not be loaded for " +
                     $"context");
