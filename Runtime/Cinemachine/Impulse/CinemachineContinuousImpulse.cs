@@ -9,7 +9,7 @@ using static Cinemachine.CinemachineImpulseManager;
 
 namespace Juce.CoreUnity.Cinemachine.Impulse
 {
-    public class CinemachineContinuousImpulse : MonoBehaviour
+    public sealed class CinemachineContinuousImpulse : MonoBehaviour
     {
         [CinemachineImpulseDefinitionProperty]
         [SerializeField] private CinemachineImpulseDefinition impulseDefinition = new CinemachineImpulseDefinition();
