@@ -94,7 +94,7 @@ namespace Juce.CoreUnity.Persistence.Serialization
             TryGenerateData();
         }
 
-        T GetData()
+        private T GetData()
         {
             if (_data == null)
             {
