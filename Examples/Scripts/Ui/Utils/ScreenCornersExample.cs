@@ -1,4 +1,4 @@
-using Juce.CoreUnity.Guizmos;
+using Juce.CoreUnity.Guizmo.Utils;
 using Juce.CoreUnity.Ui.Utils;
 using UnityEngine;
 
@@ -65,6 +65,6 @@ public class ScreenCornersExample : MonoBehaviour
     {
         Rect bounds = UiUtils.GetRectTransformBoundsWorldPosition(rectTransform);
 
-        GizmosUtils.DrawWireCube(bounds.center, bounds.size, Color.red);
+        GizmoUtils.DrawWireCube(bounds.center, bounds.size, Color.red);
     }
 }
