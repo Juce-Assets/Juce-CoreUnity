@@ -4,58 +4,48 @@ namespace Juce.Extensions
 {
     public static class GameObjectExtensions
     {
-        public static T GetOrAddComponent<T>(this GameObject go) where T : Component
+        public static void Destroy(this GameObject gameObject)
         {
-            T component = go.GetComponent<T>();
+            Object.Destroy(gameObject);
+        }
 
-            if (component != null)
+        public static void DestroyImmediate(this GameObject gameObject)
+        {
+            Object.DestroyImmediate(gameObject);
+        }
+
+        public static bool TryGetComponent<T>(this GameObject gameObject, out T component) where T : Component
+        {
+            component = gameObject.GetComponent<T>();
+
+            return component != null;
+        }
+
+        public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
+        {
+            bool found = gameObject.TryGetComponent(out T component);
+
+            if (found)
             {
                 return component;
             }
 
-            return go.AddComponent<T>();
+            return gameObject.AddComponent<T>();
         }
 
-        public static GameObject Instantiate(this GameObject go, Transform parent = null)
+        public static void SetParent(this GameObject gameObject, GameObject parent, bool worldPositionStays = true)
         {
-            return MonoBehaviour.Instantiate(go, parent);
+            gameObject.transform.SetParent(parent == null ? null : parent.transform, worldPositionStays);
         }
 
-        public static T InstantiateAndGetComponent<T>(this GameObject go, Transform parent = null) where T : Component
+        public static void SetParent(this GameObject gameObject, Transform parent, bool worldPositionStays = true)
         {
-            GameObject goInstance = MonoBehaviour.Instantiate(go, parent);
-
-            return goInstance.GetComponent<T>();
+            gameObject.transform.SetParent(parent, worldPositionStays);
         }
 
-        public static void SetParent(this GameObject go, GameObject parent, bool worldPositionStays = true)
+        public static void RemoveParent(this GameObject gameObject, bool worldPositionStays = true)
         {
-            if (parent == null)
-            {
-                go.transform.SetParent(null, worldPositionStays);
-            }
-            else
-            {
-                go.transform.SetParent(parent.transform, worldPositionStays);
-            }
-        }
-
-
-        public static void SetParent(this GameObject go, Transform parent, bool worldPositionStays = true)
-        {
-            if (parent == null)
-            {
-                go.transform.SetParent(null, worldPositionStays);
-            }
-            else
-            {
-                go.transform.SetParent(parent, worldPositionStays);
-            }
-        }
-
-        public static void RemoveParent(this GameObject go, bool worldPositionStays = true)
-        {
-            go.transform.SetParent(null, worldPositionStays);
+            gameObject.transform.SetParent(null, worldPositionStays);
         }
     }
 }

@@ -4,6 +4,9 @@ namespace Juce.Extensions
 {
     public static class Vector3Extensions
     {
+        public static readonly Vector3 MaxValue = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
+        public static readonly Vector3 MinValue = new Vector3(float.MinValue, float.MinValue, float.MaxValue);
+
         public static Vector3 PerpendicularClockwiseXY(this Vector3 vector3)
         {
             return new Vector3(vector3.y, -vector3.x, vector3.z);

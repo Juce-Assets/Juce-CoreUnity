@@ -31,5 +31,45 @@ namespace Juce.Extensions
 
             return Rect.MinMaxRect(min.x, min.y, max.x, max.y);
         }
+
+        public static float GetFrustumHeightAtCameraDistance(this Camera camera, float cameraDistance)
+        {
+            return 2.0f * cameraDistance * Mathf.Tan(camera.fieldOfView * 0.5f * Mathf.Deg2Rad);
+        }
+
+        public static float GetFrustumWidthAtCameraDistance(this Camera camera, float cameraDistance)
+        {
+            float horizontalFieldOfView = Camera.VerticalToHorizontalFieldOfView(camera.fieldOfView, camera.aspect);
+
+            return 2.0f * cameraDistance * Mathf.Tan(horizontalFieldOfView * 0.5f * Mathf.Deg2Rad);
+        }
+
+        public static Vector2 GetFrustumSizeAtCameraDistance(this Camera camera, float cameraDistance)
+        {
+            float width = camera.GetFrustumWidthAtCameraDistance(cameraDistance);
+            float height = camera.GetFrustumHeightAtCameraDistance(cameraDistance);
+
+            return new Vector2(width, height);
+        }
+
+        public static float GetCameraDistanceAtFrustumHeight(this Camera camera, float frustumHeight)
+        {
+            return frustumHeight * 0.5f / Mathf.Tan(camera.fieldOfView * 0.5f * Mathf.Deg2Rad);
+        }
+
+        public static float GetCameraDistanceAtFrustumWidth(this Camera camera, float frustumWidth)
+        {
+            float horizontalFieldOfView = Camera.VerticalToHorizontalFieldOfView(camera.fieldOfView, camera.aspect);
+
+            return frustumWidth * 0.5f / Mathf.Tan(horizontalFieldOfView * 0.5f * Mathf.Deg2Rad);
+        }
+
+        public static Vector2 GetCameraDistanceAtFrustumSize(this Camera camera, Vector2 frustumSize)
+        {
+            float width = camera.GetCameraDistanceAtFrustumWidth(frustumSize.x);
+            float height = camera.GetCameraDistanceAtFrustumHeight(frustumSize.y);
+
+            return new Vector2(width, height);
+        }
     }
 }
