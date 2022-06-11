@@ -1,6 +1,7 @@
 ﻿using Juce.Core.Refresh;
+using Juce.CoreUnity.Ui.ViewStack.Enums;
 
-namespace Juce.CoreUnity.ViewStack.Entries
+namespace Juce.CoreUnity.Ui.ViewStack.Entries
 {
     public class ViewStackEntryRefresh
     {

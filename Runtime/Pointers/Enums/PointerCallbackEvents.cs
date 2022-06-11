@@ -1,4 +1,4 @@
-﻿namespace Juce.CoreUnity.PointerCallback
+﻿namespace Juce.CoreUnity.Pointers.Enums
 {
     public enum PointerCallbackEvents
     {

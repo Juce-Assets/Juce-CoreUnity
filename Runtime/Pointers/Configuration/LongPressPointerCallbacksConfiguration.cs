@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Juce.CoreUnity.PointerCallback
+namespace Juce.CoreUnity.Pointers.Configuration
 {
     [CreateAssetMenu(fileName = nameof(LongPressPointerCallbacksConfiguration), menuName = "Juce/Configuration/" + nameof(LongPressPointerCallbacksConfiguration))]
     public class LongPressPointerCallbacksConfiguration : ScriptableObject

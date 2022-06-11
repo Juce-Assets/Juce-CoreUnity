@@ -1,14 +1,15 @@
 ﻿using Juce.Core.Repositories;
 using Juce.Core.Sequencing;
 using Juce.CoreUnity.Ui.Frame;
-using Juce.CoreUnity.ViewStack.Context;
-using Juce.CoreUnity.ViewStack.Entries;
+using Juce.CoreUnity.Ui.ViewStack.Context;
+using Juce.CoreUnity.Ui.ViewStack.Entries;
+using Juce.CoreUnity.Ui.ViewStack.Enums;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Playground.Services.ViewStack.Instructions
+namespace Juce.CoreUnity.Ui.ViewStack.Instructions
 {
     public class HideInstruction : Instruction
     {

@@ -21,27 +21,31 @@ namespace Juce.CoreUnity.Localization.Dawers
 
         private static async void ExecuteRefreshQuery(LocalizationToolConfiguration localizationToolConfiguration)
         {
-            TaskResult<List<ValueRange>> spreadsheetValues = await TryDownloadSpreadsheetFromGoogleQuery.Execute(
+            ITaskResult<List<ValueRange>> spreadsheetValuesResult = await TryDownloadSpreadsheetFromGoogleQuery.Execute(
                 localizationToolConfiguration,
                 CancellationToken.None
                 );
 
-            if(!spreadsheetValues.HasResult)
+            bool hasSpreadsheetValues = spreadsheetValuesResult.TryGetResult(out List<ValueRange> spreadsheetValues);
+
+            if (!hasSpreadsheetValues)
             {
                 return;
             }
 
-            TaskResult<LocalizationData> localizationData = GenerateLocalizationDataFromGoogleSpreadsheetQuery.Execute(
+            ITaskResult<LocalizationData> localizationDataResult = GenerateLocalizationDataFromGoogleSpreadsheetQuery.Execute(
                 localizationToolConfiguration,
-                spreadsheetValues.Value
+                spreadsheetValues
                 );
 
-            if(!localizationData.HasResult)
+            bool hasLocalizationDataResult = localizationDataResult.TryGetResult(out LocalizationData localizationData);
+
+            if (!hasLocalizationDataResult)
             {
                 return;
             }
 
-            bool success = await SaveLocalizationDataToDiskQuery.Execute(localizationData.Value, CancellationToken.None);
+            bool success = await SaveLocalizationDataToDiskQuery.Execute(localizationData, CancellationToken.None);
 
             if(success)
             {

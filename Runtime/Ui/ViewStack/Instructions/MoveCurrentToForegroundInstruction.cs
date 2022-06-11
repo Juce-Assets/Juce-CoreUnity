@@ -1,11 +1,11 @@
 ﻿using Juce.Core.Repositories;
 using Juce.Core.Sequencing;
 using Juce.CoreUnity.Ui.Frame;
-using Juce.CoreUnity.ViewStack.Context;
-using Juce.CoreUnity.ViewStack.Entries;
+using Juce.CoreUnity.Ui.ViewStack.Context;
+using Juce.CoreUnity.Ui.ViewStack.Entries;
 using System;
 
-namespace Playground.Services.ViewStack.Instructions
+namespace Juce.CoreUnity.Ui.ViewStack.Instructions
 {
     public class MoveCurrentToForegroundInstruction : InstantInstruction
     {

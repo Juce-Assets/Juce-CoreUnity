@@ -1,5 +1,5 @@
-﻿using Juce.CoreUnity.ViewStack.Entries;
-using Juce.CoreUnity.ViewStack.Builder;
+﻿using Juce.CoreUnity.Ui.ViewStack.Entries;
+using Juce.CoreUnity.Ui.ViewStack.Builder;
 
 namespace Juce.CoreUnity.ViewStack.Services
 {

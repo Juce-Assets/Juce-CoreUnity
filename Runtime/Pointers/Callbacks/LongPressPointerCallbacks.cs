@@ -1,14 +1,13 @@
 ﻿using Juce.Core.Events.Generic;
+using Juce.CoreUnity.Pointers.Configuration;
+using Juce.CoreUnity.Pointers.Enums;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Juce.CoreUnity.PointerCallback
+namespace Juce.CoreUnity.Pointers.Callbacks
 {
     public class LongPressPointerCallbacks : MonoBehaviour
     {
-        private const float DefaultLongPressActivationDelay = 0.7f;
-
-
         [Header("Setup")]
         [SerializeField] private PointerCallbacks pointerCallbacks = default;
 
@@ -72,7 +71,7 @@ namespace Juce.CoreUnity.PointerCallback
         {
             lastOnDownPointerEventData = data;
 
-            nextLongPressActivationTime = UnityEngine.Time.unscaledTime + GetLongPressDelay();
+            nextLongPressActivationTime = UnityEngine.Time.unscaledTime + pointerCallbacksConfiguration.LongPressActivationDelay;
         }
 
         private void OnUp(PointerCallbacks owner, PointerEventData data)
@@ -80,17 +79,6 @@ namespace Juce.CoreUnity.PointerCallback
             nextLongPressActivationTime = float.PositiveInfinity;
 
             TryActivateLongPressUp();
-        }
-
-        private float GetLongPressDelay()
-        {
-            if (pointerCallbacksConfiguration == null)
-            {
-                UnityEngine.Debug.LogError($"Pointer callback configuration not initialized, using default {DefaultLongPressActivationDelay}", this);
-                return DefaultLongPressActivationDelay;
-            }
-
-            return pointerCallbacksConfiguration.LongPressActivationDelay;
         }
 
         private void TryActivateLongPressDown()

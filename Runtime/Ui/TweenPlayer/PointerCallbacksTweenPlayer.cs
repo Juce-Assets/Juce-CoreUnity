@@ -1,5 +1,6 @@
 ﻿using Juce.Core.Extensions;
-using Juce.CoreUnity.PointerCallback;
+using Juce.CoreUnity.Animations;
+using Juce.CoreUnity.Pointers.Callbacks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,11 +12,11 @@ namespace Juce.CoreUnity.Ui.TweenPlayer
         [SerializeField] private PointerCallbacks pointerCallbacks = default;
 
         [Header("Animations")]
-        [SerializeField] private TaskAnimationMonoBehaviour onUpAnimation = default;
-        [SerializeField] private TaskAnimationMonoBehaviour onDownAnimation = default;
-        [SerializeField] private TaskAnimationMonoBehaviour onEnterAnimation = default;
-        [SerializeField] private TaskAnimationMonoBehaviour onExitAnimation = default;
-        [SerializeField] private TaskAnimationMonoBehaviour onClickAnimation = default;
+        [SerializeField] private MonoBehaviourTaskAnimation onUpAnimation = default;
+        [SerializeField] private MonoBehaviourTaskAnimation onDownAnimation = default;
+        [SerializeField] private MonoBehaviourTaskAnimation onEnterAnimation = default;
+        [SerializeField] private MonoBehaviourTaskAnimation onExitAnimation = default;
+        [SerializeField] private MonoBehaviourTaskAnimation onClickAnimation = default;
 
         private void Awake()
         {

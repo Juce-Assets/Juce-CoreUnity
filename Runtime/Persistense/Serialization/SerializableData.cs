@@ -1,4 +1,5 @@
-using Juce.CoreUnity.Files;
+using Juce.Core.Results;
+using Juce.CoreUnity.Files.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Text;
@@ -7,40 +8,45 @@ using System.Threading.Tasks;
 
 namespace Juce.CoreUnity.Persistence.Serialization
 {
-    public class SerializableData<T> where T : class
+    public sealed class SerializableData<T> : ISerializableData<T> where T : class
     {
-        private readonly string localPath;
+        private readonly string _localPath;
+        private readonly JsonSerializerSettings _jsonSettings;
+
+        private T _data;
 
         public event Action<T> OnSave;
         public event Action<T, bool> OnLoad;
 
-        public T Data { get; private set; }
+        public T Data => GetData();
 
         public SerializableData(string localPath)
         {
-            this.localPath = localPath;
+            _localPath = localPath;
+
+            _jsonSettings = new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                Formatting = Formatting.Indented
+            };
         }
 
         public async Task Save(CancellationToken cancellationToken)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings();
-            settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            settings.Formatting = Formatting.Indented;
-
             TryGenerateData();
 
-            OnSave?.Invoke(Data);
+            OnSave?.Invoke(_data);
 
             try
             {
-                string finalPath = SerializableDataUtils.GetPersistenceDataFilepath(localPath);
+                string finalPath = SerializableDataUtils.GetPersistenceDataFilePathFromFileName(_localPath);
 
-                string dataString = JsonConvert.SerializeObject(Data, settings);
+                string dataString = JsonConvert.SerializeObject(_data, _jsonSettings);
                 byte[] dataBytes = Encoding.UTF8.GetBytes(dataString);
 
-                await FileUtils.SaveBytesAsync(finalPath, dataBytes, cancellationToken);
+                await FilesUtils.SaveBytesAsync(finalPath, dataBytes, cancellationToken);
 
-                UnityEngine.Debug.Log($"{nameof(SerializableData<T>)} {typeof(T).Name} saved \n {Data}");
+                UnityEngine.Debug.Log($"{nameof(SerializableData<T>)} {typeof(T).Name} saved \n {_data}");
             }
             catch (Exception exception)
             {
@@ -51,34 +57,33 @@ namespace Juce.CoreUnity.Persistence.Serialization
 
         public async Task Load(CancellationToken cancellationToken)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings();
-            settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            settings.Formatting = Formatting.Indented;
-
-            string finalPath = SerializableDataUtils.GetPersistenceDataFilepath(localPath);
+            string finalPath = SerializableDataUtils.GetPersistenceDataFilePathFromFileName(_localPath);
 
             try
             {
-                byte[] bytes = await FileUtils.LoadBytesAsync(finalPath, cancellationToken);
+                ITaskResult<byte[]> bytesResult = await FilesUtils.LoadBytesAsync(finalPath, cancellationToken);
 
-                if (bytes != null)
-                {
-                    string result = Encoding.UTF8.GetString(bytes);
+                bool hasResult = bytesResult.TryGetResult(out byte[] bytes);
 
-                    Data = JsonConvert.DeserializeObject<T>(result);
-
-                    OnLoad?.Invoke(Data, false);
-
-                    UnityEngine.Debug.Log($"{nameof(SerializableData<T>)} {typeof(T).Name} loaded \n {Data}");
-                }
-                else
+                if (!hasResult)
                 {
                     TryGenerateData();
 
-                    OnLoad?.Invoke(Data, true);
+                    OnLoad?.Invoke(_data, /*First time:*/ true);
 
                     UnityEngine.Debug.Log($"{nameof(SerializableData<T>)} {typeof(T).Name} not found. Creating with default values");
                 }
+                else
+                {
+                    string result = Encoding.UTF8.GetString(bytes);
+
+                    _data = JsonConvert.DeserializeObject<T>(result);
+
+                    OnLoad?.Invoke(_data, /*First time:*/ false);
+
+                    UnityEngine.Debug.Log($"{nameof(SerializableData<T>)} {typeof(T).Name} loaded \n {Data}");
+                }
+
             }
             catch (Exception exception)
             {
@@ -89,14 +94,26 @@ namespace Juce.CoreUnity.Persistence.Serialization
             TryGenerateData();
         }
 
-        private void TryGenerateData()
+        T GetData()
         {
-            if (Data != null)
+            if (_data == null)
+            {
+                TryGenerateData();
+
+                UnityEngine.Debug.LogError($"Tried to get Data before it was loaded, at {nameof(SerializableData<T>)} {typeof(T).Name}");
+            }
+
+            return _data;
+        }
+
+        void TryGenerateData()
+        {
+            if (_data != null)
             {
                 return;
             }
 
-            Data = Activator.CreateInstance<T>();
+            _data = Activator.CreateInstance<T>();
         }
     }
 }

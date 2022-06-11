@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Juce.CoreUnity.ViewStack.Entries
+namespace Juce.CoreUnity.Ui.ViewStack.Entries
 {
     public class ViewStackEntry : IViewStackEntry
     {

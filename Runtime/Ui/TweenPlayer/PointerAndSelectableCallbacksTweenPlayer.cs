@@ -1,5 +1,7 @@
 ﻿using Juce.Core.Extensions;
-using Juce.CoreUnity.PointerCallback;
+using Juce.CoreUnity.Animations;
+using Juce.CoreUnity.Pointers.Callbacks;
+using Juce.CoreUnity.Pointers.Enums;
 using Juce.CoreUnity.Ui.SelectableCallback;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,11 +17,11 @@ namespace Juce.CoreUnity.Ui.TweenPlayer
         [SerializeField] private SelectableCallbacks selectableCallbacks = default;
 
         [Header("PointerCallbacks Animations")]
-        [SerializeField] private TaskAnimationMonoBehaviour onUpAnimation = default;
-        [SerializeField] private TaskAnimationMonoBehaviour onDownAnimation = default;
-        [SerializeField] private TaskAnimationMonoBehaviour onEnterSelectAnimation = default;
-        [SerializeField] private TaskAnimationMonoBehaviour onExitDeselectAnimation = default;
-        [SerializeField] private TaskAnimationMonoBehaviour onClickSubmitAnimation = default;
+        [SerializeField] private MonoBehaviourTaskAnimation onUpAnimation = default;
+        [SerializeField] private MonoBehaviourTaskAnimation onDownAnimation = default;
+        [SerializeField] private MonoBehaviourTaskAnimation onEnterSelectAnimation = default;
+        [SerializeField] private MonoBehaviourTaskAnimation onExitDeselectAnimation = default;
+        [SerializeField] private MonoBehaviourTaskAnimation onClickSubmitAnimation = default;
 
         [Header("Configuration")]
         [SerializeField] private bool executeSelectedOrDeselectedAfterSubmit = true;

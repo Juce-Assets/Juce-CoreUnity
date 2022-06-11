@@ -2,15 +2,16 @@
 using Juce.Core.Repositories;
 using Juce.Core.Sequencing;
 using Juce.CoreUnity.Ui.Frame;
-using Juce.CoreUnity.ViewStack.Context;
-using Juce.CoreUnity.ViewStack.Entries;
-using Playground.Services.ViewStack.Instructions;
+using Juce.CoreUnity.Ui.ViewStack.Context;
+using Juce.CoreUnity.Ui.ViewStack.Entries;
+using Juce.CoreUnity.Ui.ViewStack.Instructions;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Juce.CoreUnity.ViewStack.Builder
+
+namespace Juce.CoreUnity.Ui.ViewStack.Builder
 {
     public class ViewStackSequenceBuilder : IViewStackSequenceBuilder
     {

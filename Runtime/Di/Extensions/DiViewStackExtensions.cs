@@ -1,5 +1,5 @@
 ﻿using Juce.Core.Di.Builder;
-using Juce.CoreUnity.ViewStack.Entries;
+using Juce.CoreUnity.Ui.ViewStack.Entries;
 using Juce.CoreUnity.ViewStack.Services;
 
 namespace JuceUnity.Core.Di.Extensions

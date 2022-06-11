@@ -1,12 +1,12 @@
 ﻿using Juce.Core.Repositories;
 using Juce.Core.Sequencing;
 using Juce.CoreUnity.Ui.Frame;
-using Juce.CoreUnity.ViewStack.Context;
-using Juce.CoreUnity.ViewStack.Entries;
-using Juce.CoreUnity.ViewStack.Builder;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Juce.CoreUnity.Ui.ViewStack.Context;
+using Juce.CoreUnity.Ui.ViewStack.Entries;
+using Juce.CoreUnity.Ui.ViewStack.Builder;
 
 namespace Juce.CoreUnity.ViewStack.Services
 {

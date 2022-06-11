@@ -1,7 +1,8 @@
-﻿using Juce.Extensions;
+﻿using Juce.CoreUnity.Ui.ViewStack.Enums;
+using Juce.Extensions;
 using UnityEngine;
 
-namespace Juce.CoreUnity.ViewStack.Entries
+namespace Juce.CoreUnity.Ui.ViewStack.Entries
 {
     public static class ViewStackEntryUtils 
     {

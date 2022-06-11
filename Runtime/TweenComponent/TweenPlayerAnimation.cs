@@ -1,4 +1,4 @@
-﻿using Juce.CoreUnity.Ui;
+﻿using Juce.CoreUnity.Animations;
 using Juce.TweenComponent;
 using System.Collections.Generic;
 using System.Threading;
@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Juce.CoreUnity.TweenComponent
 {
-    public class TweenPlayerAnimation : TaskAnimationMonoBehaviour
+    public class TweenPlayerAnimation : MonoBehaviourTaskAnimation
     {
         [SerializeField] private List<TweenPlayer> play = default;
         [SerializeField] private List<TweenPlayer> kill = default;

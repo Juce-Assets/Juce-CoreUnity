@@ -1,9 +1,9 @@
-﻿using Juce.CoreUnity.PointerCallback;
+﻿using Juce.CoreUnity.Pointers.Callbacks;
 using Juce.CoreUnity.Ui.SelectableCallback;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Juce.CoreUnity.Ui.Audio
+namespace Juce.CoreUnity.Audio.PointerAndSelectableCallbacks
 {
     public class PointerAndSelectableCallbacksAudioPlayer : MonoBehaviour
     {

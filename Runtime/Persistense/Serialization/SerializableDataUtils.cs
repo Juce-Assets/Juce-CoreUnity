@@ -5,26 +5,26 @@ namespace Juce.CoreUnity.Persistence.Serialization
 {
     public static class SerializableDataUtils
     {
-        public static string GetPersistenceDataFilepath(string fileName)
+        public static string GetPersistenceDataFilePathFromFileName(string fileName)
         {
             return string.Format(
                 "{0}{1}",
-                GetPersistenceDataFolder(),
+                GetSerializableDataDirectory(),
                 fileName
                 );
         }
 
-        public static string GetPersistenceDataFolder()
+        public static string GetSerializableDataDirectory()
         {
             return Path.Combine(
                 Application.persistentDataPath,
-                string.Format("PersistenceData{0}", Path.DirectorySeparatorChar)
+                string.Format("SerializableData{0}", Path.DirectorySeparatorChar)
                 );
         }
 
-        public static void ClearPersistanceData()
+        public static void ClearAllSerializableData()
         {
-            string path = GetPersistenceDataFolder();
+            string path = GetSerializableDataDirectory();
 
             Directory.Delete(path, recursive: true);
         }

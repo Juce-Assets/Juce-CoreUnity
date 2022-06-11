@@ -10,7 +10,7 @@ namespace Juce.CoreUnity.Localization.Requests
 {
     public static class LoadLocalizationDataRequest
     {
-        public static async Task<TaskResult<LocalizationData>> Execute()
+        public static async Task<ITaskResult<LocalizationData>> Execute()
         {
             ResourceRequest resourceRequest = Resources.LoadAsync(ConstantDirectories.FilePath);
 

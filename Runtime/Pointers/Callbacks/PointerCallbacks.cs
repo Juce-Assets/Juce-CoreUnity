@@ -2,8 +2,9 @@
 using Juce.Core.Events.Consumer;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Juce.CoreUnity.Pointers.Enums;
 
-namespace Juce.CoreUnity.PointerCallback
+namespace Juce.CoreUnity.Pointers.Callbacks
 {
     public class PointerCallbacks : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Juce.CoreUnity.ViewStack.Context
+namespace Juce.CoreUnity.Ui.ViewStack.Context
 {
     public class ViewContext : IViewContext
     {

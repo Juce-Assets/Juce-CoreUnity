@@ -2,8 +2,9 @@
 using Juce.Core.Events.Consumer;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Juce.CoreUnity.Pointers.Enums;
 
-namespace Juce.CoreUnity.DragPointerCallback
+namespace Juce.CoreUnity.Pointers.Callbacks
 {
     public class DragPointerCallbacks : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
     {

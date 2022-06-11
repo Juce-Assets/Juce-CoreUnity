@@ -1,4 +1,4 @@
-﻿using Juce.CoreUnity.PointerCallback;
+﻿using Juce.CoreUnity.Pointers.Callbacks;
 using Juce.CoreUnity.Ui.SelectableCallback;
 using System;
 using UnityEngine;

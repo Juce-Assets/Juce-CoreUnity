@@ -26,15 +26,15 @@ namespace Juce.CoreUnity.Localization.Services
                 return;
             }
 
-            TaskResult<LocalizationData> result = await LoadLocalizationDataRequest.Execute();
+            ITaskResult<LocalizationData> result = await LoadLocalizationDataRequest.Execute();
 
-            if(!result.HasResult)
+            bool hasResult = result.TryGetResult(out localizationData);
+
+            if (!hasResult)
             {
                 UnityEngine.Debug.LogError("There was an error loading localization data");
                 return;
             }
-
-            localizationData = result.Value;
 
             if(localizationData.Values.Count == 0)
             {

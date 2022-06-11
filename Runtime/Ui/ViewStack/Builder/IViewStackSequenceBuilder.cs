@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Juce.CoreUnity.ViewStack.Builder
+namespace Juce.CoreUnity.Ui.ViewStack.Builder
 {
     public interface IViewStackSequenceBuilder
     {

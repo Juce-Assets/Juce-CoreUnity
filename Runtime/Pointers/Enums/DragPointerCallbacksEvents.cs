@@ -1,4 +1,4 @@
-﻿namespace Juce.CoreUnity.DragPointerCallback
+﻿namespace Juce.CoreUnity.Pointers.Enums
 {
     public enum DragPointerCallbacksEvents
     {
