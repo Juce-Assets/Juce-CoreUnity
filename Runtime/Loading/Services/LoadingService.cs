@@ -54,7 +54,6 @@ namespace Juce.CoreUnity.Loading.Services
 
             IsLoading = true;
 
-            sequencer.OnComplete -= OnComplete;
             sequencer.OnComplete += OnComplete;
 
             foreach (Func<CancellationToken, Task> before in beforeLoad)
@@ -65,6 +64,8 @@ namespace Juce.CoreUnity.Loading.Services
 
         private void OnComplete()
         {
+            sequencer.OnComplete -= OnComplete;
+
             foreach (Func<CancellationToken, Task> after in afterLoad)
             {
                 sequencer.Play(after.Invoke);
