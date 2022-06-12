@@ -1,22 +1,39 @@
 ﻿using Juce.Core.Loading.Process;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Juce.CoreUnity.Loading.Services
 {
     public class LoadingService : ILoadingService
     {
-        public bool IsLoading { get; private set; }
+        private readonly List<Func<CancellationToken, Task>> beforeLoad = new List<Func<CancellationToken, Task>>();
+        private readonly List<Func<CancellationToken, Task>> afterLoad = new List<Func<CancellationToken, Task>>();
 
-        public bool TryStartLoading(out ILoadingProcess loadingProcess)
+        private bool isLoading;
+
+        public void AddAfterLoading(Func<CancellationToken, Task> func)
         {
-            if(IsLoading)
+            beforeLoad.Add(func);
+        }
+
+        public void AddBeforeLoading(Func<CancellationToken, Task> func)
+        {
+            afterLoad.Add(func);
+        }
+
+        public bool TryGetNewProcess(out ILoadingProcess loadingProcess)
+        {
+            if(isLoading)
             {
                 loadingProcess = default;
                 return false;
             }
 
-            IsLoading = true;
+            isLoading = true;
 
-            loadingProcess = LoadingProcess.New();
+            loadingProcess = LoadingProcess.New(beforeLoad, afterLoad);
 
             loadingProcess.OnCompleted += OnLoadingProcessCompleted;
 
@@ -25,7 +42,7 @@ namespace Juce.CoreUnity.Loading.Services
 
         private void OnLoadingProcessCompleted()
         {
-            IsLoading = false;
+            isLoading = false;
         }
     }
 }
