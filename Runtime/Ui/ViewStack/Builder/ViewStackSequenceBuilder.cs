@@ -181,7 +181,7 @@ namespace Juce.CoreUnity.Ui.ViewStack.Builder
 
             cancellationToken.Register(sequencer.Kill);
 
-            return sequencer.WaitCompletition();
+            return sequencer.AwaitCompletition();
         }
 
         public void Execute()
