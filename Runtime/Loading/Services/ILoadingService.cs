@@ -11,6 +11,6 @@ namespace Juce.CoreUnity.Loading.Services
         void AddBeforeLoading(Func<CancellationToken, Task> func);
         void AddAfterLoading(Func<CancellationToken, Task> func);
 
-        void EnqueueLoad(Func<CancellationToken, Task> func);
+        void EnqueueLoad(params Func<CancellationToken, Task>[] func);
     }
 }

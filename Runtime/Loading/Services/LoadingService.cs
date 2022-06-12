@@ -25,7 +25,7 @@ namespace Juce.CoreUnity.Loading.Services
             afterLoad.Add(func);
         }
 
-        public void EnqueueLoad(Func<CancellationToken, Task> func)
+        public void EnqueueLoad(params Func<CancellationToken, Task>[] func)
         {
             if(sequencer.Count == 0)
             {
@@ -40,7 +40,10 @@ namespace Juce.CoreUnity.Loading.Services
                 }
             }
 
-            sequencer.Play(func);
+            foreach (Func<CancellationToken, Task> toLoad in func)
+            {
+                sequencer.Play(toLoad);
+            }
         }
 
         private void OnComplete()
