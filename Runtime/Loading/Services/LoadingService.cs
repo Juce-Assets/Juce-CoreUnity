@@ -17,12 +17,12 @@ namespace Juce.CoreUnity.Loading.Services
 
         public void AddAfterLoading(Func<CancellationToken, Task> func)
         {
-            beforeLoad.Add(func);
+            afterLoad.Add(func);
         }
 
         public void AddBeforeLoading(Func<CancellationToken, Task> func)
         {
-            afterLoad.Add(func);
+            beforeLoad.Add(func);
         }
 
         public void Enqueue(params Func<CancellationToken, Task>[] functions)
