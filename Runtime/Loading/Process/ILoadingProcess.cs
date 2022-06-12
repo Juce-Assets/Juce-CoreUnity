@@ -8,8 +8,6 @@ namespace Juce.CoreUnity.Loading.Process
     {
         event Action OnCompleted;
 
-        ILoadingProcess NewChild();
-
         Task StartLoading(CancellationToken cancellationToken);
         Task CompletedLoading(CancellationToken cancellationToken);
     }

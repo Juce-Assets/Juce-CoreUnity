@@ -7,6 +7,8 @@ namespace Juce.CoreUnity.Loading.Process
 {
     public sealed class LoadingProcess : ILoadingProcess
     {
+        public static LoadingProcess Empty = new LoadingProcess();
+
         private readonly IReadOnlyList<Func<CancellationToken, Task>> beforeLoad = Array.Empty<Func<CancellationToken, Task>>();
         private readonly IReadOnlyList<Func<CancellationToken, Task>> afterLoad = Array.Empty<Func<CancellationToken, Task>>();
 
@@ -17,26 +19,13 @@ namespace Juce.CoreUnity.Loading.Process
           
         }
 
-        private LoadingProcess(
+        public LoadingProcess(
             IReadOnlyList<Func<CancellationToken, Task>> beforeLoad,
             IReadOnlyList<Func<CancellationToken, Task>> afterLoad
             )
         {
             this.beforeLoad = beforeLoad;
             this.afterLoad = afterLoad;
-        }
-
-        public static ILoadingProcess New(
-            IReadOnlyList<Func<CancellationToken, Task>> beforeLoad,
-            IReadOnlyList<Func<CancellationToken, Task>> afterLoad
-            )
-        {
-            return new LoadingProcess(beforeLoad, afterLoad);
-        }
-
-        public ILoadingProcess NewChild()
-        {
-            return new LoadingProcess();
         }
 
         public async Task StartLoading(CancellationToken cancellationToken)

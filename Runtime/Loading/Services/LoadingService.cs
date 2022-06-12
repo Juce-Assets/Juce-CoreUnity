@@ -33,7 +33,7 @@ namespace Juce.CoreUnity.Loading.Services
 
             isLoading = true;
 
-            loadingProcess = LoadingProcess.New(beforeLoad, afterLoad);
+            loadingProcess = new LoadingProcess(beforeLoad, afterLoad);
 
             loadingProcess.OnCompleted += OnLoadingProcessCompleted;
 
