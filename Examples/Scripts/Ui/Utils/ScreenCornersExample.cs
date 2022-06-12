@@ -7,11 +7,6 @@ public class ScreenCornersExample : MonoBehaviour
     [SerializeField] private RectTransform rectTransform = default;
     [SerializeField] private RectTransform parentRectTransform = default;
 
-    private void Start()
-    {
-        
-    }
-
     private void Update()
     {
         Rect screenBoundsRectPosition = UiUtils.GetScreenBoundsRectPositionOverlayCamera(

@@ -1,4 +1,4 @@
-﻿using Juce.CoreUnity.Physics;
+﻿using Juce.CoreUnity.Physics.Callbacks;
 using Juce.TweenComponent;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ namespace Juce.CoreUnity.TweenComponent
             physicsCallbacks.OnPhysicsCollisionEnter -= OnPhysicsCollisionEnter;
         }
 
-        private void OnPhysicsCollisionEnter(PhysicsCallbacks physicsCallbacks, CollisionData collisionData)
+        private void OnPhysicsCollisionEnter(PhysicsCallbacks physicsCallbacks, Collision _)
         {
             tweenPlayer.Play();
         }

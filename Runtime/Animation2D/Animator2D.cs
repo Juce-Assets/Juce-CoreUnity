@@ -1,4 +1,5 @@
 ﻿using Juce.Core.Time;
+using Juce.CoreUnity.Time;
 using Juce.Extensions;
 using System;
 using UnityEngine;
@@ -7,7 +8,7 @@ namespace Juce.CoreUnity.Animation2D
 {
     [RequireComponent(typeof(SpriteRenderer))]
     [ExecuteAlways]
-    public class Animator2D : MonoBehaviour
+    public sealed class Animator2D : MonoBehaviour
     {
         [SerializeField] [HideInInspector] private SpriteRenderer spriteRenderer = default;
         [SerializeField] [HideInInspector] private Animation2DPack animationPack = default;
@@ -16,7 +17,7 @@ namespace Juce.CoreUnity.Animation2D
         private bool playinganimationNeedsToStart;
         private int playingAnimationSpriteIndex;
 
-        public ITimer Timer { get; set; }
+        public ITimer Timer { get; set; } = new ScaledUnityTimer();
 
         public bool FlipX
         {
@@ -36,22 +37,6 @@ namespace Juce.CoreUnity.Animation2D
             UpdatePlayingAnimation();
         }
 
-        private void Init(Animation2DPack animationPack, ITimer timer)
-        {
-            if (animationPack == null)
-            {
-                throw new ArgumentNullException($"{nameof(Animation2DPack)} cannot be null on {nameof(Animator2D)}");
-            }
-
-            if (timer == null)
-            {
-                throw new ArgumentNullException($"{nameof(ITimer)} cannot be null on {nameof(Animator2D)}");
-            }
-
-            this.animationPack = animationPack;
-            Timer = timer;
-        }
-
         private void TryGetSpriteRenderer()
         {
             if (spriteRenderer != null)
@@ -62,11 +47,12 @@ namespace Juce.CoreUnity.Animation2D
             spriteRenderer = gameObject.GetOrAddComponent<SpriteRenderer>();
         }
 
-        private Animation2D GetAnimation(string name)
+        private bool TryGetAnimation(string name, out Animation2D animation2D)
         {
             if (animationPack == null)
             {
-                throw new Exception($"{nameof(Animation2DPack)} cannot be null on {nameof(Animator2D)}");
+                animation2D = default;
+                return false;
             }
 
             for (int i = 0; i < animationPack.Animations.Count; ++i)
@@ -75,31 +61,33 @@ namespace Juce.CoreUnity.Animation2D
 
                 if (string.Equals(currAnimation.Name, name))
                 {
-                    return currAnimation;
+                    animation2D = currAnimation;
+                    return true;
                 }
             }
 
-            return null;
+            animation2D = default;
+            return false;
         }
 
-        public void PlayAnimation(string name)
+        public void PlayAnimation(string animationName)
         {
             if (playingAnimation != null)
             {
-                if (string.Equals(playingAnimation.Name, name))
+                if (string.Equals(playingAnimation.Name, animationName))
                 {
                     return;
                 }
             }
 
-            Animation2D animationToPlay = GetAnimation(name);
+            bool animationFound = TryGetAnimation(animationName, out Animation2D animaion);
 
-            if (animationToPlay == null)
+            if (!animationFound)
             {
                 return;
             }
 
-            playingAnimation = animationToPlay;
+            playingAnimation = animaion;
             playinganimationNeedsToStart = true;
         }
 
@@ -113,11 +101,6 @@ namespace Juce.CoreUnity.Animation2D
             if (playingAnimation == null)
             {
                 return;
-            }
-
-            if (Timer == null)
-            {
-                throw new Exception($"{nameof(ITimer)} cannot be null on {nameof(Animator2D)}");
             }
 
             if (playinganimationNeedsToStart)
