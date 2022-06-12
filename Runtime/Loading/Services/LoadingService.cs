@@ -1,4 +1,4 @@
-﻿using Juce.CoreUnity.Loading.Process;
+﻿using Juce.Core.Sequencing;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -8,10 +8,12 @@ namespace Juce.CoreUnity.Loading.Services
 {
     public class LoadingService : ILoadingService
     {
+        private readonly ISequencer sequencer = new Sequencer();
+
         private readonly List<Func<CancellationToken, Task>> beforeLoad = new List<Func<CancellationToken, Task>>();
         private readonly List<Func<CancellationToken, Task>> afterLoad = new List<Func<CancellationToken, Task>>();
 
-        private bool isLoading;
+        public bool IsLoading { get; private set; }
 
         public void AddAfterLoading(Func<CancellationToken, Task> func)
         {
@@ -23,26 +25,32 @@ namespace Juce.CoreUnity.Loading.Services
             afterLoad.Add(func);
         }
 
-        public bool TryGetNewProcess(out ILoadingProcess loadingProcess)
+        public void EnqueueLoad(Func<CancellationToken, Task> func)
         {
-            if(isLoading)
+            if(sequencer.Count == 0)
             {
-                loadingProcess = default;
-                return false;
+                IsLoading = true;
+
+                sequencer.OnComplete -= OnComplete;
+                sequencer.OnComplete += OnComplete;
+
+                foreach (Func<CancellationToken, Task> before in beforeLoad)
+                {
+                    sequencer.Play(before.Invoke);
+                }
             }
 
-            isLoading = true;
-
-            loadingProcess = new LoadingProcess(beforeLoad, afterLoad);
-
-            loadingProcess.OnCompleted += OnLoadingProcessCompleted;
-
-            return true;
+            sequencer.Play(func);
         }
 
-        private void OnLoadingProcessCompleted()
+        private void OnComplete()
         {
-            isLoading = false;
+            foreach (Func<CancellationToken, Task> after in afterLoad)
+            {
+                sequencer.Play(after.Invoke);
+            }
+
+            IsLoading = false;
         }
     }
 }
