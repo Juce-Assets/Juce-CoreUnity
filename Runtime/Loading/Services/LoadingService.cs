@@ -25,24 +25,41 @@ namespace Juce.CoreUnity.Loading.Services
             afterLoad.Add(func);
         }
 
-        public void EnqueueLoad(params Func<CancellationToken, Task>[] func)
+        public void Enqueue(params Func<CancellationToken, Task>[] functions)
         {
-            if(sequencer.Count == 0)
+            OnStartLoading();
+
+            foreach (Func<CancellationToken, Task> function in functions)
             {
-                IsLoading = true;
+                sequencer.Play(function);
+            }
+        }
 
-                sequencer.OnComplete -= OnComplete;
-                sequencer.OnComplete += OnComplete;
+        public void Enqueue(params Action[] actions)
+        {
+            OnStartLoading();
 
-                foreach (Func<CancellationToken, Task> before in beforeLoad)
-                {
-                    sequencer.Play(before.Invoke);
-                }
+            foreach (Action action in actions)
+            {
+                sequencer.Play(action);
+            }
+        }
+
+        private void OnStartLoading()
+        {
+            if(sequencer.Count > 0)
+            {
+                return;
             }
 
-            foreach (Func<CancellationToken, Task> toLoad in func)
+            IsLoading = true;
+
+            sequencer.OnComplete -= OnComplete;
+            sequencer.OnComplete += OnComplete;
+
+            foreach (Func<CancellationToken, Task> before in beforeLoad)
             {
-                sequencer.Play(toLoad);
+                sequencer.Play(before.Invoke);
             }
         }
 
