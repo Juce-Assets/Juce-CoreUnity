@@ -1,4 +1,4 @@
-﻿using Juce.Core.Loading.Process;
+﻿using Juce.CoreUnity.Loading.Process;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
