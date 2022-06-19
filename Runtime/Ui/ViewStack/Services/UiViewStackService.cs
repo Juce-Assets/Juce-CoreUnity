@@ -49,6 +49,22 @@ namespace Juce.CoreUnity.ViewStack.Services
             frame.Unregister(entry.Transform);
         }
 
+        public void SetNotInteractableNow<T>()
+        {
+            Type entryId = typeof(T);
+
+            bool found = entriesRepository.TryGet(entryId, out IViewStackEntry entry);
+
+            if (!found)
+            {
+                UnityEngine.Debug.LogError($"Tried to SetNotInteractableNow {nameof(IViewStackEntry)} of type {entryId}, " +
+                    $"but it was not registered, at {nameof(SetNotInteractableNow)}");
+                return;
+            }
+
+            ViewStackEntryUtils.SetInteractable(entry, false);
+        }
+
         public IViewStackSequenceBuilder New()
         {
             return new ViewStackSequenceBuilder(

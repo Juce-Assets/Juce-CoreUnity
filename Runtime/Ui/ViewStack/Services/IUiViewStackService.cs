@@ -8,6 +8,8 @@ namespace Juce.CoreUnity.ViewStack.Services
         void Register(IViewStackEntry entry);
         void Unregister(IViewStackEntry entry);
 
+        void SetNotInteractableNow<T>();
+
         IViewStackSequenceBuilder New();
     }
 }
