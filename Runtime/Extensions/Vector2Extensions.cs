@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Juce.Extensions
+namespace Juce.CoreUnity.Extensions
 {
     public static class Vector2Extensions
     {
@@ -20,6 +20,11 @@ namespace Juce.Extensions
         public static Vector2 PerpendicularCounterClockwise(this Vector2 vector2)
         {
             return new Vector2(-vector2.y, vector2.x);
+        }
+
+        public static Vector3 ToVector3XY(this Vector2 vector)
+        {
+            return new Vector3(vector.x, vector.y, 0);
         }
     }
 }

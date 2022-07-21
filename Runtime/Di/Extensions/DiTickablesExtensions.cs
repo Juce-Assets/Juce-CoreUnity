@@ -1,33 +1,40 @@
 ﻿using Juce.Core.Di.Builder;
-using Juce.Core.Tickable;
-using Juce.CoreUnity.Tickables;
+using Juce.Core.Tick.Tickable;
+using Juce.CoreUnity.Tick.Enums;
+using Juce.CoreUnity.Tick.Services;
 using System;
 
-namespace JuceUnity.Core.Di.Extensions
+namespace Juce.CoreUnity.Di.Extensions
 {
     public static class DiTickablesExtensions
     {
-        public static IDiBindingActionBuilder<T> LinkToTickablesService<T>(this IDiBindingActionBuilder<T> actionBuilder)
+        public static IDiBindingActionBuilder<T> LinkToTickablesService<T>(
+            this IDiBindingActionBuilder<T> actionBuilder, TickType tickType = TickType.Update
+            )
             where T : ITickable
         {
             actionBuilder.WhenInit((c, o) =>
             {
                 ITickablesService tickablesService = c.Resolve<ITickablesService>();
 
-                tickablesService.Add(o);
+                tickablesService.Add(o, tickType);
             });
 
             actionBuilder.WhenDispose((c, o) =>
             {
                 ITickablesService tickablesService = c.Resolve<ITickablesService>();
 
-                tickablesService.Remove(o);
+                tickablesService.Remove(o, tickType);
             });
 
             return actionBuilder;
         }
 
-        public static IDiBindingActionBuilder<T> LinkToTickablesService<T>(this IDiBindingActionBuilder<T> actionBuilder, Func<T, Action> func)
+        public static IDiBindingActionBuilder<T> LinkToTickablesService<T>(
+            this IDiBindingActionBuilder<T> actionBuilder, 
+            Func<T, Action> func,
+            TickType tickType = TickType.Update
+            )
         {
             CallbackTickable callbackTickable = null;
 
@@ -39,14 +46,14 @@ namespace JuceUnity.Core.Di.Extensions
 
                 ITickablesService tickablesService = c.Resolve<ITickablesService>();
 
-                tickablesService.Add(callbackTickable);
+                tickablesService.Add(callbackTickable, tickType);
             });
 
             actionBuilder.WhenDispose((c, o) =>
             {
                 ITickablesService tickablesService = c.Resolve<ITickablesService>();
 
-                tickablesService.Remove(callbackTickable);
+                tickablesService.Remove(callbackTickable, tickType);
             });
 
             return actionBuilder;

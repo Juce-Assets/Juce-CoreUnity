@@ -1,6 +1,6 @@
 ﻿using Juce.Core.Time;
+using Juce.CoreUnity.Extensions;
 using Juce.CoreUnity.Time;
-using Juce.Extensions;
 using System;
 using UnityEngine;
 

@@ -1,6 +1,7 @@
 ﻿using Juce.Core.Extensions;
 using Juce.Core.Repositories;
-using Juce.Core.Sequencing;
+using Juce.Core.Sequencing.Instructions;
+using Juce.Core.Sequencing.Sequences;
 using Juce.CoreUnity.Ui.Frame;
 using Juce.CoreUnity.Ui.ViewStack.Context;
 using Juce.CoreUnity.Ui.ViewStack.Entries;
@@ -15,7 +16,7 @@ namespace Juce.CoreUnity.Ui.ViewStack.Builder
 {
     public class ViewStackSequenceBuilder : IViewStackSequenceBuilder
     {
-        private readonly List<Instruction> instructionsToPlay = new List<Instruction>();
+        private readonly List<IInstruction> instructionsToPlay = new List<IInstruction>();
 
         private readonly IUiFrame frame;
         private readonly IKeyValueRepository<Type, IViewStackEntry> entriesRepository;

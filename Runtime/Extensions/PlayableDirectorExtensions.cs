@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine.Playables;
 
-namespace Juce.Extensions
+namespace Juce.CoreUnity.Extensions
 {
     public static class PlayableDirectorExtensions
     {

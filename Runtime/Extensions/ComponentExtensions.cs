@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Juce.Extensions
+namespace Juce.CoreUnity.Extensions
 {
     public static class ComponentExtensions
     {

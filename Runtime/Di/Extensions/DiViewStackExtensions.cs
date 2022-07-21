@@ -2,7 +2,7 @@
 using Juce.CoreUnity.Ui.ViewStack.Entries;
 using Juce.CoreUnity.ViewStack.Services;
 
-namespace JuceUnity.Core.Di.Extensions
+namespace Juce.CoreUnity.Di.Extensions
 {
     public static class DiViewStackExtensions
     {

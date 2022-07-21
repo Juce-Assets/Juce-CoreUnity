@@ -1,6 +1,5 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using Juce.CoreUnity.Loading.Contexts;
+using Juce.CoreUnity.Loading.Events;
 
 namespace Juce.CoreUnity.Loading.Services
 {
@@ -8,10 +7,9 @@ namespace Juce.CoreUnity.Loading.Services
     {
         bool IsLoading { get; }
 
-        void AddBeforeLoading(Func<CancellationToken, Task> func);
-        void AddAfterLoading(Func<CancellationToken, Task> func);
+        void AddBeforeLoading(TaskFunctionEvent func);
+        void AddAfterLoading(TaskFunctionEvent func);
 
-        void Enqueue(params Func<CancellationToken, Task>[] functions);
-        void Enqueue(params Action[] actions);
+        ILoadingContext New();
     }
 }

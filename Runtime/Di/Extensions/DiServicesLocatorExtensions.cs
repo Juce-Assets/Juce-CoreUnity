@@ -3,7 +3,7 @@ using Juce.Core.Di.Container;
 using Juce.CoreUnity.Service;
 using System;
 
-namespace JuceUnity.Core.DI.Extensions
+namespace Juce.CoreUnity.DI.Extensions
 {
     public static class DiServicesLocatorExtensions
     {

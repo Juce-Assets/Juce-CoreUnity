@@ -1,5 +1,5 @@
 ﻿using Juce.Core.Repositories;
-using Juce.Core.Sequencing;
+using Juce.Core.Sequencing.Instructions;
 using Juce.CoreUnity.Ui.Frame;
 using Juce.CoreUnity.Ui.ViewStack.Context;
 using Juce.CoreUnity.Ui.ViewStack.Entries;

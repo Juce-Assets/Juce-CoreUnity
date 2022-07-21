@@ -7,6 +7,7 @@ using System.Threading;
 using Juce.CoreUnity.Ui.ViewStack.Context;
 using Juce.CoreUnity.Ui.ViewStack.Entries;
 using Juce.CoreUnity.Ui.ViewStack.Builder;
+using Juce.Core.Sequencing.Sequences;
 
 namespace Juce.CoreUnity.ViewStack.Services
 {

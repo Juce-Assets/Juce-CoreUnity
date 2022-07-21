@@ -1,5 +1,5 @@
-﻿using Juce.CoreUnity.Ui.ViewStack.Enums;
-using Juce.Extensions;
+﻿using Juce.CoreUnity.Extensions;
+using Juce.CoreUnity.Ui.ViewStack.Enums;
 using UnityEngine;
 
 namespace Juce.CoreUnity.Ui.ViewStack.Entries

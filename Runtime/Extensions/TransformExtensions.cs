@@ -1,9 +1,23 @@
 ﻿using UnityEngine;
 
-namespace Juce.Extensions
+namespace Juce.CoreUnity.Extensions
 {
     public static class TransformExtensions
     {
+        public static void Reset(this Transform transform)
+        {
+            transform.position = Vector3.zero;
+            transform.rotation = Quaternion.identity;
+            transform.localScale = Vector3.one;
+        }
+
+        public static void LocalReset(this Transform transform)
+        {
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+            transform.localScale = Vector3.one;
+        }
+
         public static void SetPositionX(this Transform transform, float x)
         {
             Vector3 currPosition = transform.position;
@@ -28,11 +42,6 @@ namespace Juce.Extensions
             transform.position = new Vector3(x, y, currPosition.z);
         }
 
-        public static void SetPositionXY(this Transform transform, Vector2 position)
-        {
-            transform.SetPositionXY(position.x, position.y);
-        }
-
         public static void SetPositionXZ(this Transform transform, float x, float z)
         {
             Vector3 currPosition = transform.position;
@@ -43,6 +52,11 @@ namespace Juce.Extensions
         {
             Vector3 currPosition = transform.position;
             transform.position = new Vector3(currPosition.x, y, z);
+        }
+
+        public static void SetPositionXY(this Transform transform, Vector2 position)
+        {
+            transform.SetPositionXY(position.x, position.y);
         }
 
         public static void SetLocalPositionX(this Transform transform, float x)
@@ -69,11 +83,6 @@ namespace Juce.Extensions
             transform.localPosition = new Vector3(x, y, currPosition.z);
         }
 
-        public static void SetLocalPositionXY(this Transform transform, Vector2 position)
-        {
-            transform.SetLocalPositionXY(position.x, position.y);
-        }
-
         public static void SetLocalPositionXZ(this Transform transform, float x, float z)
         {
             Vector3 currPosition = transform.localPosition;
@@ -84,6 +93,11 @@ namespace Juce.Extensions
         {
             Vector3 currPosition = transform.localPosition;
             transform.localPosition = new Vector3(currPosition.x, y, z);
+        }
+
+        public static void SetLocalPositionXY(this Transform transform, Vector2 position)
+        {
+            transform.SetLocalPositionXY(position.x, position.y);
         }
 
         public static void SetRotationX(this Transform transform, float angleDegrees)

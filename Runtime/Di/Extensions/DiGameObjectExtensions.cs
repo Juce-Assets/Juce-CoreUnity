@@ -3,7 +3,7 @@ using Juce.Core.Di.Container;
 using System;
 using UnityEngine;
 
-namespace JuceUnity.Core.DI.Extensions
+namespace Juce.CoreUnity.DI.Extensions
 {
     public static class DiGameObjectExtensions
     {
