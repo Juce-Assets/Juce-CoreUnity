@@ -1,4 +1,5 @@
 ﻿using Juce.CoreUnity.SceneManagement.Collections;
+using Juce.CoreUnity.SceneManagement.Reference;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -9,8 +10,18 @@ namespace Juce.CoreUnity.SceneManagement.Loader
 {
     public static class RuntimeSceneLoader
     {
+        public static Task<SceneLoadResult> LoadReference(SceneReference sceneReference, LoadSceneMode mode, bool setAsActive)
+        {
+            return LoadFromPath(sceneReference.ScenePath, mode, setAsActive);
+        }
+
         public static Task<SceneLoadResult> LoadFromPath(string scenePath, LoadSceneMode mode, bool setAsActive)
         {
+            if (string.IsNullOrEmpty(scenePath))
+            {
+                return Task.FromResult(new SceneLoadResult());
+            }
+
             string sceneName = Path.GetFileNameWithoutExtension(scenePath);
 
             return LoadFromName(sceneName, mode, setAsActive);

@@ -5,11 +5,35 @@ using System.Threading.Tasks;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Juce.CoreUnity.SceneManagement.Reference;
 
 namespace Juce.CoreUnity.SceneManagement.Loader
 {
     public static class EditorSceneLoader
     {
+        public static bool TryOpenFromReference(SceneReference sceneReference, OpenSceneMode mode, out Scene scene)
+        {
+            return TryOpenFromPath(sceneReference.ScenePath, mode, out scene);
+        }
+
+        public static bool TryOpenFromPath(string scenePath, OpenSceneMode mode, out Scene scene)
+        {
+            if (string.IsNullOrEmpty(scenePath))
+            {
+                scene = default;
+                return false;
+            }
+
+            scene = EditorSceneManager.OpenScene(scenePath, mode);
+
+            if (!scene.IsValid())
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public static bool TryOpenFromName(string sceneName, OpenSceneMode mode, out Scene scene)
         {
             bool scenePathFound = ScenesUtils.TryGetScenePathFromSceneName(
@@ -24,18 +48,6 @@ namespace Juce.CoreUnity.SceneManagement.Loader
             }
 
             return TryOpenFromPath(scenePath, mode, out scene);
-        }
-
-        public static bool TryOpenFromPath(string scenePath, OpenSceneMode mode, out Scene scene)
-        {
-            scene = EditorSceneManager.OpenScene(scenePath, mode);
-
-            if (!scene.IsValid())
-            {
-                return false;
-            }
-
-            return true;
         }
 
         public static List<Scene> Open(ISceneCollection sceneCollection, OpenSceneMode mode)

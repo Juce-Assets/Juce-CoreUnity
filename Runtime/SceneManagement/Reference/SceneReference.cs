@@ -395,7 +395,7 @@ namespace Juce.CoreUnity.SceneManagement.Reference
             /// </summary>
             public static bool IsReadOnly()
             {
-                var curTime = Time.realtimeSinceStartup;
+                var curTime = UnityEngine.Time.realtimeSinceStartup;
                 var timeSinceLastCheck = curTime - lastTimeChecked;
 
                 if (!(timeSinceLastCheck > minCheckWait)) return cachedReadonlyVal;
