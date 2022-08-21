@@ -25,7 +25,7 @@ namespace Juce.CoreUnity.Contexts
             this.setAsActiveScene = setAsActiveScene;
         }
 
-        public async Task<ITaskDisposable<TInteractor>> Create(params IDiContainer[] parentContainers)
+        public async Task<IAsyncDisposable<TInteractor>> Create(params IDiContainer[] parentContainers)
         {
             TInstance contextInstance = await ContextInstanceLoader.Load<TInstance>(contextSceneName, setAsActiveScene);
 
@@ -41,14 +41,14 @@ namespace Juce.CoreUnity.Contexts
 
             Func<TInteractor, Task> onDispose = (TInteractor _) =>
             {
-                ServiceLocator.Unregister<ITaskDisposable<TInteractor>>();
+                ServiceLocator.Unregister<IAsyncDisposable<TInteractor>>();
 
                 container.Dispose();
 
                 return ContextInstanceLoader.Unload(contextSceneName);
             };
 
-            ITaskDisposable<TInteractor> disposable = new TaskDisposable<TInteractor>(
+            IAsyncDisposable<TInteractor> disposable = new AsyncDisposable<TInteractor>(
                 interactor,
                 onDispose
                 );

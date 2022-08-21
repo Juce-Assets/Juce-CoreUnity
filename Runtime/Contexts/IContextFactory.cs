@@ -7,6 +7,6 @@ namespace Juce.CoreUnity.Contexts
 {
     public interface IContextFactory<TInteractor, TInstance> where TInstance : MonoBehaviour
     {
-        Task<ITaskDisposable<TInteractor>> Create(params IDiContainer[] parentContainers);
+        Task<IAsyncDisposable<TInteractor>> Create(params IDiContainer[] parentContainers);
     }
 }

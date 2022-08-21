@@ -1,4 +1,3 @@
-using System;
 using Juce.Core.Tick.Tickable;
 using Juce.Core.Tick.Tickables;
 using Juce.CoreUnity.Tick.Enums;
