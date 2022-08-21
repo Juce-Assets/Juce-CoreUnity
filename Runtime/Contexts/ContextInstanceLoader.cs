@@ -1,4 +1,4 @@
-﻿using Juce.SceneManagement.Loader;
+﻿using Juce.CoreUnity.SceneManagement.Loader;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;

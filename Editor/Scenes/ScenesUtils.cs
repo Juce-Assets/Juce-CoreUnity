@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
-namespace Juce.CoreUnity.Scenes
+namespace Juce.CoreUnity.CoreUnity.Scenes
 {
     public static class ScenesUtils
     {
