@@ -13,7 +13,7 @@ using UnityEngine.SceneManagement;
 namespace Juce.CoreUnity.Di.Contexts
 {
     public sealed class SceneDiContext<TResult, TMonoBehaviourInstance> : IAsyncDiContext<TResult> 
-        where TMonoBehaviourInstance : MonoBehaviour
+        where TMonoBehaviourInstance : MonoBehaviour, IInstaller
     {
         private readonly string sceneName;
         private readonly bool setAsActiveScene;
@@ -53,7 +53,7 @@ namespace Juce.CoreUnity.Di.Contexts
 
             List<IInstaller> allInstallers = new List<IInstaller>();
             allInstallers.AddRange(installers);
-            allInstallers.Add(new CallbackInstaller(c => c.Bind<TMonoBehaviourInstance>().FromInstance(instance)));
+            allInstallers.Add(instance);
 
             IDiContainer container = DiContainerBuilderExtensions.BuildFromInstallers(allInstallers);
 
