@@ -12,6 +12,8 @@ namespace Juce.CoreUnity.Di.Extensions
             builder.WhenInit((c, o) => ServiceLocator.Register(builder.IdentifierType, o));
             builder.WhenDispose((c, o) => ServiceLocator.Unregister(builder.IdentifierType));
 
+            builder.NonLazy();
+
             return builder;
         }
 
